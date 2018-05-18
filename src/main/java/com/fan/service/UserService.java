@@ -2,8 +2,11 @@ package com.fan.service;
 
 import com.fan.mapper.UserMapper;
 import com.fan.po.User;
+import com.fan.po.UserExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * java类简单作用描述
@@ -26,8 +29,19 @@ public class UserService {
         userMapper.insertSelective(user);
     }
 
-    public User selectUser(Long userId) {
+    public User selectUserByUserId(Long userId) {
         return userMapper.selectByPrimaryKey(userId);
+    }
+
+    public User selectUserName(String userName) {
+        UserExample userExample = new UserExample();
+        UserExample.Criteria criteria = userExample.createCriteria();
+        criteria.andNameEqualTo(userName);
+        List<User> users = userMapper.selectByExample(userExample);
+        if (users != null && !users.isEmpty()) {
+            return users.get(0);
+        }
+        return null;
     }
 
 }

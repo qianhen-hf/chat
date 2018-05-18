@@ -2,6 +2,8 @@ package com.fan.vo;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * java类简单作用描述
  *
@@ -15,8 +17,22 @@ import lombok.Data;
  */
 @Data
 public class UserVo {
-    private String userId;
-    private String userName;
-    private String userType;
+    private Long userId;
+
+    private String name;
+
+    private String token;
+
+    private String nickName;
+
+    private String autograph;
+
+    private Integer sex;
+
+    private String headPic;
+
+    private Date createTime;
+
+    private Date updateTime;
 
 }
