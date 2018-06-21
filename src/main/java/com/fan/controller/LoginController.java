@@ -2,6 +2,7 @@ package com.fan.controller;
 
 import com.fan.Exception.VRabbitException;
 import com.fan.Exception.VRabbitUserErrors;
+import com.fan.config.OssConfig;
 import com.fan.config.PrefixConfig;
 import com.fan.jwt.JwtHelper;
 import com.fan.po.User;
@@ -52,31 +53,32 @@ public class LoginController {
     public ResponseResult Login(String userName,String password) {
         ResponseResult responseResult = new ResponseResult(false);
         User user = userService.selectUserName(userName);
-        sendMsgService.sendMessage("18983635404","5859");
-        redisOperator.set("huang","fan",10000l);
-        System.out.println(redisOperator.get("huang"));
-        if (user == null || !user.getPassword().equals(MD5.Md5Encryption(password))) {
-            throw new VRabbitException(VRabbitUserErrors.USER_ERROR);
-        }
-        ObjectMapper objectMapper = new ObjectMapper();
-        responseResult.setCode(ResponseResult.SUCCESS);
-        String uid = user.getUserId().toString();
-        String userSerializable = null;
-        try {
-            userSerializable = objectMapper.writeValueAsString(user);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            throw new VRabbitException(VRabbitUserErrors.OBJECT_MAPPER_ERROR);
-        }
-        redisOperator.set(prefixConfig.getUserIdPrefix() + uid, userSerializable, prefixConfig.getUserOverTime());
-        String token = JwtHelper.createJWT(uid, "", "", "",
-                Integer.MAX_VALUE, MD5.Md5Encryption(uid));
-        UserVo userVo = new UserVo();
-        BeanUtils.copyProperties(user,userVo);
-        userVo.setToken(token);
-        responseResult.setData(userVo);
-        responseResult.setCode(ResponseResult.SUCCESS);
-        return responseResult;
+        sendMsgService.sendMessage("1","2");
+        return new ResponseResult();
+//        redisOperator.set("huang","fan",10000l);
+//        System.out.println(redisOperator.get("huang"));
+//        if (user == null || !user.getPassword().equals(MD5.Md5Encryption(password))) {
+//            throw new VRabbitException(VRabbitUserErrors.USER_ERROR);
+//        }
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        responseResult.setCode(ResponseResult.SUCCESS);
+//        String uid = user.getUserId().toString();
+//        String userSerializable = null;
+//        try {
+//            userSerializable = objectMapper.writeValueAsString(user);
+//        } catch (JsonProcessingException e) {
+//            e.printStackTrace();
+//            throw new VRabbitException(VRabbitUserErrors.OBJECT_MAPPER_ERROR);
+//        }
+//        redisOperator.set(prefixConfig.getUserIdPrefix() + uid, userSerializable, prefixConfig.getUserOverTime());
+//        String token = JwtHelper.createJWT(uid, "", "", "",
+//                Integer.MAX_VALUE, MD5.Md5Encryption(uid));
+//        UserVo userVo = new UserVo();
+//        BeanUtils.copyProperties(user,userVo);
+//        userVo.setToken(token);
+//        responseResult.setData(userVo);
+//        responseResult.setCode(ResponseResult.SUCCESS);
+//        return responseResult;
     }
 
     @RequestMapping("/overTime")
@@ -102,5 +104,8 @@ public class LoginController {
         responseResult.setMsg("token验证失败");
         return responseResult;
     }
+
+
+
 }
 
