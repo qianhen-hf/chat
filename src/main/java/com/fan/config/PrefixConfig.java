@@ -21,4 +21,5 @@ import org.springframework.stereotype.Component;
 public class PrefixConfig {
     private String userIdPrefix;
     private Long userOverTime;
+    private String userCodePrefix;
 }

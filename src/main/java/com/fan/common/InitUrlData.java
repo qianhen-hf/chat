@@ -19,6 +19,7 @@ public class InitUrlData {
     public Map<String, Integer> getUrls() {
         Map<String, Integer> urls = new HashMap<>();
         urls.put("/vRabbit/login", 1);
+        urls.put("/vRabbit/sendMsgCode", 1);
         return urls;
     }
 }

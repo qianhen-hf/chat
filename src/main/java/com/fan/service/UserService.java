@@ -36,7 +36,7 @@ public class UserService {
     public User selectUserName(String userName) {
         UserExample userExample = new UserExample();
         UserExample.Criteria criteria = userExample.createCriteria();
-        criteria.andNameEqualTo(userName);
+        criteria.andUsernameEqualTo(userName);
         List<User> users = userMapper.selectByExample(userExample);
         if (users != null && !users.isEmpty()) {
             return users.get(0);

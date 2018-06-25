@@ -14,16 +14,19 @@ import com.fan.vo.ResponseResult;
 import com.fan.vo.UserVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * java类简单作用描述
@@ -37,6 +40,7 @@ import java.util.Map;
  * @Version: 1.0
  */
 
+@Slf4j
 @RestController
 @RequestMapping("vRabbit")
 public class LoginController {
@@ -49,36 +53,37 @@ public class LoginController {
     @Autowired
     SendMsgService sendMsgService;
 
-    @RequestMapping("login")
-    public ResponseResult Login(String userName,String password) {
+    @PostMapping("login")
+    public ResponseResult Login(String userName, String msgCode) {
         ResponseResult responseResult = new ResponseResult(false);
         User user = userService.selectUserName(userName);
-        sendMsgService.sendMessage("1","2");
-        return new ResponseResult();
-//        redisOperator.set("huang","fan",10000l);
-//        System.out.println(redisOperator.get("huang"));
-//        if (user == null || !user.getPassword().equals(MD5.Md5Encryption(password))) {
-//            throw new VRabbitException(VRabbitUserErrors.USER_ERROR);
-//        }
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        responseResult.setCode(ResponseResult.SUCCESS);
-//        String uid = user.getUserId().toString();
-//        String userSerializable = null;
-//        try {
-//            userSerializable = objectMapper.writeValueAsString(user);
-//        } catch (JsonProcessingException e) {
-//            e.printStackTrace();
-//            throw new VRabbitException(VRabbitUserErrors.OBJECT_MAPPER_ERROR);
-//        }
-//        redisOperator.set(prefixConfig.getUserIdPrefix() + uid, userSerializable, prefixConfig.getUserOverTime());
-//        String token = JwtHelper.createJWT(uid, "", "", "",
-//                Integer.MAX_VALUE, MD5.Md5Encryption(uid));
-//        UserVo userVo = new UserVo();
-//        BeanUtils.copyProperties(user,userVo);
-//        userVo.setToken(token);
-//        responseResult.setData(userVo);
-//        responseResult.setCode(ResponseResult.SUCCESS);
-//        return responseResult;
+        String redisMsgCode = redisOperator.get(prefixConfig.getUserCodePrefix().concat(userName));
+        log.info("redisMsgCode:{}", redisMsgCode);
+        if(user == null){
+            throw new VRabbitException(VRabbitUserErrors.USER_ERROR);
+        }
+        if ( !msgCode.equals(MD5.Md5Encryption(redisMsgCode))) {
+            throw new VRabbitException(VRabbitUserErrors.USER_MSG_CODE_ERROR);
+        }
+        ObjectMapper objectMapper = new ObjectMapper();
+        responseResult.setCode(ResponseResult.SUCCESS);
+        String uid = user.getUserId().toString();
+        String userSerializable = null;
+        try {
+            userSerializable = objectMapper.writeValueAsString(user);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new VRabbitException(VRabbitUserErrors.OBJECT_MAPPER_ERROR);
+        }
+        redisOperator.set(prefixConfig.getUserIdPrefix().concat(uid), userSerializable, prefixConfig.getUserOverTime());
+        String token = JwtHelper.createJWT(uid, "", "", "",
+                Integer.MAX_VALUE, MD5.Md5Encryption(uid));
+        UserVo userVo = new UserVo();
+        BeanUtils.copyProperties(user, userVo);
+        userVo.setToken(token);
+        responseResult.setData(userVo);
+        responseResult.setCode(ResponseResult.SUCCESS);
+        return responseResult;
     }
 
     @RequestMapping("/overTime")
@@ -105,6 +110,14 @@ public class LoginController {
         return responseResult;
     }
 
+
+    @PostMapping("sendMsgCode")
+    public ResponseResult sendMsgCode(String userName) {
+        String msgCode = String.valueOf(new Random().nextInt(899999) + 100000);
+        redisOperator.set(prefixConfig.getUserCodePrefix().concat(userName), msgCode);
+        sendMsgService.sendMessage(userName, "SMS_137790152", "{\"code\":\"" + msgCode + "\"}");
+        return new ResponseResult();
+    }
 
 
 }

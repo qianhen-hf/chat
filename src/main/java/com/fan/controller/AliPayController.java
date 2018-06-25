@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @UpdateRemark: The modified content
  * @Version: 1.0
  */
-@RequestMapping("pay")
+@RequestMapping("vRabbit/pay")
 @RestController
 public class AliPayController {
     @Autowired
