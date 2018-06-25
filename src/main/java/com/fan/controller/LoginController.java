@@ -55,7 +55,7 @@ public class LoginController {
 
     @PostMapping("login")
     public ResponseResult Login(String userName, String msgCode) {
-        ResponseResult responseResult = new ResponseResult(false);
+        ResponseResult responseResult = new ResponseResult(true);
         User user = userService.selectUserName(userName);
         String redisMsgCode = redisOperator.get(prefixConfig.getUserCodePrefix().concat(userName));
         log.info("redisMsgCode:{}", redisMsgCode);
