@@ -24,7 +24,8 @@ public class ResponseResult {
     private int code;
 
     public ResponseResult() {
-
+        this.code = 1;
+        this.msg = "操作成功";
     }
 
     public ResponseResult(boolean flag) {

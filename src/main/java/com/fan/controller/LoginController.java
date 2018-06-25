@@ -59,10 +59,10 @@ public class LoginController {
         User user = userService.selectUserName(userName);
         String redisMsgCode = redisOperator.get(prefixConfig.getUserCodePrefix().concat(userName));
         log.info("redisMsgCode:{}", redisMsgCode);
-        if(user == null){
+        if (user == null) {
             throw new VRabbitException(VRabbitUserErrors.USER_ERROR);
         }
-        if ( !msgCode.equals(MD5.Md5Encryption(redisMsgCode))) {
+        if (!msgCode.equals(redisMsgCode)) {
             throw new VRabbitException(VRabbitUserErrors.USER_MSG_CODE_ERROR);
         }
         ObjectMapper objectMapper = new ObjectMapper();
@@ -116,7 +116,7 @@ public class LoginController {
         String msgCode = String.valueOf(new Random().nextInt(899999) + 100000);
         redisOperator.set(prefixConfig.getUserCodePrefix().concat(userName), msgCode);
         sendMsgService.sendMessage(userName, "SMS_137790152", "{\"code\":\"" + msgCode + "\"}");
-        return new ResponseResult();
+        return new ResponseResult(true);
     }
 
 
