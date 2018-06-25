@@ -5,14 +5,14 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class UserExample {
+public class AnchorExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public UserExample() {
+    public AnchorExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -132,133 +132,133 @@ public class UserExample {
             addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
 
-        public Criteria andUserIdIsNull() {
-            addCriterion("user_id is null");
+        public Criteria andAnchorIdIsNull() {
+            addCriterion("anchor_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdIsNotNull() {
-            addCriterion("user_id is not null");
+        public Criteria andAnchorIdIsNotNull() {
+            addCriterion("anchor_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdEqualTo(Long value) {
-            addCriterion("user_id =", value, "userId");
+        public Criteria andAnchorIdEqualTo(Long value) {
+            addCriterion("anchor_id =", value, "anchorId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotEqualTo(Long value) {
-            addCriterion("user_id <>", value, "userId");
+        public Criteria andAnchorIdNotEqualTo(Long value) {
+            addCriterion("anchor_id <>", value, "anchorId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdGreaterThan(Long value) {
-            addCriterion("user_id >", value, "userId");
+        public Criteria andAnchorIdGreaterThan(Long value) {
+            addCriterion("anchor_id >", value, "anchorId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("user_id >=", value, "userId");
+        public Criteria andAnchorIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("anchor_id >=", value, "anchorId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdLessThan(Long value) {
-            addCriterion("user_id <", value, "userId");
+        public Criteria andAnchorIdLessThan(Long value) {
+            addCriterion("anchor_id <", value, "anchorId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdLessThanOrEqualTo(Long value) {
-            addCriterion("user_id <=", value, "userId");
+        public Criteria andAnchorIdLessThanOrEqualTo(Long value) {
+            addCriterion("anchor_id <=", value, "anchorId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdIn(List<Long> values) {
-            addCriterion("user_id in", values, "userId");
+        public Criteria andAnchorIdIn(List<Long> values) {
+            addCriterion("anchor_id in", values, "anchorId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotIn(List<Long> values) {
-            addCriterion("user_id not in", values, "userId");
+        public Criteria andAnchorIdNotIn(List<Long> values) {
+            addCriterion("anchor_id not in", values, "anchorId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdBetween(Long value1, Long value2) {
-            addCriterion("user_id between", value1, value2, "userId");
+        public Criteria andAnchorIdBetween(Long value1, Long value2) {
+            addCriterion("anchor_id between", value1, value2, "anchorId");
             return (Criteria) this;
         }
 
-        public Criteria andUserIdNotBetween(Long value1, Long value2) {
-            addCriterion("user_id not between", value1, value2, "userId");
+        public Criteria andAnchorIdNotBetween(Long value1, Long value2) {
+            addCriterion("anchor_id not between", value1, value2, "anchorId");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameIsNull() {
-            addCriterion("username is null");
+        public Criteria andAnchorNameIsNull() {
+            addCriterion("anchor_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameIsNotNull() {
-            addCriterion("username is not null");
+        public Criteria andAnchorNameIsNotNull() {
+            addCriterion("anchor_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameEqualTo(String value) {
-            addCriterion("username =", value, "username");
+        public Criteria andAnchorNameEqualTo(String value) {
+            addCriterion("anchor_name =", value, "anchorName");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameNotEqualTo(String value) {
-            addCriterion("username <>", value, "username");
+        public Criteria andAnchorNameNotEqualTo(String value) {
+            addCriterion("anchor_name <>", value, "anchorName");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameGreaterThan(String value) {
-            addCriterion("username >", value, "username");
+        public Criteria andAnchorNameGreaterThan(String value) {
+            addCriterion("anchor_name >", value, "anchorName");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameGreaterThanOrEqualTo(String value) {
-            addCriterion("username >=", value, "username");
+        public Criteria andAnchorNameGreaterThanOrEqualTo(String value) {
+            addCriterion("anchor_name >=", value, "anchorName");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameLessThan(String value) {
-            addCriterion("username <", value, "username");
+        public Criteria andAnchorNameLessThan(String value) {
+            addCriterion("anchor_name <", value, "anchorName");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameLessThanOrEqualTo(String value) {
-            addCriterion("username <=", value, "username");
+        public Criteria andAnchorNameLessThanOrEqualTo(String value) {
+            addCriterion("anchor_name <=", value, "anchorName");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameLike(String value) {
-            addCriterion("username like", value, "username");
+        public Criteria andAnchorNameLike(String value) {
+            addCriterion("anchor_name like", value, "anchorName");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameNotLike(String value) {
-            addCriterion("username not like", value, "username");
+        public Criteria andAnchorNameNotLike(String value) {
+            addCriterion("anchor_name not like", value, "anchorName");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameIn(List<String> values) {
-            addCriterion("username in", values, "username");
+        public Criteria andAnchorNameIn(List<String> values) {
+            addCriterion("anchor_name in", values, "anchorName");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameNotIn(List<String> values) {
-            addCriterion("username not in", values, "username");
+        public Criteria andAnchorNameNotIn(List<String> values) {
+            addCriterion("anchor_name not in", values, "anchorName");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameBetween(String value1, String value2) {
-            addCriterion("username between", value1, value2, "username");
+        public Criteria andAnchorNameBetween(String value1, String value2) {
+            addCriterion("anchor_name between", value1, value2, "anchorName");
             return (Criteria) this;
         }
 
-        public Criteria andUsernameNotBetween(String value1, String value2) {
-            addCriterion("username not between", value1, value2, "username");
+        public Criteria andAnchorNameNotBetween(String value1, String value2) {
+            addCriterion("anchor_name not between", value1, value2, "anchorName");
             return (Criteria) this;
         }
 

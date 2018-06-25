@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fan.mapper.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.fan.po.User" >
-    <id column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="username" property="username" jdbcType="CHAR" />
+<mapper namespace="com.fan.mapper.AnchorMapper" >
+  <resultMap id="BaseResultMap" type="com.fan.po.Anchor" >
+    <id column="anchor_id" property="anchorId" jdbcType="BIGINT" />
+    <result column="anchor_name" property="anchorName" jdbcType="CHAR" />
     <result column="nickname" property="nickname" jdbcType="VARCHAR" />
     <result column="photo" property="photo" jdbcType="VARCHAR" />
     <result column="sign" property="sign" jdbcType="VARCHAR" />
@@ -72,16 +72,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    user_id, username, nickname, photo, sign, register_time, amount, is_stop, create_time, 
+    anchor_id, anchor_name, nickname, photo, sign, register_time, amount, is_stop, create_time, 
     update_time
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fan.po.UserExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fan.po.AnchorExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from v_user
+    from v_anchor
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -92,37 +92,37 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from v_user
-    where user_id = #{userId,jdbcType=BIGINT}
+    from v_anchor
+    where anchor_id = #{anchorId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from v_user
-    where user_id = #{userId,jdbcType=BIGINT}
+    delete from v_anchor
+    where anchor_id = #{anchorId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.fan.po.UserExample" >
-    delete from v_user
+  <delete id="deleteByExample" parameterType="com.fan.po.AnchorExample" >
+    delete from v_anchor
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.fan.po.User" >
-    insert into v_user (user_id, username, nickname, 
+  <insert id="insert" parameterType="com.fan.po.Anchor" >
+    insert into v_anchor (anchor_id, anchor_name, nickname, 
       photo, sign, register_time, 
       amount, is_stop, create_time, 
       update_time)
-    values (#{userId,jdbcType=BIGINT}, #{username,jdbcType=CHAR}, #{nickname,jdbcType=VARCHAR}, 
+    values (#{anchorId,jdbcType=BIGINT}, #{anchorName,jdbcType=CHAR}, #{nickname,jdbcType=VARCHAR}, 
       #{photo,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, #{registerTime,jdbcType=DATE}, 
       #{amount,jdbcType=BIGINT}, #{isStop,jdbcType=TINYINT}, #{createTime,jdbcType=DATE}, 
       #{updateTime,jdbcType=DATE})
   </insert>
-  <insert id="insertSelective" parameterType="com.fan.po.User" >
-    insert into v_user
+  <insert id="insertSelective" parameterType="com.fan.po.Anchor" >
+    insert into v_anchor
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        user_id,
+      <if test="anchorId != null" >
+        anchor_id,
       </if>
-      <if test="username != null" >
-        username,
+      <if test="anchorName != null" >
+        anchor_name,
       </if>
       <if test="nickname != null" >
         nickname,
@@ -150,11 +150,11 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        #{userId,jdbcType=BIGINT},
+      <if test="anchorId != null" >
+        #{anchorId,jdbcType=BIGINT},
       </if>
-      <if test="username != null" >
-        #{username,jdbcType=CHAR},
+      <if test="anchorName != null" >
+        #{anchorName,jdbcType=CHAR},
       </if>
       <if test="nickname != null" >
         #{nickname,jdbcType=VARCHAR},
@@ -182,20 +182,20 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.fan.po.UserExample" resultType="java.lang.Integer" >
-    select count(*) from v_user
+  <select id="countByExample" parameterType="com.fan.po.AnchorExample" resultType="java.lang.Integer" >
+    select count(*) from v_anchor
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update v_user
+    update v_anchor
     <set >
-      <if test="record.userId != null" >
-        user_id = #{record.userId,jdbcType=BIGINT},
+      <if test="record.anchorId != null" >
+        anchor_id = #{record.anchorId,jdbcType=BIGINT},
       </if>
-      <if test="record.username != null" >
-        username = #{record.username,jdbcType=CHAR},
+      <if test="record.anchorName != null" >
+        anchor_name = #{record.anchorName,jdbcType=CHAR},
       </if>
       <if test="record.nickname != null" >
         nickname = #{record.nickname,jdbcType=VARCHAR},
@@ -227,9 +227,9 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update v_user
-    set user_id = #{record.userId,jdbcType=BIGINT},
-      username = #{record.username,jdbcType=CHAR},
+    update v_anchor
+    set anchor_id = #{record.anchorId,jdbcType=BIGINT},
+      anchor_name = #{record.anchorName,jdbcType=CHAR},
       nickname = #{record.nickname,jdbcType=VARCHAR},
       photo = #{record.photo,jdbcType=VARCHAR},
       sign = #{record.sign,jdbcType=VARCHAR},
@@ -242,11 +242,11 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fan.po.User" >
-    update v_user
+  <update id="updateByPrimaryKeySelective" parameterType="com.fan.po.Anchor" >
+    update v_anchor
     <set >
-      <if test="username != null" >
-        username = #{username,jdbcType=CHAR},
+      <if test="anchorName != null" >
+        anchor_name = #{anchorName,jdbcType=CHAR},
       </if>
       <if test="nickname != null" >
         nickname = #{nickname,jdbcType=VARCHAR},
@@ -273,11 +273,11 @@
         update_time = #{updateTime,jdbcType=DATE},
       </if>
     </set>
-    where user_id = #{userId,jdbcType=BIGINT}
+    where anchor_id = #{anchorId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fan.po.User" >
-    update v_user
-    set username = #{username,jdbcType=CHAR},
+  <update id="updateByPrimaryKey" parameterType="com.fan.po.Anchor" >
+    update v_anchor
+    set anchor_name = #{anchorName,jdbcType=CHAR},
       nickname = #{nickname,jdbcType=VARCHAR},
       photo = #{photo,jdbcType=VARCHAR},
       sign = #{sign,jdbcType=VARCHAR},
@@ -286,6 +286,6 @@
       is_stop = #{isStop,jdbcType=TINYINT},
       create_time = #{createTime,jdbcType=DATE},
       update_time = #{updateTime,jdbcType=DATE}
-    where user_id = #{userId,jdbcType=BIGINT}
+    where anchor_id = #{anchorId,jdbcType=BIGINT}
   </update>
 </mapper>

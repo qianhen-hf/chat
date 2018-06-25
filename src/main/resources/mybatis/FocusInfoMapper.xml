@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fan.mapper.UserMapper" >
-  <resultMap id="BaseResultMap" type="com.fan.po.User" >
-    <id column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="username" property="username" jdbcType="CHAR" />
-    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
-    <result column="photo" property="photo" jdbcType="VARCHAR" />
-    <result column="sign" property="sign" jdbcType="VARCHAR" />
-    <result column="register_time" property="registerTime" jdbcType="DATE" />
-    <result column="amount" property="amount" jdbcType="BIGINT" />
-    <result column="is_stop" property="isStop" jdbcType="TINYINT" />
+<mapper namespace="com.fan.mapper.FocusInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.fan.po.FocusInfo" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="anchor_id" property="anchorId" jdbcType="BIGINT" />
+    <result column="focus_time" property="focusTime" jdbcType="DATE" />
     <result column="create_time" property="createTime" jdbcType="DATE" />
     <result column="update_time" property="updateTime" jdbcType="DATE" />
   </resultMap>
@@ -72,16 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    user_id, username, nickname, photo, sign, register_time, amount, is_stop, create_time, 
-    update_time
+    ID, user_id, anchor_id, focus_time, create_time, update_time
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fan.po.UserExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fan.po.FocusInfoExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from v_user
+    from v_focus_info
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -92,55 +87,41 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from v_user
-    where user_id = #{userId,jdbcType=BIGINT}
+    from v_focus_info
+    where ID = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from v_user
-    where user_id = #{userId,jdbcType=BIGINT}
+    delete from v_focus_info
+    where ID = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.fan.po.UserExample" >
-    delete from v_user
+  <delete id="deleteByExample" parameterType="com.fan.po.FocusInfoExample" >
+    delete from v_focus_info
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.fan.po.User" >
-    insert into v_user (user_id, username, nickname, 
-      photo, sign, register_time, 
-      amount, is_stop, create_time, 
-      update_time)
-    values (#{userId,jdbcType=BIGINT}, #{username,jdbcType=CHAR}, #{nickname,jdbcType=VARCHAR}, 
-      #{photo,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, #{registerTime,jdbcType=DATE}, 
-      #{amount,jdbcType=BIGINT}, #{isStop,jdbcType=TINYINT}, #{createTime,jdbcType=DATE}, 
-      #{updateTime,jdbcType=DATE})
+  <insert id="insert" parameterType="com.fan.po.FocusInfo" >
+    insert into v_focus_info (ID, user_id, anchor_id, 
+      focus_time, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{anchorId,jdbcType=BIGINT}, 
+      #{focusTime,jdbcType=DATE}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.fan.po.User" >
-    insert into v_user
+  <insert id="insertSelective" parameterType="com.fan.po.FocusInfo" >
+    insert into v_focus_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
       <if test="userId != null" >
         user_id,
       </if>
-      <if test="username != null" >
-        username,
+      <if test="anchorId != null" >
+        anchor_id,
       </if>
-      <if test="nickname != null" >
-        nickname,
-      </if>
-      <if test="photo != null" >
-        photo,
-      </if>
-      <if test="sign != null" >
-        sign,
-      </if>
-      <if test="registerTime != null" >
-        register_time,
-      </if>
-      <if test="amount != null" >
-        amount,
-      </if>
-      <if test="isStop != null" >
-        is_stop,
+      <if test="focusTime != null" >
+        focus_time,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -150,29 +131,17 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
       <if test="userId != null" >
         #{userId,jdbcType=BIGINT},
       </if>
-      <if test="username != null" >
-        #{username,jdbcType=CHAR},
+      <if test="anchorId != null" >
+        #{anchorId,jdbcType=BIGINT},
       </if>
-      <if test="nickname != null" >
-        #{nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="photo != null" >
-        #{photo,jdbcType=VARCHAR},
-      </if>
-      <if test="sign != null" >
-        #{sign,jdbcType=VARCHAR},
-      </if>
-      <if test="registerTime != null" >
-        #{registerTime,jdbcType=DATE},
-      </if>
-      <if test="amount != null" >
-        #{amount,jdbcType=BIGINT},
-      </if>
-      <if test="isStop != null" >
-        #{isStop,jdbcType=TINYINT},
+      <if test="focusTime != null" >
+        #{focusTime,jdbcType=DATE},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=DATE},
@@ -182,38 +151,26 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.fan.po.UserExample" resultType="java.lang.Integer" >
-    select count(*) from v_user
+  <select id="countByExample" parameterType="com.fan.po.FocusInfoExample" resultType="java.lang.Integer" >
+    select count(*) from v_focus_info
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update v_user
+    update v_focus_info
     <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
       <if test="record.userId != null" >
         user_id = #{record.userId,jdbcType=BIGINT},
       </if>
-      <if test="record.username != null" >
-        username = #{record.username,jdbcType=CHAR},
+      <if test="record.anchorId != null" >
+        anchor_id = #{record.anchorId,jdbcType=BIGINT},
       </if>
-      <if test="record.nickname != null" >
-        nickname = #{record.nickname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.photo != null" >
-        photo = #{record.photo,jdbcType=VARCHAR},
-      </if>
-      <if test="record.sign != null" >
-        sign = #{record.sign,jdbcType=VARCHAR},
-      </if>
-      <if test="record.registerTime != null" >
-        register_time = #{record.registerTime,jdbcType=DATE},
-      </if>
-      <if test="record.amount != null" >
-        amount = #{record.amount,jdbcType=BIGINT},
-      </if>
-      <if test="record.isStop != null" >
-        is_stop = #{record.isStop,jdbcType=TINYINT},
+      <if test="record.focusTime != null" >
+        focus_time = #{record.focusTime,jdbcType=DATE},
       </if>
       <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=DATE},
@@ -227,44 +184,28 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update v_user
-    set user_id = #{record.userId,jdbcType=BIGINT},
-      username = #{record.username,jdbcType=CHAR},
-      nickname = #{record.nickname,jdbcType=VARCHAR},
-      photo = #{record.photo,jdbcType=VARCHAR},
-      sign = #{record.sign,jdbcType=VARCHAR},
-      register_time = #{record.registerTime,jdbcType=DATE},
-      amount = #{record.amount,jdbcType=BIGINT},
-      is_stop = #{record.isStop,jdbcType=TINYINT},
+    update v_focus_info
+    set ID = #{record.id,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
+      anchor_id = #{record.anchorId,jdbcType=BIGINT},
+      focus_time = #{record.focusTime,jdbcType=DATE},
       create_time = #{record.createTime,jdbcType=DATE},
       update_time = #{record.updateTime,jdbcType=DATE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fan.po.User" >
-    update v_user
+  <update id="updateByPrimaryKeySelective" parameterType="com.fan.po.FocusInfo" >
+    update v_focus_info
     <set >
-      <if test="username != null" >
-        username = #{username,jdbcType=CHAR},
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
       </if>
-      <if test="nickname != null" >
-        nickname = #{nickname,jdbcType=VARCHAR},
+      <if test="anchorId != null" >
+        anchor_id = #{anchorId,jdbcType=BIGINT},
       </if>
-      <if test="photo != null" >
-        photo = #{photo,jdbcType=VARCHAR},
-      </if>
-      <if test="sign != null" >
-        sign = #{sign,jdbcType=VARCHAR},
-      </if>
-      <if test="registerTime != null" >
-        register_time = #{registerTime,jdbcType=DATE},
-      </if>
-      <if test="amount != null" >
-        amount = #{amount,jdbcType=BIGINT},
-      </if>
-      <if test="isStop != null" >
-        is_stop = #{isStop,jdbcType=TINYINT},
+      <if test="focusTime != null" >
+        focus_time = #{focusTime,jdbcType=DATE},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=DATE},
@@ -273,19 +214,15 @@
         update_time = #{updateTime,jdbcType=DATE},
       </if>
     </set>
-    where user_id = #{userId,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fan.po.User" >
-    update v_user
-    set username = #{username,jdbcType=CHAR},
-      nickname = #{nickname,jdbcType=VARCHAR},
-      photo = #{photo,jdbcType=VARCHAR},
-      sign = #{sign,jdbcType=VARCHAR},
-      register_time = #{registerTime,jdbcType=DATE},
-      amount = #{amount,jdbcType=BIGINT},
-      is_stop = #{isStop,jdbcType=TINYINT},
+  <update id="updateByPrimaryKey" parameterType="com.fan.po.FocusInfo" >
+    update v_focus_info
+    set user_id = #{userId,jdbcType=BIGINT},
+      anchor_id = #{anchorId,jdbcType=BIGINT},
+      focus_time = #{focusTime,jdbcType=DATE},
       create_time = #{createTime,jdbcType=DATE},
       update_time = #{updateTime,jdbcType=DATE}
-    where user_id = #{userId,jdbcType=BIGINT}
+    where ID = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

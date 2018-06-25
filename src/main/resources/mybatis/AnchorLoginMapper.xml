@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fan.mapper.AnchorLoginMapper" >
+  <resultMap id="BaseResultMap" type="com.fan.po.AnchorLogin" >
+    <id column="ID" property="id" jdbcType="BIGINT" />
+    <result column="anchor_id" property="anchorId" jdbcType="BIGINT" />
+    <result column="anchor_name" property="anchorName" jdbcType="CHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="sid" property="sid" jdbcType="VARCHAR" />
+    <result column="code" property="code" jdbcType="INTEGER" />
+    <result column="login_out_time" property="loginOutTime" jdbcType="DATE" />
+    <result column="os_type" property="osType" jdbcType="TINYINT" />
+    <result column="os_version" property="osVersion" jdbcType="VARCHAR" />
+    <result column="mobile_model" property="mobileModel" jdbcType="VARCHAR" />
+    <result column="app_version" property="appVersion" jdbcType="VARCHAR" />
+    <result column="appname" property="appname" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="update_time" property="updateTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, anchor_id, anchor_name, status, sid, code, login_out_time, os_type, os_version, 
+    mobile_model, app_version, appname, create_time, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fan.po.AnchorLoginExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from v_anchor_login
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from v_anchor_login
+    where ID = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from v_anchor_login
+    where ID = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fan.po.AnchorLoginExample" >
+    delete from v_anchor_login
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fan.po.AnchorLogin" >
+    insert into v_anchor_login (ID, anchor_id, anchor_name, 
+      status, sid, code, 
+      login_out_time, os_type, os_version, 
+      mobile_model, app_version, appname, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{anchorId,jdbcType=BIGINT}, #{anchorName,jdbcType=CHAR}, 
+      #{status,jdbcType=TINYINT}, #{sid,jdbcType=VARCHAR}, #{code,jdbcType=INTEGER}, 
+      #{loginOutTime,jdbcType=DATE}, #{osType,jdbcType=TINYINT}, #{osVersion,jdbcType=VARCHAR}, 
+      #{mobileModel,jdbcType=VARCHAR}, #{appVersion,jdbcType=VARCHAR}, #{appname,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fan.po.AnchorLogin" >
+    insert into v_anchor_login
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="anchorId != null" >
+        anchor_id,
+      </if>
+      <if test="anchorName != null" >
+        anchor_name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="sid != null" >
+        sid,
+      </if>
+      <if test="code != null" >
+        code,
+      </if>
+      <if test="loginOutTime != null" >
+        login_out_time,
+      </if>
+      <if test="osType != null" >
+        os_type,
+      </if>
+      <if test="osVersion != null" >
+        os_version,
+      </if>
+      <if test="mobileModel != null" >
+        mobile_model,
+      </if>
+      <if test="appVersion != null" >
+        app_version,
+      </if>
+      <if test="appname != null" >
+        appname,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="anchorId != null" >
+        #{anchorId,jdbcType=BIGINT},
+      </if>
+      <if test="anchorName != null" >
+        #{anchorName,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="sid != null" >
+        #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        #{code,jdbcType=INTEGER},
+      </if>
+      <if test="loginOutTime != null" >
+        #{loginOutTime,jdbcType=DATE},
+      </if>
+      <if test="osType != null" >
+        #{osType,jdbcType=TINYINT},
+      </if>
+      <if test="osVersion != null" >
+        #{osVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileModel != null" >
+        #{mobileModel,jdbcType=VARCHAR},
+      </if>
+      <if test="appVersion != null" >
+        #{appVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="appname != null" >
+        #{appname,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fan.po.AnchorLoginExample" resultType="java.lang.Integer" >
+    select count(*) from v_anchor_login
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update v_anchor_login
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.anchorId != null" >
+        anchor_id = #{record.anchorId,jdbcType=BIGINT},
+      </if>
+      <if test="record.anchorName != null" >
+        anchor_name = #{record.anchorName,jdbcType=CHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.sid != null" >
+        sid = #{record.sid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=INTEGER},
+      </if>
+      <if test="record.loginOutTime != null" >
+        login_out_time = #{record.loginOutTime,jdbcType=DATE},
+      </if>
+      <if test="record.osType != null" >
+        os_type = #{record.osType,jdbcType=TINYINT},
+      </if>
+      <if test="record.osVersion != null" >
+        os_version = #{record.osVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobileModel != null" >
+        mobile_model = #{record.mobileModel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appVersion != null" >
+        app_version = #{record.appVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appname != null" >
+        appname = #{record.appname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=DATE},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update v_anchor_login
+    set ID = #{record.id,jdbcType=BIGINT},
+      anchor_id = #{record.anchorId,jdbcType=BIGINT},
+      anchor_name = #{record.anchorName,jdbcType=CHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      sid = #{record.sid,jdbcType=VARCHAR},
+      code = #{record.code,jdbcType=INTEGER},
+      login_out_time = #{record.loginOutTime,jdbcType=DATE},
+      os_type = #{record.osType,jdbcType=TINYINT},
+      os_version = #{record.osVersion,jdbcType=VARCHAR},
+      mobile_model = #{record.mobileModel,jdbcType=VARCHAR},
+      app_version = #{record.appVersion,jdbcType=VARCHAR},
+      appname = #{record.appname,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=DATE},
+      update_time = #{record.updateTime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fan.po.AnchorLogin" >
+    update v_anchor_login
+    <set >
+      <if test="anchorId != null" >
+        anchor_id = #{anchorId,jdbcType=BIGINT},
+      </if>
+      <if test="anchorName != null" >
+        anchor_name = #{anchorName,jdbcType=CHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="sid != null" >
+        sid = #{sid,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null" >
+        code = #{code,jdbcType=INTEGER},
+      </if>
+      <if test="loginOutTime != null" >
+        login_out_time = #{loginOutTime,jdbcType=DATE},
+      </if>
+      <if test="osType != null" >
+        os_type = #{osType,jdbcType=TINYINT},
+      </if>
+      <if test="osVersion != null" >
+        os_version = #{osVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileModel != null" >
+        mobile_model = #{mobileModel,jdbcType=VARCHAR},
+      </if>
+      <if test="appVersion != null" >
+        app_version = #{appVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="appname != null" >
+        appname = #{appname,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=DATE},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fan.po.AnchorLogin" >
+    update v_anchor_login
+    set anchor_id = #{anchorId,jdbcType=BIGINT},
+      anchor_name = #{anchorName,jdbcType=CHAR},
+      status = #{status,jdbcType=TINYINT},
+      sid = #{sid,jdbcType=VARCHAR},
+      code = #{code,jdbcType=INTEGER},
+      login_out_time = #{loginOutTime,jdbcType=DATE},
+      os_type = #{osType,jdbcType=TINYINT},
+      os_version = #{osVersion,jdbcType=VARCHAR},
+      mobile_model = #{mobileModel,jdbcType=VARCHAR},
+      app_version = #{appVersion,jdbcType=VARCHAR},
+      appname = #{appname,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=DATE},
+      update_time = #{updateTime,jdbcType=DATE}
+    where ID = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

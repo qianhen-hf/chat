@@ -2,10 +2,10 @@ package com.fan.po;
 
 import java.util.Date;
 
-public class User {
-    private Long userId;
+public class Anchor {
+    private Long anchorId;
 
-    private String username;
+    private String anchorName;
 
     private String nickname;
 
@@ -23,20 +23,20 @@ public class User {
 
     private Date updateTime;
 
-    public Long getUserId() {
-        return userId;
+    public Long getAnchorId() {
+        return anchorId;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setAnchorId(Long anchorId) {
+        this.anchorId = anchorId;
     }
 
-    public String getUsername() {
-        return username;
+    public String getAnchorName() {
+        return anchorName;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setAnchorName(String anchorName) {
+        this.anchorName = anchorName == null ? null : anchorName.trim();
     }
 
     public String getNickname() {

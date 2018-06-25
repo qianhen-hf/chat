@@ -69,26 +69,30 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <!-- <table tableName="custom_order" domainObjectName="CustomOrder">
-             <generatedKey column="custom_id" sqlStatement="MySql" identity="true"/>
-             <columnOverride column="order_id" javaType="java.math.BigInteger" jdbcType="BIGINT" />
-         </table>-->
-        <!-- <table tableName="cus_passenger_info" domainObjectName="CusPassengerInfo">
-         </table>
-         <table tableName="t_order" domainObjectName="Order">
-             <columnOverride column="order_id" javaType="java.math.BigInteger" jdbcType="BIGINT" />
-         </table>
-         <table tableName="t_pay_info" domainObjectName="PayInfo">
-             <columnOverride column="order_id" javaType="java.math.BigInteger" jdbcType="BIGINT" />
-         </table>-->
-        <!--  <table tableName="t_alipay" domainObjectName="Alipay">
-          </table>-->
-       <!-- <table tableName="t_pay_info" domainObjectName="PayInfo">
-            <generatedKey column="pay_id" sqlStatement="MySql" identity="true"/>
-            <columnOverride column="order_id" javaType="java.math.BigInteger" jdbcType="BIGINT"/>
-        </table>-->
-        <!--<table tableName="cus_passenger_info" domainObjectName="CusPassengerInfo">
-        </table>-->
+        <table tableName="v_advise" domainObjectName="Advise">
+        </table>
+        <table tableName="v_anchor" domainObjectName="Anchor">
+        </table>
+        <table tableName="v_anchor_login" domainObjectName="AnchorLogin">
+        </table>
+        <table tableName="v_charge_info" domainObjectName="ChargeInfo">
+        </table>
+        <table tableName="v_consume_info" domainObjectName="ConsumeInfo">
+        </table>
+        <table tableName="v_deposit_info" domainObjectName="DepositInfo">
+        </table>
+        <table tableName="v_focus_info" domainObjectName="FocusInfo">
+        </table>
+        <table tableName="v_msg_record" domainObjectName="MsgRecord">
+        </table>
+        <table tableName="v_user" domainObjectName="User">
+        </table>
+        <table tableName="v_user_login" domainObjectName="UserLogin">
+        </table>
+        <table tableName="v_version_info" domainObjectName="VersionInfo">
+        </table>
+
+
 
         <!--<table tableName="t_weixin_pay" domainObjectName="WeiXinPay">
         </table>-->

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fan.mapper.VersionInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.fan.po.VersionInfo" >
+    <id column="version_id" property="versionId" jdbcType="INTEGER" />
+    <result column="version_code" property="versionCode" jdbcType="INTEGER" />
+    <result column="version_name" property="versionName" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="os_type" property="osType" jdbcType="INTEGER" />
+    <result column="update_tip" property="updateTip" jdbcType="VARCHAR" />
+    <result column="appname" property="appname" jdbcType="VARCHAR" />
+    <result column="download_url" property="downloadUrl" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="is_stop" property="isStop" jdbcType="TINYINT" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="update_time" property="updateTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    version_id, version_code, version_name, type, os_type, update_tip, appname, download_url, 
+    remark, is_stop, create_time, update_time
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fan.po.VersionInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from v_version_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from v_version_info
+    where version_id = #{versionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from v_version_info
+    where version_id = #{versionId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fan.po.VersionInfoExample" >
+    delete from v_version_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fan.po.VersionInfo" >
+    insert into v_version_info (version_id, version_code, version_name, 
+      type, os_type, update_tip, 
+      appname, download_url, remark, 
+      is_stop, create_time, update_time
+      )
+    values (#{versionId,jdbcType=INTEGER}, #{versionCode,jdbcType=INTEGER}, #{versionName,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{osType,jdbcType=INTEGER}, #{updateTip,jdbcType=VARCHAR}, 
+      #{appname,jdbcType=VARCHAR}, #{downloadUrl,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{isStop,jdbcType=TINYINT}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fan.po.VersionInfo" >
+    insert into v_version_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="versionId != null" >
+        version_id,
+      </if>
+      <if test="versionCode != null" >
+        version_code,
+      </if>
+      <if test="versionName != null" >
+        version_name,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="osType != null" >
+        os_type,
+      </if>
+      <if test="updateTip != null" >
+        update_tip,
+      </if>
+      <if test="appname != null" >
+        appname,
+      </if>
+      <if test="downloadUrl != null" >
+        download_url,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="isStop != null" >
+        is_stop,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="versionId != null" >
+        #{versionId,jdbcType=INTEGER},
+      </if>
+      <if test="versionCode != null" >
+        #{versionCode,jdbcType=INTEGER},
+      </if>
+      <if test="versionName != null" >
+        #{versionName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="osType != null" >
+        #{osType,jdbcType=INTEGER},
+      </if>
+      <if test="updateTip != null" >
+        #{updateTip,jdbcType=VARCHAR},
+      </if>
+      <if test="appname != null" >
+        #{appname,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadUrl != null" >
+        #{downloadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isStop != null" >
+        #{isStop,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fan.po.VersionInfoExample" resultType="java.lang.Integer" >
+    select count(*) from v_version_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update v_version_info
+    <set >
+      <if test="record.versionId != null" >
+        version_id = #{record.versionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.versionCode != null" >
+        version_code = #{record.versionCode,jdbcType=INTEGER},
+      </if>
+      <if test="record.versionName != null" >
+        version_name = #{record.versionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.osType != null" >
+        os_type = #{record.osType,jdbcType=INTEGER},
+      </if>
+      <if test="record.updateTip != null" >
+        update_tip = #{record.updateTip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appname != null" >
+        appname = #{record.appname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.downloadUrl != null" >
+        download_url = #{record.downloadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isStop != null" >
+        is_stop = #{record.isStop,jdbcType=TINYINT},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=DATE},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=DATE},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update v_version_info
+    set version_id = #{record.versionId,jdbcType=INTEGER},
+      version_code = #{record.versionCode,jdbcType=INTEGER},
+      version_name = #{record.versionName,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=INTEGER},
+      os_type = #{record.osType,jdbcType=INTEGER},
+      update_tip = #{record.updateTip,jdbcType=VARCHAR},
+      appname = #{record.appname,jdbcType=VARCHAR},
+      download_url = #{record.downloadUrl,jdbcType=VARCHAR},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      is_stop = #{record.isStop,jdbcType=TINYINT},
+      create_time = #{record.createTime,jdbcType=DATE},
+      update_time = #{record.updateTime,jdbcType=DATE}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fan.po.VersionInfo" >
+    update v_version_info
+    <set >
+      <if test="versionCode != null" >
+        version_code = #{versionCode,jdbcType=INTEGER},
+      </if>
+      <if test="versionName != null" >
+        version_name = #{versionName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="osType != null" >
+        os_type = #{osType,jdbcType=INTEGER},
+      </if>
+      <if test="updateTip != null" >
+        update_tip = #{updateTip,jdbcType=VARCHAR},
+      </if>
+      <if test="appname != null" >
+        appname = #{appname,jdbcType=VARCHAR},
+      </if>
+      <if test="downloadUrl != null" >
+        download_url = #{downloadUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="isStop != null" >
+        is_stop = #{isStop,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=DATE},
+      </if>
+    </set>
+    where version_id = #{versionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fan.po.VersionInfo" >
+    update v_version_info
+    set version_code = #{versionCode,jdbcType=INTEGER},
+      version_name = #{versionName,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      os_type = #{osType,jdbcType=INTEGER},
+      update_tip = #{updateTip,jdbcType=VARCHAR},
+      appname = #{appname,jdbcType=VARCHAR},
+      download_url = #{downloadUrl,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      is_stop = #{isStop,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=DATE},
+      update_time = #{updateTime,jdbcType=DATE}
+    where version_id = #{versionId,jdbcType=INTEGER}
+  </update>
+</mapper>
