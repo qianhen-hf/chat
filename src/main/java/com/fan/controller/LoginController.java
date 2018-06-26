@@ -2,30 +2,27 @@ package com.fan.controller;
 
 import com.fan.Exception.VRabbitException;
 import com.fan.Exception.VRabbitUserErrors;
-import com.fan.config.OssConfig;
 import com.fan.config.PrefixConfig;
 import com.fan.jwt.JwtHelper;
 import com.fan.po.User;
 import com.fan.service.SendMsgService;
+import com.fan.service.LoginService;
 import com.fan.service.UserService;
 import com.fan.service.redis.RedisOperator;
 import com.fan.util.MD5;
 import com.fan.vo.ResponseResult;
+import com.fan.vo.UserLoginVo;
 import com.fan.vo.UserVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 /**
@@ -47,6 +44,8 @@ public class LoginController {
     @Autowired
     UserService userService;
     @Autowired
+    LoginService loginService;
+    @Autowired
     PrefixConfig prefixConfig;
     @Autowired
     RedisOperator redisOperator;
@@ -54,15 +53,18 @@ public class LoginController {
     SendMsgService sendMsgService;
 
     @PostMapping("login")
-    public ResponseResult Login(String userName, String msgCode) {
+    public ResponseResult Login(String userName, Integer msgCode, UserLoginVo userLoginVo) {
         ResponseResult responseResult = new ResponseResult(true);
         User user = userService.selectUserName(userName);
         String redisMsgCode = redisOperator.get(prefixConfig.getUserCodePrefix().concat(userName));
         log.info("redisMsgCode:{}", redisMsgCode);
+        if (StringUtils.isBlank(redisMsgCode)) {
+            throw new VRabbitException(VRabbitUserErrors.USER_MSG_CODE_NOT_EXIST);
+        }
         if (user == null) {
             throw new VRabbitException(VRabbitUserErrors.USER_ERROR);
         }
-        if (!msgCode.equals(redisMsgCode)) {
+        if (msgCode.intValue() != Integer.valueOf(redisMsgCode)) {
             throw new VRabbitException(VRabbitUserErrors.USER_MSG_CODE_ERROR);
         }
         ObjectMapper objectMapper = new ObjectMapper();
@@ -83,6 +85,7 @@ public class LoginController {
         userVo.setToken(token);
         responseResult.setData(userVo);
         responseResult.setCode(ResponseResult.SUCCESS);
+        loginService.userLogin(msgCode, user, userLoginVo);
         return responseResult;
     }
 
@@ -114,7 +117,7 @@ public class LoginController {
     @PostMapping("sendMsgCode")
     public ResponseResult sendMsgCode(String userName) {
         String msgCode = String.valueOf(new Random().nextInt(899999) + 100000);
-        redisOperator.set(prefixConfig.getUserCodePrefix().concat(userName), msgCode);
+        redisOperator.set(prefixConfig.getUserCodePrefix().concat(userName), msgCode, 1800);
         sendMsgService.sendMessage(userName, "SMS_137790152", "{\"code\":\"" + msgCode + "\"}");
         return new ResponseResult(true);
     }
