@@ -19,6 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,7 +55,11 @@ public class LoginController {
     SendMsgService sendMsgService;
 
     @PostMapping("login")
-    public ResponseResult Login(String userName, Integer msgCode, UserLoginVo userLoginVo) {
+    public ResponseResult Login(String userName, Integer msgCode, @Validated UserLoginVo userLoginVo, BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            System.out.println(bindingResult);
+        }
+
         ResponseResult responseResult = new ResponseResult(true);
         User user = userService.selectUserName(userName);
         String redisMsgCode = redisOperator.get(prefixConfig.getUserCodePrefix().concat(userName));
