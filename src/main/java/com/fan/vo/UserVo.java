@@ -1,5 +1,7 @@
 package com.fan.vo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
@@ -16,23 +18,33 @@ import java.util.Date;
  * @Version: 1.0
  */
 @Data
+@ApiModel(value="user对象",description="用户对象user")
 public class UserVo {
+
     private Long userId;
 
-    private String name;
+    @ApiModelProperty(value="用户名",name="username")
+    private String username;
 
-    private String token;
+    @ApiModelProperty(value="显示昵称",name="nickname")
+    private String nickname;
 
-    private String nickName;
+    @ApiModelProperty(value="头像",name="photo")
+    private String photo;
 
-    private String autograph;
+    @ApiModelProperty(value="注册时间",name="registerTime")
+    private Date registerTime;
 
-    private Integer sex;
+    private Long amount;
 
-    private String headPic;
+    private Byte isStop;
 
     private Date createTime;
 
     private Date updateTime;
+
+    private Integer type;
+
+    private String token;
 
 }
