@@ -43,8 +43,8 @@ public class LoginFilter implements Filter {
             return;
         }
         ObjectMapper objectMapper = new ObjectMapper();
-//        String token = req.getHeader("token");
-        String token = req.getParameter("token");
+        String token = req.getHeader("token");
+//        String token = req.getParameter("token");
         if (StringUtils.isBlank(token)) {
             resp.sendRedirect(ConstValue.TOKEN_ISNULL);
             return;
@@ -60,9 +60,9 @@ public class LoginFilter implements Filter {
             }
             User user = objectMapper.readValue(keyValue, User.class);
             UserHolder.add(user);
-//            String userSerializable = objectMapper.writeValueAsString(user);
-//            redisOperator.set(prefixConfig.getUserIdPrefix() + uid, userSerializable, prefixConfig.getUserOverTime());
-            filterChain.doFilter(servletRequest, servletResponse);
+            ParameterRequestWrapper requestParameterWrapper = new ParameterRequestWrapper(req);
+            requestParameterWrapper.addParameter("uid", uid);
+            filterChain.doFilter(requestParameterWrapper, servletResponse);
         } else {
             resp.sendRedirect(ConstValue.TOKEN_VALIDATE);
         }

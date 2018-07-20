@@ -4,7 +4,9 @@ import com.fan.Exception.VRabbitException;
 import com.fan.Exception.VRabbitUserErrors;
 import com.fan.config.PrefixConfig;
 import com.fan.jwt.JwtHelper;
+import com.fan.po.Anchor;
 import com.fan.po.User;
+import com.fan.service.AnchorService;
 import com.fan.service.SendMsgService;
 import com.fan.service.LoginService;
 import com.fan.service.UserService;
@@ -21,6 +23,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,13 +56,14 @@ public class LoginController {
     RedisOperator redisOperator;
     @Autowired
     SendMsgService sendMsgService;
+    @Autowired
+    AnchorService anchorService;
 
     @PostMapping("login")
-    public ResponseResult Login(String userName, Integer msgCode, @Validated UserLoginVo userLoginVo, BindingResult bindingResult) {
-        if(bindingResult.hasErrors()){
+    public ResponseResult Login(String userName, Integer msgCode, UserLoginVo userLoginVo, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             System.out.println(bindingResult);
         }
-
         ResponseResult responseResult = new ResponseResult(true);
         User user = userService.selectUserName(userName);
         String redisMsgCode = redisOperator.get(prefixConfig.getUserCodePrefix().concat(userName));
@@ -68,7 +72,7 @@ public class LoginController {
             throw new VRabbitException(VRabbitUserErrors.USER_MSG_CODE_NOT_EXIST);
         }
         if (user == null) {
-            throw new VRabbitException(VRabbitUserErrors.USER_ERROR);
+                throw new VRabbitException(VRabbitUserErrors.USER_ERROR);
         }
         if (msgCode.intValue() != Integer.valueOf(redisMsgCode)) {
             throw new VRabbitException(VRabbitUserErrors.USER_MSG_CODE_ERROR);
@@ -95,7 +99,7 @@ public class LoginController {
         return responseResult;
     }
 
-    @RequestMapping("/overTime")
+    @GetMapping("/overTime")
     public ResponseResult overTime() {
         ResponseResult responseResult = new ResponseResult();
         responseResult.setCode(303);
@@ -103,7 +107,7 @@ public class LoginController {
         return responseResult;
     }
 
-    @RequestMapping("/tokenIsNull")
+    @GetMapping("/tokenIsNull")
     public ResponseResult tokenIsNull() {
         ResponseResult responseResult = new ResponseResult();
         responseResult.setCode(101);
@@ -111,7 +115,7 @@ public class LoginController {
         return responseResult;
     }
 
-    @RequestMapping("/tokenValidate")
+    @GetMapping("/tokenValidate")
     public ResponseResult tokenValidate() {
         ResponseResult responseResult = new ResponseResult();
         responseResult.setCode(202);
