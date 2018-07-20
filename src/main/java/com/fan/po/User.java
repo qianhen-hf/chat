@@ -23,6 +23,8 @@ public class User {
 
     private Date updateTime;
 
+    private Integer type;
+
     public Long getUserId() {
         return userId;
     }
@@ -101,5 +103,13 @@ public class User {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }
