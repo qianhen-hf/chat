@@ -4,6 +4,7 @@ import com.fan.service.AliPayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * java类简单作用描述
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @UpdateRemark: The modified content
  * @Version: 1.0
  */
+
 @RequestMapping("vRabbit/pay")
 @RestController
 public class AliPayController {

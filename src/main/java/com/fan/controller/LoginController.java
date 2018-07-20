@@ -17,16 +17,18 @@ import com.fan.vo.UserLoginVo;
 import com.fan.vo.UserVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.Random;
 
@@ -43,6 +45,7 @@ import java.util.Random;
  */
 
 @Slf4j
+@Api(value = "用户登录", tags = {"用户登录接口"})
 @RestController
 @RequestMapping("vRabbit")
 public class LoginController {
@@ -59,11 +62,17 @@ public class LoginController {
     @Autowired
     AnchorService anchorService;
 
+
     @PostMapping("login")
-    public ResponseResult Login(String userName, Integer msgCode, UserLoginVo userLoginVo, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            System.out.println(bindingResult);
-        }
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userName", value = "用户登陆名", required = true, dataType = "String"),
+            @ApiImplicitParam(name = "msgCode", value = "用户验证码", required = true, dataType = "Integer"),
+            @ApiImplicitParam(name = "userLoginVo", value = "用户信息对象", required = true, dataType = "UserLoginVo")
+    })
+    public ResponseResult Login(@RequestBody String userName, @RequestBody Integer msgCode, @RequestBody UserLoginVo userLoginVo) {
+//        if (bindingResult.hasErrors()) {
+//            System.out.println(bindingResult);
+//        }
         ResponseResult responseResult = new ResponseResult(true);
         User user = userService.selectUserName(userName);
         String redisMsgCode = redisOperator.get(prefixConfig.getUserCodePrefix().concat(userName));
@@ -72,7 +81,7 @@ public class LoginController {
             throw new VRabbitException(VRabbitUserErrors.USER_MSG_CODE_NOT_EXIST);
         }
         if (user == null) {
-                throw new VRabbitException(VRabbitUserErrors.USER_ERROR);
+            throw new VRabbitException(VRabbitUserErrors.USER_ERROR);
         }
         if (msgCode.intValue() != Integer.valueOf(redisMsgCode)) {
             throw new VRabbitException(VRabbitUserErrors.USER_MSG_CODE_ERROR);
@@ -99,6 +108,8 @@ public class LoginController {
         return responseResult;
     }
 
+
+    @ApiIgnore()
     @GetMapping("/overTime")
     public ResponseResult overTime() {
         ResponseResult responseResult = new ResponseResult();
@@ -107,6 +118,8 @@ public class LoginController {
         return responseResult;
     }
 
+
+    @ApiIgnore()
     @GetMapping("/tokenIsNull")
     public ResponseResult tokenIsNull() {
         ResponseResult responseResult = new ResponseResult();
@@ -115,6 +128,8 @@ public class LoginController {
         return responseResult;
     }
 
+
+    @ApiIgnore()
     @GetMapping("/tokenValidate")
     public ResponseResult tokenValidate() {
         ResponseResult responseResult = new ResponseResult();
