@@ -61,7 +61,7 @@ public class LoginFilter implements Filter {
             User user = objectMapper.readValue(keyValue, User.class);
             UserHolder.add(user);
             ParameterRequestWrapper requestParameterWrapper = new ParameterRequestWrapper(req);
-            requestParameterWrapper.addParameter("uid", uid);
+            requestParameterWrapper.addParameter("userId", uid);
             filterChain.doFilter(requestParameterWrapper, servletResponse);
         } else {
             resp.sendRedirect(ConstValue.TOKEN_VALIDATE);

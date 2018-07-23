@@ -82,7 +82,8 @@
        <!-- <table tableName="t_alipay" domainObjectName="Alipay">
         </table>-->
 
-        <table tableName="v_user" domainObjectName="User">
+      <!--  <table tableName="v_charge_info" domainObjectName="ChargeInfo">-->
+        <table tableName="v_aliPay" domainObjectName="AliPay">
 
         </table>
     </context>

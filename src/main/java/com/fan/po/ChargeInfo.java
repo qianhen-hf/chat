@@ -13,7 +13,7 @@ public class ChargeInfo {
 
     private Long chargeAmount;
 
-    private Byte status;
+    private Integer status;
 
     private Date chargeTime;
 
@@ -61,11 +61,11 @@ public class ChargeInfo {
         this.chargeAmount = chargeAmount;
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

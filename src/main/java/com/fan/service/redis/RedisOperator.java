@@ -157,6 +157,11 @@ public class RedisOperator {
 
     // List（列表）
 
+    public void setList(String key, long index, String value) {
+        redisTemplate.opsForList().set(key, index, value);
+        redisTemplate.opsForList().getOperations();
+    }
+
     /**
      * 实现命令：LPUSH key value，将一个值 value插入到列表 key的表头
      *

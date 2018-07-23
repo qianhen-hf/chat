@@ -3,6 +3,7 @@ package com.fan.controller;
 import com.fan.service.external.OssService;
 import com.fan.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
@@ -22,20 +23,21 @@ import java.util.Map;
  */
 
 @RestController
-@RequestMapping("oss")
+@RequestMapping("vRabbit/oss")
 public class OssController {
     @Autowired
     OssService ossService;
 
-    @RequestMapping("getOssCertificate")
-    public ResponseResult getOssCertificate() {
+    @ApiIgnore
+    @RequestMapping("getOssCertificate1")
+    public ResponseResult getOssCertificate1() {
         ResponseResult responseResult = new ResponseResult(true);
         responseResult.setData(ossService.getOssCertificate());
         return responseResult;
     }
 
-    @RequestMapping("getOssCertificate1")
-    public Map<String, String> getOssCertificate1() {
+    @GetMapping("getOssCertificate")
+    public Map<String, String> getOssCertificate() {
         return ossService.getOssCertificate();
     }
 }

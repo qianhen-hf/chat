@@ -4,29 +4,25 @@ import com.fan.Exception.VRabbitException;
 import com.fan.Exception.VRabbitUserErrors;
 import com.fan.config.PrefixConfig;
 import com.fan.jwt.JwtHelper;
-import com.fan.po.Anchor;
 import com.fan.po.User;
+import com.fan.requestVo.UserLoginVo;
 import com.fan.service.AnchorService;
-import com.fan.service.SendMsgService;
 import com.fan.service.LoginService;
+import com.fan.service.SendMsgService;
 import com.fan.service.UserService;
 import com.fan.service.redis.RedisOperator;
 import com.fan.util.MD5;
 import com.fan.vo.ResponseResult;
-import com.fan.vo.UserLoginVo;
 import com.fan.vo.UserVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -69,13 +65,13 @@ public class LoginController {
             @ApiImplicitParam(name = "msgCode", value = "用户验证码", required = true, dataType = "Integer"),
             @ApiImplicitParam(name = "userLoginVo", value = "用户信息对象", required = true, dataType = "UserLoginVo")
     })
-    public ResponseResult Login(@RequestBody String userName, @RequestBody Integer msgCode, @RequestBody UserLoginVo userLoginVo) {
+    public ResponseResult Login(@RequestBody UserLoginVo userLoginVo) {
 //        if (bindingResult.hasErrors()) {
 //            System.out.println(bindingResult);
 //        }
         ResponseResult responseResult = new ResponseResult(true);
-        User user = userService.selectUserName(userName);
-        String redisMsgCode = redisOperator.get(prefixConfig.getUserCodePrefix().concat(userName));
+        User user = userService.selectUserName(userLoginVo.getUserName());
+        String redisMsgCode = redisOperator.get(prefixConfig.getUserCodePrefix().concat(userLoginVo.getUserName()));
         log.info("redisMsgCode:{}", redisMsgCode);
         if (StringUtils.isBlank(redisMsgCode)) {
             throw new VRabbitException(VRabbitUserErrors.USER_MSG_CODE_NOT_EXIST);
@@ -83,7 +79,7 @@ public class LoginController {
         if (user == null) {
             throw new VRabbitException(VRabbitUserErrors.USER_ERROR);
         }
-        if (msgCode.intValue() != Integer.valueOf(redisMsgCode)) {
+        if (userLoginVo.getMsgCode().intValue() != Integer.valueOf(redisMsgCode)) {
             throw new VRabbitException(VRabbitUserErrors.USER_MSG_CODE_ERROR);
         }
         ObjectMapper objectMapper = new ObjectMapper();
@@ -104,7 +100,7 @@ public class LoginController {
         userVo.setToken(token);
         responseResult.setData(userVo);
         responseResult.setCode(ResponseResult.SUCCESS);
-        loginService.userLogin(msgCode, user, userLoginVo);
+        loginService.userLogin(user, userLoginVo);
         return responseResult;
     }
 
@@ -119,7 +115,7 @@ public class LoginController {
     }
 
 
-    @ApiIgnore()
+    @ApiIgnore
     @GetMapping("/tokenIsNull")
     public ResponseResult tokenIsNull() {
         ResponseResult responseResult = new ResponseResult();
@@ -129,7 +125,7 @@ public class LoginController {
     }
 
 
-    @ApiIgnore()
+    @ApiIgnore
     @GetMapping("/tokenValidate")
     public ResponseResult tokenValidate() {
         ResponseResult responseResult = new ResponseResult();
@@ -139,6 +135,9 @@ public class LoginController {
     }
 
 
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userName", value = "用户登陆名", required = true, dataType = "String")
+    })
     @PostMapping("sendMsgCode")
     public ResponseResult sendMsgCode(String userName) {
         String msgCode = String.valueOf(new Random().nextInt(899999) + 100000);

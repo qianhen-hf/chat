@@ -3,8 +3,7 @@ package com.fan.service;
 import com.fan.mapper.UserLoginMapper;
 import com.fan.po.User;
 import com.fan.po.UserLogin;
-import com.fan.vo.UserLoginVo;
-import com.fan.vo.UserVo;
+import com.fan.requestVo.UserLoginVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,10 +27,10 @@ public class LoginService {
     UserLoginMapper userLoginMapper;
 
 
-    public void userLogin(Integer code, User user, UserLoginVo userLoginVo) {
+    public void userLogin(User user, UserLoginVo userLoginVo) {
         UserLogin userLogin = new UserLogin();
         BeanUtils.copyProperties(user, userLogin);
-        userLogin.setCode(code);
+        userLogin.setCode(userLoginVo.getMsgCode());
         userLoginMapper.insertSelective(userLogin);
     }
 }

@@ -1,17 +1,21 @@
-package com.fan.vo;
+package com.fan.requestVo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
 
 
 @Data
 @ApiModel
 public class UserLoginVo {
 
-    @ApiModelProperty(value="系统类型1安卓2ios",name="username")
+    @ApiModelProperty(value="登陆用户名",name="username")
+    private String userName;
+
+    @ApiModelProperty(value="登陆验证码",name="msgCode")
+    private Integer msgCode;
+
+    @ApiModelProperty(value="系统类型1安卓2ios",name="osType")
     private Byte osType;
 
     @ApiModelProperty(value="系统版本",name="osVersion")

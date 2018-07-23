@@ -7,6 +7,8 @@ import com.alipay.api.domain.AlipayTradeAppPayModel;
 import com.alipay.api.request.AlipayTradeAppPayRequest;
 import com.alipay.api.response.AlipayTradeAppPayResponse;
 import com.fan.config.AliPayConfig;
+import com.fan.mapper.ChargeInfoMapper;
+import com.fan.po.ChargeInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +27,13 @@ import org.springframework.stereotype.Service;
 public class AliPayService {
     @Autowired
     AliPayConfig aliPayConfig;
+    @Autowired
+    ChargeInfoService chargeInfoService;
 
-    public String aliPay() {
+
+    public String aliPay(ChargeInfo chargeInfo) {
+        chargeInfoService.insert(chargeInfo);
+
         //实例化客户端
         AlipayClient alipayClient = new DefaultAlipayClient(aliPayConfig.getUrl(), aliPayConfig.getAppId(), aliPayConfig.getRsaPrivateKey(), aliPayConfig.getFormat(), aliPayConfig.getCharset(), aliPayConfig.getAliPayPublicKey(), aliPayConfig.getSignType());
 //实例化具体API对应的request类,类名称和接口名称对应,当前调用接口名称：alipay.trade.app.pay

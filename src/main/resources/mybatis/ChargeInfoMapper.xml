@@ -7,7 +7,7 @@
     <result column="busi_id" property="busiId" jdbcType="BIGINT" />
     <result column="trade_no" property="tradeNo" jdbcType="VARCHAR" />
     <result column="charge_amount" property="chargeAmount" jdbcType="BIGINT" />
-    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
     <result column="charge_time" property="chargeTime" jdbcType="DATE" />
     <result column="create_time" property="createTime" jdbcType="DATE" />
     <result column="update_time" property="updateTime" jdbcType="DATE" />
@@ -110,7 +110,7 @@
       charge_time, create_time, update_time
       )
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{busiId,jdbcType=BIGINT}, 
-      #{tradeNo,jdbcType=VARCHAR}, #{chargeAmount,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, 
+      #{tradeNo,jdbcType=VARCHAR}, #{chargeAmount,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, 
       #{chargeTime,jdbcType=DATE}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}
       )
   </insert>
@@ -162,7 +162,7 @@
         #{chargeAmount,jdbcType=BIGINT},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=TINYINT},
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="chargeTime != null" >
         #{chargeTime,jdbcType=DATE},
@@ -200,7 +200,7 @@
         charge_amount = #{record.chargeAmount,jdbcType=BIGINT},
       </if>
       <if test="record.status != null" >
-        status = #{record.status,jdbcType=TINYINT},
+        status = #{record.status,jdbcType=INTEGER},
       </if>
       <if test="record.chargeTime != null" >
         charge_time = #{record.chargeTime,jdbcType=DATE},
@@ -223,7 +223,7 @@
       busi_id = #{record.busiId,jdbcType=BIGINT},
       trade_no = #{record.tradeNo,jdbcType=VARCHAR},
       charge_amount = #{record.chargeAmount,jdbcType=BIGINT},
-      status = #{record.status,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=INTEGER},
       charge_time = #{record.chargeTime,jdbcType=DATE},
       create_time = #{record.createTime,jdbcType=DATE},
       update_time = #{record.updateTime,jdbcType=DATE}
@@ -247,7 +247,7 @@
         charge_amount = #{chargeAmount,jdbcType=BIGINT},
       </if>
       <if test="status != null" >
-        status = #{status,jdbcType=TINYINT},
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="chargeTime != null" >
         charge_time = #{chargeTime,jdbcType=DATE},
@@ -267,7 +267,7 @@
       busi_id = #{busiId,jdbcType=BIGINT},
       trade_no = #{tradeNo,jdbcType=VARCHAR},
       charge_amount = #{chargeAmount,jdbcType=BIGINT},
-      status = #{status,jdbcType=TINYINT},
+      status = #{status,jdbcType=INTEGER},
       charge_time = #{chargeTime,jdbcType=DATE},
       create_time = #{createTime,jdbcType=DATE},
       update_time = #{updateTime,jdbcType=DATE}
