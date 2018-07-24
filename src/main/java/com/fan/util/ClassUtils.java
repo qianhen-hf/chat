@@ -2,20 +2,23 @@ package com.fan.util;
 
 import com.fan.Exception.VRabbitException;
 import com.fan.Exception.VRabbitUserErrors;
+import com.fan.po.AliPay;
+import com.fan.requestVo.RequestAliPay;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import org.apache.commons.beanutils.BeanUtils;
+import org.omg.CORBA.Request;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -112,6 +115,13 @@ public class ClassUtils {
     }
 
 
+    private static String getMethodName(String fieldName) throws Exception {
+        byte[] items = fieldName.getBytes();
+        items[0] = (byte) ((char) items[0] - 'a' + 'A');
+        return new String(items);
+    }
+
+
     public static Object mapToObject(Map<String, String> map, Class<?> beanClass, boolean isLineToHump) throws Exception {
         if (map == null)
             return null;
@@ -135,14 +145,47 @@ public class ClassUtils {
         String[] v = null;
         Iterator var5 = map.entrySet().iterator();
 
-        while(var5.hasNext()) {
-            Map.Entry<String, String[]> et = (Map.Entry)var5.next();
-            k = (String)et.getKey();
-            v = (String[])et.getValue();
+        while (var5.hasNext()) {
+            Map.Entry<String, String[]> et = (Map.Entry) var5.next();
+            k = (String) et.getKey();
+            v = (String[]) et.getValue();
             if (v != null && v.length > 0) {
                 result.put(k, v[0]);
             }
         }
         return result;
     }
+
+
+    public static <T, V> void lineBeanToHumpBean(T t, V v) {
+        Field[] fields = t.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            try {
+                field.setAccessible(true);
+                Object value = field.get(t);
+                if (value == null) {
+                    continue;
+                }
+                String name = field.getName();
+                String newName = lineToHump(name);
+                Type genericType = field.getGenericType();
+                Class<?> aClass = Class.forName(genericType.getTypeName());
+                System.out.println(aClass);
+                Method m = v.getClass().getMethod("set" + getMethodName(newName), aClass);
+                m.invoke(v, value);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+//    public static void main(String[] args) {
+//        RequestAliPay requestAliPay = new RequestAliPay();
+//        requestAliPay.setApp_id("aaaa");
+//        requestAliPay.setGmt_close(new Date());
+//        AliPay aliPay = new AliPay();
+//        lineBeanToHumpBean(requestAliPay, aliPay);
+//        System.out.println(aliPay.getAppId());
+//        System.out.println(aliPay.getGmtClose());
+//    }
 }

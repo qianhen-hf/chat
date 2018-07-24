@@ -40,4 +40,17 @@ public class ChargeInfoService {
         chargeInfo.setTradeNo(tradeNo);
         chargeInfoMapper.updateByExampleSelective(chargeInfo, chargeInfoExample);
     }
+
+
+    @Transactional
+    public void charge(Integer status, String tradeNo, Long chargeId,Long amount) {
+        ChargeInfoExample chargeInfoExample = new ChargeInfoExample();
+        ChargeInfoExample.Criteria criteria = chargeInfoExample.createCriteria();
+        criteria.andBusiIdEqualTo(chargeId);
+        ChargeInfo chargeInfo = new ChargeInfo();
+        chargeInfo.setStatus(status);
+        chargeInfo.setTradeNo(tradeNo);
+        chargeInfo.setChargeAmount(amount);
+        chargeInfoMapper.updateByExampleSelective(chargeInfo, chargeInfoExample);
+    }
 }

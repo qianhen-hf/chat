@@ -1,63 +1,71 @@
 package com.fan.po;
 
+import java.util.Date;
+
 public class AliPay {
     private Long id;
 
-    private String outTradeNo;
-
-    private String tradeNo;
-
-    private String refundStatus;
-
-    private String subject;
-
-    private String notifyTime;
+    private Date notifyTime;
 
     private String notifyType;
 
     private String notifyId;
 
+    private String appId;
+
+    private String charset;
+
+    private String version;
+
     private String signType;
 
     private String sign;
 
-    private String paymentType;
+    private String tradeNo;
 
-    private String tradeStatus;
+    private String outTradeNo;
 
-    private String gmtCreate;
-
-    private String gmtPayment;
-
-    private String gmtClose;
-
-    private String sellerEmail;
-
-    private String buyerEmail;
-
-    private String sellerId;
+    private String outBizNo;
 
     private String buyerId;
 
-    private String price;
+    private String buyerLogonId;
 
-    private String totalFee;
+    private String sellerId;
 
-    private String quantity;
+    private String sellerEmail;
+
+    private String tradeStatus;
+
+    private Double totalAmount;
+
+    private Double receiptAmount;
+
+    private Double invoiceAmount;
+
+    private Double buyerPayAmount;
+
+    private Double pointAmount;
+
+    private Double refundFee;
+
+    private String subject;
 
     private String body;
 
-    private String discount;
+    private Date gmtCreate;
 
-    private String isTotalFeeAdjust;
+    private Date gmtPayment;
 
-    private String useCoupon;
+    private Date gmtRefund;
 
-    private String extraCommonParam;
+    private Date gmtClose;
 
-    private String businessScene;
+    private String fundBillList;
 
     private String passbackParams;
+
+    private String voucherDetailList;
 
     public Long getId() {
         return id;
@@ -67,44 +75,12 @@ public class AliPay {
         this.id = id;
     }
 
-    public String getOutTradeNo() {
-        return outTradeNo;
-    }
-
-    public void setOutTradeNo(String outTradeNo) {
-        this.outTradeNo = outTradeNo == null ? null : outTradeNo.trim();
-    }
-
-    public String getTradeNo() {
-        return tradeNo;
-    }
-
-    public void setTradeNo(String tradeNo) {
-        this.tradeNo = tradeNo == null ? null : tradeNo.trim();
-    }
-
-    public String getRefundStatus() {
-        return refundStatus;
-    }
-
-    public void setRefundStatus(String refundStatus) {
-        this.refundStatus = refundStatus == null ? null : refundStatus.trim();
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject == null ? null : subject.trim();
-    }
-
-    public String getNotifyTime() {
+    public Date getNotifyTime() {
         return notifyTime;
     }
 
-    public void setNotifyTime(String notifyTime) {
-        this.notifyTime = notifyTime == null ? null : notifyTime.trim();
+    public void setNotifyTime(Date notifyTime) {
+        this.notifyTime = notifyTime;
     }
 
     public String getNotifyType() {
@@ -123,6 +99,30 @@ public class AliPay {
         this.notifyId = notifyId == null ? null : notifyId.trim();
     }
 
+    public String getAppId() {
+        return appId;
+    }
+
+    public void setAppId(String appId) {
+        this.appId = appId == null ? null : appId.trim();
+    }
+
+    public String getCharset() {
+        return charset;
+    }
+
+    public void setCharset(String charset) {
+        this.charset = charset == null ? null : charset.trim();
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version == null ? null : version.trim();
+    }
+
     public String getSignType() {
         return signType;
     }
@@ -139,68 +139,28 @@ public class AliPay {
         this.sign = sign == null ? null : sign.trim();
     }
 
-    public String getPaymentType() {
-        return paymentType;
+    public String getTradeNo() {
+        return tradeNo;
     }
 
-    public void setPaymentType(String paymentType) {
-        this.paymentType = paymentType == null ? null : paymentType.trim();
+    public void setTradeNo(String tradeNo) {
+        this.tradeNo = tradeNo == null ? null : tradeNo.trim();
     }
 
-    public String getTradeStatus() {
-        return tradeStatus;
+    public String getOutTradeNo() {
+        return outTradeNo;
     }
 
-    public void setTradeStatus(String tradeStatus) {
-        this.tradeStatus = tradeStatus == null ? null : tradeStatus.trim();
+    public void setOutTradeNo(String outTradeNo) {
+        this.outTradeNo = outTradeNo == null ? null : outTradeNo.trim();
     }
 
-    public String getGmtCreate() {
-        return gmtCreate;
+    public String getOutBizNo() {
+        return outBizNo;
     }
 
-    public void setGmtCreate(String gmtCreate) {
-        this.gmtCreate = gmtCreate == null ? null : gmtCreate.trim();
-    }
-
-    public String getGmtPayment() {
-        return gmtPayment;
-    }
-
-    public void setGmtPayment(String gmtPayment) {
-        this.gmtPayment = gmtPayment == null ? null : gmtPayment.trim();
-    }
-
-    public String getGmtClose() {
-        return gmtClose;
-    }
-
-    public void setGmtClose(String gmtClose) {
-        this.gmtClose = gmtClose == null ? null : gmtClose.trim();
-    }
-
-    public String getSellerEmail() {
-        return sellerEmail;
-    }
-
-    public void setSellerEmail(String sellerEmail) {
-        this.sellerEmail = sellerEmail == null ? null : sellerEmail.trim();
-    }
-
-    public String getBuyerEmail() {
-        return buyerEmail;
-    }
-
-    public void setBuyerEmail(String buyerEmail) {
-        this.buyerEmail = buyerEmail == null ? null : buyerEmail.trim();
-    }
-
-    public String getSellerId() {
-        return sellerId;
-    }
-
-    public void setSellerId(String sellerId) {
-        this.sellerId = sellerId == null ? null : sellerId.trim();
+    public void setOutBizNo(String outBizNo) {
+        this.outBizNo = outBizNo == null ? null : outBizNo.trim();
     }
 
     public String getBuyerId() {
@@ -211,28 +171,92 @@ public class AliPay {
         this.buyerId = buyerId == null ? null : buyerId.trim();
     }
 
-    public String getPrice() {
-        return price;
+    public String getBuyerLogonId() {
+        return buyerLogonId;
     }
 
-    public void setPrice(String price) {
-        this.price = price == null ? null : price.trim();
+    public void setBuyerLogonId(String buyerLogonId) {
+        this.buyerLogonId = buyerLogonId == null ? null : buyerLogonId.trim();
     }
 
-    public String getTotalFee() {
-        return totalFee;
+    public String getSellerId() {
+        return sellerId;
     }
 
-    public void setTotalFee(String totalFee) {
-        this.totalFee = totalFee == null ? null : totalFee.trim();
+    public void setSellerId(String sellerId) {
+        this.sellerId = sellerId == null ? null : sellerId.trim();
     }
 
-    public String getQuantity() {
-        return quantity;
+    public String getSellerEmail() {
+        return sellerEmail;
     }
 
-    public void setQuantity(String quantity) {
-        this.quantity = quantity == null ? null : quantity.trim();
+    public void setSellerEmail(String sellerEmail) {
+        this.sellerEmail = sellerEmail == null ? null : sellerEmail.trim();
+    }
+
+    public String getTradeStatus() {
+        return tradeStatus;
+    }
+
+    public void setTradeStatus(String tradeStatus) {
+        this.tradeStatus = tradeStatus == null ? null : tradeStatus.trim();
+    }
+
+    public Double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public Double getReceiptAmount() {
+        return receiptAmount;
+    }
+
+    public void setReceiptAmount(Double receiptAmount) {
+        this.receiptAmount = receiptAmount;
+    }
+
+    public Double getInvoiceAmount() {
+        return invoiceAmount;
+    }
+
+    public void setInvoiceAmount(Double invoiceAmount) {
+        this.invoiceAmount = invoiceAmount;
+    }
+
+    public Double getBuyerPayAmount() {
+        return buyerPayAmount;
+    }
+
+    public void setBuyerPayAmount(Double buyerPayAmount) {
+        this.buyerPayAmount = buyerPayAmount;
+    }
+
+    public Double getPointAmount() {
+        return pointAmount;
+    }
+
+    public void setPointAmount(Double pointAmount) {
+        this.pointAmount = pointAmount;
+    }
+
+    public Double getRefundFee() {
+        return refundFee;
+    }
+
+    public void setRefundFee(Double refundFee) {
+        this.refundFee = refundFee;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject == null ? null : subject.trim();
     }
 
     public String getBody() {
@@ -243,44 +267,44 @@ public class AliPay {
         this.body = body == null ? null : body.trim();
     }
 
-    public String getDiscount() {
-        return discount;
+    public Date getGmtCreate() {
+        return gmtCreate;
     }
 
-    public void setDiscount(String discount) {
-        this.discount = discount == null ? null : discount.trim();
+    public void setGmtCreate(Date gmtCreate) {
+        this.gmtCreate = gmtCreate;
     }
 
-    public String getIsTotalFeeAdjust() {
-        return isTotalFeeAdjust;
+    public Date getGmtPayment() {
+        return gmtPayment;
     }
 
-    public void setIsTotalFeeAdjust(String isTotalFeeAdjust) {
-        this.isTotalFeeAdjust = isTotalFeeAdjust == null ? null : isTotalFeeAdjust.trim();
+    public void setGmtPayment(Date gmtPayment) {
+        this.gmtPayment = gmtPayment;
     }
 
-    public String getUseCoupon() {
-        return useCoupon;
+    public Date getGmtRefund() {
+        return gmtRefund;
     }
 
-    public void setUseCoupon(String useCoupon) {
-        this.useCoupon = useCoupon == null ? null : useCoupon.trim();
+    public void setGmtRefund(Date gmtRefund) {
+        this.gmtRefund = gmtRefund;
     }
 
-    public String getExtraCommonParam() {
-        return extraCommonParam;
+    public Date getGmtClose() {
+        return gmtClose;
     }
 
-    public void setExtraCommonParam(String extraCommonParam) {
-        this.extraCommonParam = extraCommonParam == null ? null : extraCommonParam.trim();
+    public void setGmtClose(Date gmtClose) {
+        this.gmtClose = gmtClose;
     }
 
-    public String getBusinessScene() {
-        return businessScene;
+    public String getFundBillList() {
+        return fundBillList;
     }
 
-    public void setBusinessScene(String businessScene) {
-        this.businessScene = businessScene == null ? null : businessScene.trim();
+    public void setFundBillList(String fundBillList) {
+        this.fundBillList = fundBillList == null ? null : fundBillList.trim();
     }
 
     public String getPassbackParams() {
@@ -289,5 +313,13 @@ public class AliPay {
 
     public void setPassbackParams(String passbackParams) {
         this.passbackParams = passbackParams == null ? null : passbackParams.trim();
+    }
+
+    public String getVoucherDetailList() {
+        return voucherDetailList;
+    }
+
+    public void setVoucherDetailList(String voucherDetailList) {
+        this.voucherDetailList = voucherDetailList == null ? null : voucherDetailList.trim();
     }
 }

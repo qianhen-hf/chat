@@ -36,4 +36,13 @@ public class RechargeController {
     public String recharge(@RequestBody RequestCharge requestCharge) {
         return rechargeService.recharge(requestCharge);
     }
+
+    @GetMapping("recharge1")
+    public String recharge1() {
+        RequestCharge requestCharge = new RequestCharge();
+        requestCharge.setChargeAmount(1l);
+        requestCharge.setType(1);
+        requestCharge.setUserId(1l);
+        return rechargeService.recharge(requestCharge);
+    }
 }

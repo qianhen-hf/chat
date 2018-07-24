@@ -5,6 +5,7 @@ import com.fan.Exception.VRabbitUserErrors;
 import com.fan.config.PrefixConfig;
 import com.fan.jwt.JwtHelper;
 import com.fan.po.User;
+import com.fan.requestVo.RequestUser;
 import com.fan.requestVo.UserLoginVo;
 import com.fan.service.AnchorService;
 import com.fan.service.LoginService;
@@ -139,7 +140,7 @@ public class LoginController {
             @ApiImplicitParam(name = "userName", value = "用户登陆名", required = true, dataType = "String")
     })
     @PostMapping("sendMsgCode")
-    public ResponseResult sendMsgCode(String userName) {
+    public ResponseResult sendMsgCode(@RequestBody  String userName) {
         String msgCode = String.valueOf(new Random().nextInt(899999) + 100000);
         redisOperator.set(prefixConfig.getUserCodePrefix().concat(userName), msgCode, 1800);
         sendMsgService.sendMessage(userName, "SMS_137790152", "{\"code\":\"" + msgCode + "\"}");
@@ -147,5 +148,12 @@ public class LoginController {
     }
 
 
+    @PostMapping("register")
+    public ResponseResult register(@RequestBody RequestUser requestUser) {
+        User user = new User();
+        user.setUsername(requestUser.getUsername());
+        userService.insertUser(user);
+        return new ResponseResult(true);
+    }
 }
 

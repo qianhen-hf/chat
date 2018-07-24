@@ -40,7 +40,8 @@ public class AliPayCallBackService {
             Boolean b = checkCallBack(parameterMap);
             if (b) {
                 aliPayMapper.insert(aliPay);
-                chargeInfoService.changeStatus(1, aliPay.getTradeNo(), Long.parseLong(aliPay.getOutTradeNo()));
+                Double totalAmount = aliPay.getTotalAmount() * 100;
+                chargeInfoService.charge(1, aliPay.getTradeNo(), Long.parseLong(aliPay.getOutTradeNo()), Long.parseLong(totalAmount.toString()));
                 return true;
             }
         } catch (AlipayApiException e) {
