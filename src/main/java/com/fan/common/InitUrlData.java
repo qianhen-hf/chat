@@ -33,7 +33,6 @@ public class InitUrlData {
         urls.put("/v2/api-docs", 1);
         urls.put("/configuration/security", 1);
         urls.put("/configuration/ui", 1);
-
         urls.put("/vRabbit/getSing", 1);
         return urls;
     }
