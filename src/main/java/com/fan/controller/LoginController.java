@@ -61,15 +61,7 @@ public class LoginController {
 
 
     @PostMapping("login")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "userName", value = "用户登陆名", required = true, dataType = "String"),
-            @ApiImplicitParam(name = "msgCode", value = "用户验证码", required = true, dataType = "Integer"),
-            @ApiImplicitParam(name = "userLoginVo", value = "用户信息对象", required = true, dataType = "UserLoginVo")
-    })
-    public ResponseResult Login(@RequestBody UserLoginVo userLoginVo) {
-//        if (bindingResult.hasErrors()) {
-//            System.out.println(bindingResult);
-//        }
+    public ResponseResult Login(UserLoginVo userLoginVo) {
         ResponseResult responseResult = new ResponseResult(true);
         User user = userService.selectUserName(userLoginVo.getUserName());
         String redisMsgCode = redisOperator.get(prefixConfig.getUserCodePrefix().concat(userLoginVo.getUserName()));
@@ -140,7 +132,7 @@ public class LoginController {
             @ApiImplicitParam(name = "userName", value = "用户登陆名", required = true, dataType = "String")
     })
     @PostMapping("sendMsgCode")
-    public ResponseResult sendMsgCode(@RequestBody  String userName) {
+    public ResponseResult sendMsgCode(String userName) {
         String msgCode = String.valueOf(new Random().nextInt(899999) + 100000);
         redisOperator.set(prefixConfig.getUserCodePrefix().concat(userName), msgCode, 1800);
         sendMsgService.sendMessage(userName, "SMS_137790152", "{\"code\":\"" + msgCode + "\"}");
@@ -149,7 +141,7 @@ public class LoginController {
 
 
     @PostMapping("register")
-    public ResponseResult register(@RequestBody RequestUser requestUser) {
+    public ResponseResult register(RequestUser requestUser) {
         User user = new User();
         user.setUsername(requestUser.getUsername());
         userService.insertUser(user);

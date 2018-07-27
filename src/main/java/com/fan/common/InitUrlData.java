@@ -21,6 +21,7 @@ public class InitUrlData {
         urls.put("/vRabbit/login", 1);
         urls.put("/vRabbit/pay/recharge1", 1);
         urls.put("/callback/aliPayCallBack", 1);
+        urls.put("/callback/ossCallBack", 1);
         urls.put("/vRabbit/tokenValidate", 1);
         urls.put("/vRabbit/tokenIsNull", 1);
         urls.put("/vRabbit/overTime", 1);
@@ -34,6 +35,8 @@ public class InitUrlData {
         urls.put("/configuration/security", 1);
         urls.put("/configuration/ui", 1);
         urls.put("/vRabbit/getSing", 1);
+        urls.put("/oss/getOssCertificate", 1);
+        urls.put("/oss/getOssCertificate1", 1);
         return urls;
     }
 }

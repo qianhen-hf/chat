@@ -42,6 +42,7 @@ public class SendMsgService {
 
     public Boolean aliSend(String tel, String messageId, String content) {
         Boolean b = false;
+        log.info("tel:{},content:{}", tel, content);
         try {
             IClientProfile profile = DefaultProfile.getProfile(smsConfig.getRegionId(), smsConfig.getAccessKeyId(), smsConfig.getAccessKeySecret());
             DefaultProfile.addEndpoint(smsConfig.getRegionId(), smsConfig.getRegionId(), smsConfig.getProduct(), smsConfig.getDomain());

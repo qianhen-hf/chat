@@ -5,6 +5,7 @@ import com.fan.po.ChargeInfo;
 import com.fan.requestVo.RequestCharge;
 import com.fan.service.AliPayService;
 import com.fan.service.RechargeService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import javax.ws.rs.POST;
  * @Version: 1.0
  */
 
+@Api(value = "支付", tags = {"支付接口"})
 @RequestMapping("vRabbit/pay")
 @RestController
 public class RechargeController {
@@ -33,10 +35,11 @@ public class RechargeController {
 
 
     @PostMapping("recharge")
-    public String recharge(@RequestBody RequestCharge requestCharge) {
+    public String recharge(RequestCharge requestCharge) {
         return rechargeService.recharge(requestCharge);
     }
 
+    @ApiIgnore
     @GetMapping("recharge1")
     public String recharge1() {
         RequestCharge requestCharge = new RequestCharge();

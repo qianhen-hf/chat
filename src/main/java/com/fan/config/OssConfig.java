@@ -27,5 +27,4 @@ public class OssConfig {
     private String RoleArn;
     private Long TokenExpireTime;
     private String Policy;
-
 }
