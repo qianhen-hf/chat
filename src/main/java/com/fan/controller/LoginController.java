@@ -7,7 +7,6 @@ import com.fan.jwt.JwtHelper;
 import com.fan.po.User;
 import com.fan.requestVo.RequestUser;
 import com.fan.requestVo.UserLoginVo;
-import com.fan.service.AnchorService;
 import com.fan.service.LoginService;
 import com.fan.service.SendMsgService;
 import com.fan.service.UserService;
@@ -56,8 +55,6 @@ public class LoginController {
     RedisOperator redisOperator;
     @Autowired
     SendMsgService sendMsgService;
-    @Autowired
-    AnchorService anchorService;
 
 
     @PostMapping("login")

@@ -44,25 +44,20 @@ public class OssCallBackController {
         System.out.println("--------ossCallBack------------");
         ResponseResult responseResult = new ResponseResult(true);
         try {
-            String authorizationRequest = request.getHeader("Authorization");
-            String pubKeyInputRequest = request.getHeader("x-oss-pub-key-url");
-            byte[] authorization = BinaryUtil.fromBase64String(authorizationRequest);
-            byte[] pubKey = BinaryUtil.fromBase64String(pubKeyInputRequest);
-
-            String authorizationString = new String(authorization, "utf-8");
-            String pubKeyString = new String(pubKey, "utf-8");
-            String queryString = request.getQueryString();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
-            String body = read(reader);
-            System.out.println(body);
-
-
-
-
-
+//            String authorizationRequest = request.getHeader("Authorization");
+//            String pubKeyInputRequest = request.getHeader("x-oss-pub-key-url");
+//            byte[] authorization = BinaryUtil.fromBase64String(authorizationRequest);
+//            byte[] pubKey = BinaryUtil.fromBase64String(pubKeyInputRequest);
+//
+//            String authorizationString = new String(authorization, "utf-8");
+//            String pubKeyString = new String(pubKey, "utf-8");
+//            String queryString = request.getQueryString();
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
+//            String body = read(reader);
+//            System.out.println(body);
 
             String ossCallbackBody = GetPostBody(request.getInputStream(), Integer.parseInt(request.getHeader("content-length")));
-            boolean b = VerifyOSSCallbackRequest(request, "");
+            boolean b = VerifyOSSCallbackRequest(request, ossCallbackBody);
             log.info("验证结果:{}", b);
         } catch (IOException e) {
             e.printStackTrace();
