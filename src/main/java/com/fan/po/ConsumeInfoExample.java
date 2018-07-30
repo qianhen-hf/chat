@@ -252,63 +252,63 @@ public class ConsumeInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andAnchorIdIsNull() {
-            addCriterion("anchor_id is null");
+        public Criteria andAnchorIsNull() {
+            addCriterion("anchor is null");
             return (Criteria) this;
         }
 
-        public Criteria andAnchorIdIsNotNull() {
-            addCriterion("anchor_id is not null");
+        public Criteria andAnchorIsNotNull() {
+            addCriterion("anchor is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAnchorIdEqualTo(Long value) {
-            addCriterion("anchor_id =", value, "anchorId");
+        public Criteria andAnchorEqualTo(Long value) {
+            addCriterion("anchor =", value, "anchor");
             return (Criteria) this;
         }
 
-        public Criteria andAnchorIdNotEqualTo(Long value) {
-            addCriterion("anchor_id <>", value, "anchorId");
+        public Criteria andAnchorNotEqualTo(Long value) {
+            addCriterion("anchor <>", value, "anchor");
             return (Criteria) this;
         }
 
-        public Criteria andAnchorIdGreaterThan(Long value) {
-            addCriterion("anchor_id >", value, "anchorId");
+        public Criteria andAnchorGreaterThan(Long value) {
+            addCriterion("anchor >", value, "anchor");
             return (Criteria) this;
         }
 
-        public Criteria andAnchorIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("anchor_id >=", value, "anchorId");
+        public Criteria andAnchorGreaterThanOrEqualTo(Long value) {
+            addCriterion("anchor >=", value, "anchor");
             return (Criteria) this;
         }
 
-        public Criteria andAnchorIdLessThan(Long value) {
-            addCriterion("anchor_id <", value, "anchorId");
+        public Criteria andAnchorLessThan(Long value) {
+            addCriterion("anchor <", value, "anchor");
             return (Criteria) this;
         }
 
-        public Criteria andAnchorIdLessThanOrEqualTo(Long value) {
-            addCriterion("anchor_id <=", value, "anchorId");
+        public Criteria andAnchorLessThanOrEqualTo(Long value) {
+            addCriterion("anchor <=", value, "anchor");
             return (Criteria) this;
         }
 
-        public Criteria andAnchorIdIn(List<Long> values) {
-            addCriterion("anchor_id in", values, "anchorId");
+        public Criteria andAnchorIn(List<Long> values) {
+            addCriterion("anchor in", values, "anchor");
             return (Criteria) this;
         }
 
-        public Criteria andAnchorIdNotIn(List<Long> values) {
-            addCriterion("anchor_id not in", values, "anchorId");
+        public Criteria andAnchorNotIn(List<Long> values) {
+            addCriterion("anchor not in", values, "anchor");
             return (Criteria) this;
         }
 
-        public Criteria andAnchorIdBetween(Long value1, Long value2) {
-            addCriterion("anchor_id between", value1, value2, "anchorId");
+        public Criteria andAnchorBetween(Long value1, Long value2) {
+            addCriterion("anchor between", value1, value2, "anchor");
             return (Criteria) this;
         }
 
-        public Criteria andAnchorIdNotBetween(Long value1, Long value2) {
-            addCriterion("anchor_id not between", value1, value2, "anchorId");
+        public Criteria andAnchorNotBetween(Long value1, Long value2) {
+            addCriterion("anchor not between", value1, value2, "anchor");
             return (Criteria) this;
         }
 

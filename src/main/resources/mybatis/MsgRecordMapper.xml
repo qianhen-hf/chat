@@ -3,14 +3,12 @@
 <mapper namespace="com.fan.mapper.MsgRecordMapper" >
   <resultMap id="BaseResultMap" type="com.fan.po.MsgRecord" >
     <id column="msg_id" property="msgId" jdbcType="BIGINT" />
-    <result column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="anchor_id" property="anchorId" jdbcType="BIGINT" />
     <result column="sender_id" property="senderId" jdbcType="BIGINT" />
-    <result column="sender_type" property="senderType" jdbcType="TINYINT" />
+    <result column="sender_type" property="senderType" jdbcType="INTEGER" />
     <result column="receiver_id" property="receiverId" jdbcType="BIGINT" />
-    <result column="receiver_type" property="receiverType" jdbcType="TINYINT" />
+    <result column="receiver_type" property="receiverType" jdbcType="INTEGER" />
     <result column="msg_cnt" property="msgCnt" jdbcType="VARCHAR" />
-    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
     <result column="send_time" property="sendTime" jdbcType="DATE" />
     <result column="receive_time" property="receiveTime" jdbcType="DATE" />
     <result column="create_time" property="createTime" jdbcType="DATE" />
@@ -75,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    msg_id, user_id, anchor_id, sender_id, sender_type, receiver_id, receiver_type, msg_cnt, 
-    status, send_time, receive_time, create_time, update_time
+    msg_id, sender_id, sender_type, receiver_id, receiver_type, msg_cnt, status, send_time, 
+    receive_time, create_time, update_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fan.po.MsgRecordExample" >
     select
@@ -109,28 +107,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.fan.po.MsgRecord" >
-    insert into v_msg_record (msg_id, user_id, anchor_id, 
-      sender_id, sender_type, receiver_id, 
-      receiver_type, msg_cnt, status, 
-      send_time, receive_time, create_time, 
-      update_time)
-    values (#{msgId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{anchorId,jdbcType=BIGINT}, 
-      #{senderId,jdbcType=BIGINT}, #{senderType,jdbcType=TINYINT}, #{receiverId,jdbcType=BIGINT}, 
-      #{receiverType,jdbcType=TINYINT}, #{msgCnt,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, 
-      #{sendTime,jdbcType=DATE}, #{receiveTime,jdbcType=DATE}, #{createTime,jdbcType=DATE}, 
-      #{updateTime,jdbcType=DATE})
+    insert into v_msg_record (msg_id, sender_id, sender_type, 
+      receiver_id, receiver_type, msg_cnt, 
+      status, send_time, receive_time, 
+      create_time, update_time)
+    values (#{msgId,jdbcType=BIGINT}, #{senderId,jdbcType=BIGINT}, #{senderType,jdbcType=INTEGER}, 
+      #{receiverId,jdbcType=BIGINT}, #{receiverType,jdbcType=INTEGER}, #{msgCnt,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{sendTime,jdbcType=DATE}, #{receiveTime,jdbcType=DATE}, 
+      #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.fan.po.MsgRecord" >
     insert into v_msg_record
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="msgId != null" >
         msg_id,
-      </if>
-      <if test="userId != null" >
-        user_id,
-      </if>
-      <if test="anchorId != null" >
-        anchor_id,
       </if>
       <if test="senderId != null" >
         sender_id,
@@ -167,29 +157,23 @@
       <if test="msgId != null" >
         #{msgId,jdbcType=BIGINT},
       </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="anchorId != null" >
-        #{anchorId,jdbcType=BIGINT},
-      </if>
       <if test="senderId != null" >
         #{senderId,jdbcType=BIGINT},
       </if>
       <if test="senderType != null" >
-        #{senderType,jdbcType=TINYINT},
+        #{senderType,jdbcType=INTEGER},
       </if>
       <if test="receiverId != null" >
         #{receiverId,jdbcType=BIGINT},
       </if>
       <if test="receiverType != null" >
-        #{receiverType,jdbcType=TINYINT},
+        #{receiverType,jdbcType=INTEGER},
       </if>
       <if test="msgCnt != null" >
         #{msgCnt,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=TINYINT},
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="sendTime != null" >
         #{sendTime,jdbcType=DATE},
@@ -217,29 +201,23 @@
       <if test="record.msgId != null" >
         msg_id = #{record.msgId,jdbcType=BIGINT},
       </if>
-      <if test="record.userId != null" >
-        user_id = #{record.userId,jdbcType=BIGINT},
-      </if>
-      <if test="record.anchorId != null" >
-        anchor_id = #{record.anchorId,jdbcType=BIGINT},
-      </if>
       <if test="record.senderId != null" >
         sender_id = #{record.senderId,jdbcType=BIGINT},
       </if>
       <if test="record.senderType != null" >
-        sender_type = #{record.senderType,jdbcType=TINYINT},
+        sender_type = #{record.senderType,jdbcType=INTEGER},
       </if>
       <if test="record.receiverId != null" >
         receiver_id = #{record.receiverId,jdbcType=BIGINT},
       </if>
       <if test="record.receiverType != null" >
-        receiver_type = #{record.receiverType,jdbcType=TINYINT},
+        receiver_type = #{record.receiverType,jdbcType=INTEGER},
       </if>
       <if test="record.msgCnt != null" >
         msg_cnt = #{record.msgCnt,jdbcType=VARCHAR},
       </if>
       <if test="record.status != null" >
-        status = #{record.status,jdbcType=TINYINT},
+        status = #{record.status,jdbcType=INTEGER},
       </if>
       <if test="record.sendTime != null" >
         send_time = #{record.sendTime,jdbcType=DATE},
@@ -261,14 +239,12 @@
   <update id="updateByExample" parameterType="map" >
     update v_msg_record
     set msg_id = #{record.msgId,jdbcType=BIGINT},
-      user_id = #{record.userId,jdbcType=BIGINT},
-      anchor_id = #{record.anchorId,jdbcType=BIGINT},
       sender_id = #{record.senderId,jdbcType=BIGINT},
-      sender_type = #{record.senderType,jdbcType=TINYINT},
+      sender_type = #{record.senderType,jdbcType=INTEGER},
       receiver_id = #{record.receiverId,jdbcType=BIGINT},
-      receiver_type = #{record.receiverType,jdbcType=TINYINT},
+      receiver_type = #{record.receiverType,jdbcType=INTEGER},
       msg_cnt = #{record.msgCnt,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=INTEGER},
       send_time = #{record.sendTime,jdbcType=DATE},
       receive_time = #{record.receiveTime,jdbcType=DATE},
       create_time = #{record.createTime,jdbcType=DATE},
@@ -280,29 +256,23 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.fan.po.MsgRecord" >
     update v_msg_record
     <set >
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="anchorId != null" >
-        anchor_id = #{anchorId,jdbcType=BIGINT},
-      </if>
       <if test="senderId != null" >
         sender_id = #{senderId,jdbcType=BIGINT},
       </if>
       <if test="senderType != null" >
-        sender_type = #{senderType,jdbcType=TINYINT},
+        sender_type = #{senderType,jdbcType=INTEGER},
       </if>
       <if test="receiverId != null" >
         receiver_id = #{receiverId,jdbcType=BIGINT},
       </if>
       <if test="receiverType != null" >
-        receiver_type = #{receiverType,jdbcType=TINYINT},
+        receiver_type = #{receiverType,jdbcType=INTEGER},
       </if>
       <if test="msgCnt != null" >
         msg_cnt = #{msgCnt,jdbcType=VARCHAR},
       </if>
       <if test="status != null" >
-        status = #{status,jdbcType=TINYINT},
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="sendTime != null" >
         send_time = #{sendTime,jdbcType=DATE},
@@ -321,14 +291,12 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.fan.po.MsgRecord" >
     update v_msg_record
-    set user_id = #{userId,jdbcType=BIGINT},
-      anchor_id = #{anchorId,jdbcType=BIGINT},
-      sender_id = #{senderId,jdbcType=BIGINT},
-      sender_type = #{senderType,jdbcType=TINYINT},
+    set sender_id = #{senderId,jdbcType=BIGINT},
+      sender_type = #{senderType,jdbcType=INTEGER},
       receiver_id = #{receiverId,jdbcType=BIGINT},
-      receiver_type = #{receiverType,jdbcType=TINYINT},
+      receiver_type = #{receiverType,jdbcType=INTEGER},
       msg_cnt = #{msgCnt,jdbcType=VARCHAR},
-      status = #{status,jdbcType=TINYINT},
+      status = #{status,jdbcType=INTEGER},
       send_time = #{sendTime,jdbcType=DATE},
       receive_time = #{receiveTime,jdbcType=DATE},
       create_time = #{createTime,jdbcType=DATE},

@@ -9,7 +9,7 @@ public class UserLogin {
 
     private String userName;
 
-    private Byte status;
+    private Integer status;
 
     private String sid;
 
@@ -17,7 +17,7 @@ public class UserLogin {
 
     private Date loginOutTime;
 
-    private Byte osType;
+    private Integer osType;
 
     private String osVersion;
 
@@ -55,11 +55,11 @@ public class UserLogin {
         this.userName = userName == null ? null : userName.trim();
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -87,11 +87,11 @@ public class UserLogin {
         this.loginOutTime = loginOutTime;
     }
 
-    public Byte getOsType() {
+    public Integer getOsType() {
         return osType;
     }
 
-    public void setOsType(Byte osType) {
+    public void setOsType(Integer osType) {
         this.osType = osType;
     }
 

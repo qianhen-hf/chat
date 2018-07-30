@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.fan.po.ConsumeInfo" >
     <id column="ID" property="id" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="anchor_id" property="anchorId" jdbcType="BIGINT" />
+    <result column="anchor" property="anchor" jdbcType="BIGINT" />
     <result column="vcorn" property="vcorn" jdbcType="BIGINT" />
     <result column="create_time" property="createTime" jdbcType="DATE" />
     <result column="update_time" property="updateTime" jdbcType="DATE" />
@@ -68,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ID, user_id, anchor_id, vcorn, create_time, update_time
+    ID, user_id, anchor, vcorn, create_time, update_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fan.po.ConsumeInfoExample" >
     select
@@ -101,10 +101,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.fan.po.ConsumeInfo" >
-    insert into v_consume_info (ID, user_id, anchor_id, 
+    insert into v_consume_info (ID, user_id, anchor, 
       vcorn, create_time, update_time
       )
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{anchorId,jdbcType=BIGINT}, 
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{anchor,jdbcType=BIGINT}, 
       #{vcorn,jdbcType=BIGINT}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}
       )
   </insert>
@@ -117,8 +117,8 @@
       <if test="userId != null" >
         user_id,
       </if>
-      <if test="anchorId != null" >
-        anchor_id,
+      <if test="anchor != null" >
+        anchor,
       </if>
       <if test="vcorn != null" >
         vcorn,
@@ -137,8 +137,8 @@
       <if test="userId != null" >
         #{userId,jdbcType=BIGINT},
       </if>
-      <if test="anchorId != null" >
-        #{anchorId,jdbcType=BIGINT},
+      <if test="anchor != null" >
+        #{anchor,jdbcType=BIGINT},
       </if>
       <if test="vcorn != null" >
         #{vcorn,jdbcType=BIGINT},
@@ -166,8 +166,8 @@
       <if test="record.userId != null" >
         user_id = #{record.userId,jdbcType=BIGINT},
       </if>
-      <if test="record.anchorId != null" >
-        anchor_id = #{record.anchorId,jdbcType=BIGINT},
+      <if test="record.anchor != null" >
+        anchor = #{record.anchor,jdbcType=BIGINT},
       </if>
       <if test="record.vcorn != null" >
         vcorn = #{record.vcorn,jdbcType=BIGINT},
@@ -187,7 +187,7 @@
     update v_consume_info
     set ID = #{record.id,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
-      anchor_id = #{record.anchorId,jdbcType=BIGINT},
+      anchor = #{record.anchor,jdbcType=BIGINT},
       vcorn = #{record.vcorn,jdbcType=BIGINT},
       create_time = #{record.createTime,jdbcType=DATE},
       update_time = #{record.updateTime,jdbcType=DATE}
@@ -201,8 +201,8 @@
       <if test="userId != null" >
         user_id = #{userId,jdbcType=BIGINT},
       </if>
-      <if test="anchorId != null" >
-        anchor_id = #{anchorId,jdbcType=BIGINT},
+      <if test="anchor != null" >
+        anchor = #{anchor,jdbcType=BIGINT},
       </if>
       <if test="vcorn != null" >
         vcorn = #{vcorn,jdbcType=BIGINT},
@@ -219,7 +219,7 @@
   <update id="updateByPrimaryKey" parameterType="com.fan.po.ConsumeInfo" >
     update v_consume_info
     set user_id = #{userId,jdbcType=BIGINT},
-      anchor_id = #{anchorId,jdbcType=BIGINT},
+      anchor = #{anchor,jdbcType=BIGINT},
       vcorn = #{vcorn,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=DATE},
       update_time = #{updateTime,jdbcType=DATE}

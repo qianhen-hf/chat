@@ -5,7 +5,7 @@ import java.util.Date;
 public class PhotoInfo {
     private Long id;
 
-    private Long anchorId;
+    private Long userId;
 
     private String photoUrl;
 
@@ -23,12 +23,12 @@ public class PhotoInfo {
         this.id = id;
     }
 
-    public Long getAnchorId() {
-        return anchorId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setAnchorId(Long anchorId) {
-        this.anchorId = anchorId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getPhotoUrl() {

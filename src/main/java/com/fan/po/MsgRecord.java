@@ -5,21 +5,17 @@ import java.util.Date;
 public class MsgRecord {
     private Long msgId;
 
-    private Long userId;
-
-    private Long anchorId;
-
     private Long senderId;
 
-    private Byte senderType;
+    private Integer senderType;
 
     private Long receiverId;
 
-    private Byte receiverType;
+    private Integer receiverType;
 
     private String msgCnt;
 
-    private Byte status;
+    private Integer status;
 
     private Date sendTime;
 
@@ -37,22 +33,6 @@ public class MsgRecord {
         this.msgId = msgId;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getAnchorId() {
-        return anchorId;
-    }
-
-    public void setAnchorId(Long anchorId) {
-        this.anchorId = anchorId;
-    }
-
     public Long getSenderId() {
         return senderId;
     }
@@ -61,11 +41,11 @@ public class MsgRecord {
         this.senderId = senderId;
     }
 
-    public Byte getSenderType() {
+    public Integer getSenderType() {
         return senderType;
     }
 
-    public void setSenderType(Byte senderType) {
+    public void setSenderType(Integer senderType) {
         this.senderType = senderType;
     }
 
@@ -77,11 +57,11 @@ public class MsgRecord {
         this.receiverId = receiverId;
     }
 
-    public Byte getReceiverType() {
+    public Integer getReceiverType() {
         return receiverType;
     }
 
-    public void setReceiverType(Byte receiverType) {
+    public void setReceiverType(Integer receiverType) {
         this.receiverType = receiverType;
     }
 
@@ -93,11 +73,11 @@ public class MsgRecord {
         this.msgCnt = msgCnt == null ? null : msgCnt.trim();
     }
 
-    public Byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

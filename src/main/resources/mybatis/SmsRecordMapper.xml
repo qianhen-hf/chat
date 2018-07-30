@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fan.mapper.PhotoInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.fan.po.PhotoInfo" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="photo_url" property="photoUrl" jdbcType="VARCHAR" />
-    <result column="seq" property="seq" jdbcType="INTEGER" />
+<mapper namespace="com.fan.mapper.SmsRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.fan.po.SmsRecord" >
+    <id column="sms_id" property="smsId" jdbcType="BIGINT" />
+    <result column="mobile" property="mobile" jdbcType="CHAR" />
+    <result column="code" property="code" jdbcType="INTEGER" />
+    <result column="ischeck" property="ischeck" jdbcType="TINYINT" />
+    <result column="check_times" property="checkTimes" jdbcType="INTEGER" />
+    <result column="send_time" property="sendTime" jdbcType="DATE" />
+    <result column="expire_time" property="expireTime" jdbcType="DATE" />
     <result column="create_time" property="createTime" jdbcType="DATE" />
     <result column="update_time" property="updateTime" jdbcType="DATE" />
   </resultMap>
@@ -68,15 +71,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, user_id, photo_url, seq, create_time, update_time
+    sms_id, mobile, code, ischeck, check_times, send_time, expire_time, create_time, 
+    update_time
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fan.po.PhotoInfoExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fan.po.SmsRecordExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from v_photo_info
+    from v_sms_record
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,41 +91,52 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from v_photo_info
-    where id = #{id,jdbcType=BIGINT}
+    from v_sms_record
+    where sms_id = #{smsId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from v_photo_info
-    where id = #{id,jdbcType=BIGINT}
+    delete from v_sms_record
+    where sms_id = #{smsId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.fan.po.PhotoInfoExample" >
-    delete from v_photo_info
+  <delete id="deleteByExample" parameterType="com.fan.po.SmsRecordExample" >
+    delete from v_sms_record
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.fan.po.PhotoInfo" >
-    insert into v_photo_info (id, user_id, photo_url, 
-      seq, create_time, update_time
+  <insert id="insert" parameterType="com.fan.po.SmsRecord" >
+    insert into v_sms_record (sms_id, mobile, code, 
+      ischeck, check_times, send_time, 
+      expire_time, create_time, update_time
       )
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{photoUrl,jdbcType=VARCHAR}, 
-      #{seq,jdbcType=INTEGER}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}
+    values (#{smsId,jdbcType=BIGINT}, #{mobile,jdbcType=CHAR}, #{code,jdbcType=INTEGER}, 
+      #{ischeck,jdbcType=TINYINT}, #{checkTimes,jdbcType=INTEGER}, #{sendTime,jdbcType=DATE}, 
+      #{expireTime,jdbcType=DATE}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.fan.po.PhotoInfo" >
-    insert into v_photo_info
+  <insert id="insertSelective" parameterType="com.fan.po.SmsRecord" >
+    insert into v_sms_record
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
+      <if test="smsId != null" >
+        sms_id,
       </if>
-      <if test="userId != null" >
-        user_id,
+      <if test="mobile != null" >
+        mobile,
       </if>
-      <if test="photoUrl != null" >
-        photo_url,
+      <if test="code != null" >
+        code,
       </if>
-      <if test="seq != null" >
-        seq,
+      <if test="ischeck != null" >
+        ischeck,
+      </if>
+      <if test="checkTimes != null" >
+        check_times,
+      </if>
+      <if test="sendTime != null" >
+        send_time,
+      </if>
+      <if test="expireTime != null" >
+        expire_time,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -131,17 +146,26 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
+      <if test="smsId != null" >
+        #{smsId,jdbcType=BIGINT},
       </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=BIGINT},
+      <if test="mobile != null" >
+        #{mobile,jdbcType=CHAR},
       </if>
-      <if test="photoUrl != null" >
-        #{photoUrl,jdbcType=VARCHAR},
+      <if test="code != null" >
+        #{code,jdbcType=INTEGER},
       </if>
-      <if test="seq != null" >
-        #{seq,jdbcType=INTEGER},
+      <if test="ischeck != null" >
+        #{ischeck,jdbcType=TINYINT},
+      </if>
+      <if test="checkTimes != null" >
+        #{checkTimes,jdbcType=INTEGER},
+      </if>
+      <if test="sendTime != null" >
+        #{sendTime,jdbcType=DATE},
+      </if>
+      <if test="expireTime != null" >
+        #{expireTime,jdbcType=DATE},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=DATE},
@@ -151,26 +175,35 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.fan.po.PhotoInfoExample" resultType="java.lang.Integer" >
-    select count(*) from v_photo_info
+  <select id="countByExample" parameterType="com.fan.po.SmsRecordExample" resultType="java.lang.Integer" >
+    select count(*) from v_sms_record
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update v_photo_info
+    update v_sms_record
     <set >
-      <if test="record.id != null" >
-        id = #{record.id,jdbcType=BIGINT},
+      <if test="record.smsId != null" >
+        sms_id = #{record.smsId,jdbcType=BIGINT},
       </if>
-      <if test="record.userId != null" >
-        user_id = #{record.userId,jdbcType=BIGINT},
+      <if test="record.mobile != null" >
+        mobile = #{record.mobile,jdbcType=CHAR},
       </if>
-      <if test="record.photoUrl != null" >
-        photo_url = #{record.photoUrl,jdbcType=VARCHAR},
+      <if test="record.code != null" >
+        code = #{record.code,jdbcType=INTEGER},
       </if>
-      <if test="record.seq != null" >
-        seq = #{record.seq,jdbcType=INTEGER},
+      <if test="record.ischeck != null" >
+        ischeck = #{record.ischeck,jdbcType=TINYINT},
+      </if>
+      <if test="record.checkTimes != null" >
+        check_times = #{record.checkTimes,jdbcType=INTEGER},
+      </if>
+      <if test="record.sendTime != null" >
+        send_time = #{record.sendTime,jdbcType=DATE},
+      </if>
+      <if test="record.expireTime != null" >
+        expire_time = #{record.expireTime,jdbcType=DATE},
       </if>
       <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=DATE},
@@ -184,28 +217,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update v_photo_info
-    set id = #{record.id,jdbcType=BIGINT},
-      user_id = #{record.userId,jdbcType=BIGINT},
-      photo_url = #{record.photoUrl,jdbcType=VARCHAR},
-      seq = #{record.seq,jdbcType=INTEGER},
+    update v_sms_record
+    set sms_id = #{record.smsId,jdbcType=BIGINT},
+      mobile = #{record.mobile,jdbcType=CHAR},
+      code = #{record.code,jdbcType=INTEGER},
+      ischeck = #{record.ischeck,jdbcType=TINYINT},
+      check_times = #{record.checkTimes,jdbcType=INTEGER},
+      send_time = #{record.sendTime,jdbcType=DATE},
+      expire_time = #{record.expireTime,jdbcType=DATE},
       create_time = #{record.createTime,jdbcType=DATE},
       update_time = #{record.updateTime,jdbcType=DATE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fan.po.PhotoInfo" >
-    update v_photo_info
+  <update id="updateByPrimaryKeySelective" parameterType="com.fan.po.SmsRecord" >
+    update v_sms_record
     <set >
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=BIGINT},
+      <if test="mobile != null" >
+        mobile = #{mobile,jdbcType=CHAR},
       </if>
-      <if test="photoUrl != null" >
-        photo_url = #{photoUrl,jdbcType=VARCHAR},
+      <if test="code != null" >
+        code = #{code,jdbcType=INTEGER},
       </if>
-      <if test="seq != null" >
-        seq = #{seq,jdbcType=INTEGER},
+      <if test="ischeck != null" >
+        ischeck = #{ischeck,jdbcType=TINYINT},
+      </if>
+      <if test="checkTimes != null" >
+        check_times = #{checkTimes,jdbcType=INTEGER},
+      </if>
+      <if test="sendTime != null" >
+        send_time = #{sendTime,jdbcType=DATE},
+      </if>
+      <if test="expireTime != null" >
+        expire_time = #{expireTime,jdbcType=DATE},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=DATE},
@@ -214,15 +259,18 @@
         update_time = #{updateTime,jdbcType=DATE},
       </if>
     </set>
-    where id = #{id,jdbcType=BIGINT}
+    where sms_id = #{smsId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fan.po.PhotoInfo" >
-    update v_photo_info
-    set user_id = #{userId,jdbcType=BIGINT},
-      photo_url = #{photoUrl,jdbcType=VARCHAR},
-      seq = #{seq,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.fan.po.SmsRecord" >
+    update v_sms_record
+    set mobile = #{mobile,jdbcType=CHAR},
+      code = #{code,jdbcType=INTEGER},
+      ischeck = #{ischeck,jdbcType=TINYINT},
+      check_times = #{checkTimes,jdbcType=INTEGER},
+      send_time = #{sendTime,jdbcType=DATE},
+      expire_time = #{expireTime,jdbcType=DATE},
       create_time = #{createTime,jdbcType=DATE},
       update_time = #{updateTime,jdbcType=DATE}
-    where id = #{id,jdbcType=BIGINT}
+    where sms_id = #{smsId,jdbcType=BIGINT}
   </update>
 </mapper>

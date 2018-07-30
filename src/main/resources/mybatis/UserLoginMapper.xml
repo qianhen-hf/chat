@@ -5,11 +5,11 @@
     <id column="ID" property="id" jdbcType="BIGINT" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="user_name" property="userName" jdbcType="CHAR" />
-    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
     <result column="sid" property="sid" jdbcType="VARCHAR" />
     <result column="code" property="code" jdbcType="INTEGER" />
     <result column="login_out_time" property="loginOutTime" jdbcType="DATE" />
-    <result column="os_type" property="osType" jdbcType="TINYINT" />
+    <result column="os_type" property="osType" jdbcType="INTEGER" />
     <result column="os_version" property="osVersion" jdbcType="VARCHAR" />
     <result column="mobile_model" property="mobileModel" jdbcType="VARCHAR" />
     <result column="app_version" property="appVersion" jdbcType="VARCHAR" />
@@ -116,8 +116,8 @@
       mobile_model, app_version, appname, 
       create_time, update_time)
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userName,jdbcType=CHAR}, 
-      #{status,jdbcType=TINYINT}, #{sid,jdbcType=VARCHAR}, #{code,jdbcType=INTEGER}, 
-      #{loginOutTime,jdbcType=DATE}, #{osType,jdbcType=TINYINT}, #{osVersion,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{sid,jdbcType=VARCHAR}, #{code,jdbcType=INTEGER}, 
+      #{loginOutTime,jdbcType=DATE}, #{osType,jdbcType=INTEGER}, #{osVersion,jdbcType=VARCHAR}, 
       #{mobileModel,jdbcType=VARCHAR}, #{appVersion,jdbcType=VARCHAR}, #{appname,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE})
   </insert>
@@ -178,7 +178,7 @@
         #{userName,jdbcType=CHAR},
       </if>
       <if test="status != null" >
-        #{status,jdbcType=TINYINT},
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="sid != null" >
         #{sid,jdbcType=VARCHAR},
@@ -190,7 +190,7 @@
         #{loginOutTime,jdbcType=DATE},
       </if>
       <if test="osType != null" >
-        #{osType,jdbcType=TINYINT},
+        #{osType,jdbcType=INTEGER},
       </if>
       <if test="osVersion != null" >
         #{osVersion,jdbcType=VARCHAR},
@@ -231,7 +231,7 @@
         user_name = #{record.userName,jdbcType=CHAR},
       </if>
       <if test="record.status != null" >
-        status = #{record.status,jdbcType=TINYINT},
+        status = #{record.status,jdbcType=INTEGER},
       </if>
       <if test="record.sid != null" >
         sid = #{record.sid,jdbcType=VARCHAR},
@@ -243,7 +243,7 @@
         login_out_time = #{record.loginOutTime,jdbcType=DATE},
       </if>
       <if test="record.osType != null" >
-        os_type = #{record.osType,jdbcType=TINYINT},
+        os_type = #{record.osType,jdbcType=INTEGER},
       </if>
       <if test="record.osVersion != null" >
         os_version = #{record.osVersion,jdbcType=VARCHAR},
@@ -273,11 +273,11 @@
     set ID = #{record.id,jdbcType=BIGINT},
       user_id = #{record.userId,jdbcType=BIGINT},
       user_name = #{record.userName,jdbcType=CHAR},
-      status = #{record.status,jdbcType=TINYINT},
+      status = #{record.status,jdbcType=INTEGER},
       sid = #{record.sid,jdbcType=VARCHAR},
       code = #{record.code,jdbcType=INTEGER},
       login_out_time = #{record.loginOutTime,jdbcType=DATE},
-      os_type = #{record.osType,jdbcType=TINYINT},
+      os_type = #{record.osType,jdbcType=INTEGER},
       os_version = #{record.osVersion,jdbcType=VARCHAR},
       mobile_model = #{record.mobileModel,jdbcType=VARCHAR},
       app_version = #{record.appVersion,jdbcType=VARCHAR},
@@ -298,7 +298,7 @@
         user_name = #{userName,jdbcType=CHAR},
       </if>
       <if test="status != null" >
-        status = #{status,jdbcType=TINYINT},
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="sid != null" >
         sid = #{sid,jdbcType=VARCHAR},
@@ -310,7 +310,7 @@
         login_out_time = #{loginOutTime,jdbcType=DATE},
       </if>
       <if test="osType != null" >
-        os_type = #{osType,jdbcType=TINYINT},
+        os_type = #{osType,jdbcType=INTEGER},
       </if>
       <if test="osVersion != null" >
         os_version = #{osVersion,jdbcType=VARCHAR},
@@ -337,11 +337,11 @@
     update v_user_login
     set user_id = #{userId,jdbcType=BIGINT},
       user_name = #{userName,jdbcType=CHAR},
-      status = #{status,jdbcType=TINYINT},
+      status = #{status,jdbcType=INTEGER},
       sid = #{sid,jdbcType=VARCHAR},
       code = #{code,jdbcType=INTEGER},
       login_out_time = #{loginOutTime,jdbcType=DATE},
-      os_type = #{osType,jdbcType=TINYINT},
+      os_type = #{osType,jdbcType=INTEGER},
       os_version = #{osVersion,jdbcType=VARCHAR},
       mobile_model = #{mobileModel,jdbcType=VARCHAR},
       app_version = #{appVersion,jdbcType=VARCHAR},

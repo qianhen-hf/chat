@@ -3,9 +3,11 @@
 <mapper namespace="com.fan.mapper.DepositInfoMapper" >
   <resultMap id="BaseResultMap" type="com.fan.po.DepositInfo" >
     <id column="ID" property="id" jdbcType="BIGINT" />
-    <result column="anchor_id" property="anchorId" jdbcType="BIGINT" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="apply_amount" property="applyAmount" jdbcType="BIGINT" />
     <result column="way" property="way" jdbcType="INTEGER" />
+    <result column="account_name" property="accountName" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
     <result column="apply_time" property="applyTime" jdbcType="DATE" />
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="DATE" />
@@ -70,7 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ID, anchor_id, apply_amount, way, apply_time, status, create_time, update_time
+    ID, user_id, apply_amount, way, account_name, account, apply_time, status, create_time, 
+    update_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fan.po.DepositInfoExample" >
     select
@@ -103,12 +106,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.fan.po.DepositInfo" >
-    insert into v_deposit_info (ID, anchor_id, apply_amount, 
-      way, apply_time, status, 
-      create_time, update_time)
-    values (#{id,jdbcType=BIGINT}, #{anchorId,jdbcType=BIGINT}, #{applyAmount,jdbcType=BIGINT}, 
-      #{way,jdbcType=INTEGER}, #{applyTime,jdbcType=DATE}, #{status,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE})
+    insert into v_deposit_info (ID, user_id, apply_amount, 
+      way, account_name, account, 
+      apply_time, status, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{applyAmount,jdbcType=BIGINT}, 
+      #{way,jdbcType=INTEGER}, #{accountName,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, 
+      #{applyTime,jdbcType=DATE}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=DATE}, 
+      #{updateTime,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.fan.po.DepositInfo" >
     insert into v_deposit_info
@@ -116,14 +121,20 @@
       <if test="id != null" >
         ID,
       </if>
-      <if test="anchorId != null" >
-        anchor_id,
+      <if test="userId != null" >
+        user_id,
       </if>
       <if test="applyAmount != null" >
         apply_amount,
       </if>
       <if test="way != null" >
         way,
+      </if>
+      <if test="accountName != null" >
+        account_name,
+      </if>
+      <if test="account != null" >
+        account,
       </if>
       <if test="applyTime != null" >
         apply_time,
@@ -142,14 +153,20 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="anchorId != null" >
-        #{anchorId,jdbcType=BIGINT},
+      <if test="userId != null" >
+        #{userId,jdbcType=BIGINT},
       </if>
       <if test="applyAmount != null" >
         #{applyAmount,jdbcType=BIGINT},
       </if>
       <if test="way != null" >
         #{way,jdbcType=INTEGER},
+      </if>
+      <if test="accountName != null" >
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
       </if>
       <if test="applyTime != null" >
         #{applyTime,jdbcType=DATE},
@@ -177,14 +194,20 @@
       <if test="record.id != null" >
         ID = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.anchorId != null" >
-        anchor_id = #{record.anchorId,jdbcType=BIGINT},
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=BIGINT},
       </if>
       <if test="record.applyAmount != null" >
         apply_amount = #{record.applyAmount,jdbcType=BIGINT},
       </if>
       <if test="record.way != null" >
         way = #{record.way,jdbcType=INTEGER},
+      </if>
+      <if test="record.accountName != null" >
+        account_name = #{record.accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.account != null" >
+        account = #{record.account,jdbcType=VARCHAR},
       </if>
       <if test="record.applyTime != null" >
         apply_time = #{record.applyTime,jdbcType=DATE},
@@ -206,9 +229,11 @@
   <update id="updateByExample" parameterType="map" >
     update v_deposit_info
     set ID = #{record.id,jdbcType=BIGINT},
-      anchor_id = #{record.anchorId,jdbcType=BIGINT},
+      user_id = #{record.userId,jdbcType=BIGINT},
       apply_amount = #{record.applyAmount,jdbcType=BIGINT},
       way = #{record.way,jdbcType=INTEGER},
+      account_name = #{record.accountName,jdbcType=VARCHAR},
+      account = #{record.account,jdbcType=VARCHAR},
       apply_time = #{record.applyTime,jdbcType=DATE},
       status = #{record.status,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=DATE},
@@ -220,14 +245,20 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.fan.po.DepositInfo" >
     update v_deposit_info
     <set >
-      <if test="anchorId != null" >
-        anchor_id = #{anchorId,jdbcType=BIGINT},
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=BIGINT},
       </if>
       <if test="applyAmount != null" >
         apply_amount = #{applyAmount,jdbcType=BIGINT},
       </if>
       <if test="way != null" >
         way = #{way,jdbcType=INTEGER},
+      </if>
+      <if test="accountName != null" >
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
       </if>
       <if test="applyTime != null" >
         apply_time = #{applyTime,jdbcType=DATE},
@@ -246,9 +277,11 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.fan.po.DepositInfo" >
     update v_deposit_info
-    set anchor_id = #{anchorId,jdbcType=BIGINT},
+    set user_id = #{userId,jdbcType=BIGINT},
       apply_amount = #{applyAmount,jdbcType=BIGINT},
       way = #{way,jdbcType=INTEGER},
+      account_name = #{accountName,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
       apply_time = #{applyTime,jdbcType=DATE},
       status = #{status,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=DATE},

@@ -332,52 +332,52 @@ public class UserLoginExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(Byte value) {
+        public Criteria andStatusEqualTo(Integer value) {
             addCriterion("status =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotEqualTo(Byte value) {
+        public Criteria andStatusNotEqualTo(Integer value) {
             addCriterion("status <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThan(Byte value) {
+        public Criteria andStatusGreaterThan(Integer value) {
             addCriterion("status >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThanOrEqualTo(Byte value) {
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
             addCriterion("status >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThan(Byte value) {
+        public Criteria andStatusLessThan(Integer value) {
             addCriterion("status <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThanOrEqualTo(Byte value) {
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
             addCriterion("status <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIn(List<Byte> values) {
+        public Criteria andStatusIn(List<Integer> values) {
             addCriterion("status in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotIn(List<Byte> values) {
+        public Criteria andStatusNotIn(List<Integer> values) {
             addCriterion("status not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusBetween(Byte value1, Byte value2) {
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
             addCriterion("status between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotBetween(Byte value1, Byte value2) {
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
             addCriterion("status not between", value1, value2, "status");
             return (Criteria) this;
         }
@@ -582,52 +582,52 @@ public class UserLoginExample {
             return (Criteria) this;
         }
 
-        public Criteria andOsTypeEqualTo(Byte value) {
+        public Criteria andOsTypeEqualTo(Integer value) {
             addCriterion("os_type =", value, "osType");
             return (Criteria) this;
         }
 
-        public Criteria andOsTypeNotEqualTo(Byte value) {
+        public Criteria andOsTypeNotEqualTo(Integer value) {
             addCriterion("os_type <>", value, "osType");
             return (Criteria) this;
         }
 
-        public Criteria andOsTypeGreaterThan(Byte value) {
+        public Criteria andOsTypeGreaterThan(Integer value) {
             addCriterion("os_type >", value, "osType");
             return (Criteria) this;
         }
 
-        public Criteria andOsTypeGreaterThanOrEqualTo(Byte value) {
+        public Criteria andOsTypeGreaterThanOrEqualTo(Integer value) {
             addCriterion("os_type >=", value, "osType");
             return (Criteria) this;
         }
 
-        public Criteria andOsTypeLessThan(Byte value) {
+        public Criteria andOsTypeLessThan(Integer value) {
             addCriterion("os_type <", value, "osType");
             return (Criteria) this;
         }
 
-        public Criteria andOsTypeLessThanOrEqualTo(Byte value) {
+        public Criteria andOsTypeLessThanOrEqualTo(Integer value) {
             addCriterion("os_type <=", value, "osType");
             return (Criteria) this;
         }
 
-        public Criteria andOsTypeIn(List<Byte> values) {
+        public Criteria andOsTypeIn(List<Integer> values) {
             addCriterion("os_type in", values, "osType");
             return (Criteria) this;
         }
 
-        public Criteria andOsTypeNotIn(List<Byte> values) {
+        public Criteria andOsTypeNotIn(List<Integer> values) {
             addCriterion("os_type not in", values, "osType");
             return (Criteria) this;
         }
 
-        public Criteria andOsTypeBetween(Byte value1, Byte value2) {
+        public Criteria andOsTypeBetween(Integer value1, Integer value2) {
             addCriterion("os_type between", value1, value2, "osType");
             return (Criteria) this;
         }
 
-        public Criteria andOsTypeNotBetween(Byte value1, Byte value2) {
+        public Criteria andOsTypeNotBetween(Integer value1, Integer value2) {
             addCriterion("os_type not between", value1, value2, "osType");
             return (Criteria) this;
         }

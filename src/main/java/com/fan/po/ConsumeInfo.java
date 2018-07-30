@@ -7,7 +7,7 @@ public class ConsumeInfo {
 
     private Long userId;
 
-    private Long anchorId;
+    private Long anchor;
 
     private Long vcorn;
 
@@ -31,12 +31,12 @@ public class ConsumeInfo {
         this.userId = userId;
     }
 
-    public Long getAnchorId() {
-        return anchorId;
+    public Long getAnchor() {
+        return anchor;
     }
 
-    public void setAnchorId(Long anchorId) {
-        this.anchorId = anchorId;
+    public void setAnchor(Long anchor) {
+        this.anchor = anchor;
     }
 
     public Long getVcorn() {

@@ -5,11 +5,15 @@ import java.util.Date;
 public class DepositInfo {
     private Long id;
 
-    private Long anchorId;
+    private Long userId;
 
     private Long applyAmount;
 
     private Integer way;
+
+    private String accountName;
+
+    private String account;
 
     private Date applyTime;
 
@@ -27,12 +31,12 @@ public class DepositInfo {
         this.id = id;
     }
 
-    public Long getAnchorId() {
-        return anchorId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setAnchorId(Long anchorId) {
-        this.anchorId = anchorId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Long getApplyAmount() {
@@ -49,6 +53,22 @@ public class DepositInfo {
 
     public void setWay(Integer way) {
         this.way = way;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName == null ? null : accountName.trim();
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account == null ? null : account.trim();
     }
 
     public Date getApplyTime() {

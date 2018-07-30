@@ -192,126 +192,6 @@ public class MsgRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andUserIdIsNull() {
-            addCriterion("user_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdIsNotNull() {
-            addCriterion("user_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdEqualTo(Long value) {
-            addCriterion("user_id =", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdNotEqualTo(Long value) {
-            addCriterion("user_id <>", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdGreaterThan(Long value) {
-            addCriterion("user_id >", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("user_id >=", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdLessThan(Long value) {
-            addCriterion("user_id <", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdLessThanOrEqualTo(Long value) {
-            addCriterion("user_id <=", value, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdIn(List<Long> values) {
-            addCriterion("user_id in", values, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdNotIn(List<Long> values) {
-            addCriterion("user_id not in", values, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdBetween(Long value1, Long value2) {
-            addCriterion("user_id between", value1, value2, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andUserIdNotBetween(Long value1, Long value2) {
-            addCriterion("user_id not between", value1, value2, "userId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAnchorIdIsNull() {
-            addCriterion("anchor_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAnchorIdIsNotNull() {
-            addCriterion("anchor_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andAnchorIdEqualTo(Long value) {
-            addCriterion("anchor_id =", value, "anchorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAnchorIdNotEqualTo(Long value) {
-            addCriterion("anchor_id <>", value, "anchorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAnchorIdGreaterThan(Long value) {
-            addCriterion("anchor_id >", value, "anchorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAnchorIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("anchor_id >=", value, "anchorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAnchorIdLessThan(Long value) {
-            addCriterion("anchor_id <", value, "anchorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAnchorIdLessThanOrEqualTo(Long value) {
-            addCriterion("anchor_id <=", value, "anchorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAnchorIdIn(List<Long> values) {
-            addCriterion("anchor_id in", values, "anchorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAnchorIdNotIn(List<Long> values) {
-            addCriterion("anchor_id not in", values, "anchorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAnchorIdBetween(Long value1, Long value2) {
-            addCriterion("anchor_id between", value1, value2, "anchorId");
-            return (Criteria) this;
-        }
-
-        public Criteria andAnchorIdNotBetween(Long value1, Long value2) {
-            addCriterion("anchor_id not between", value1, value2, "anchorId");
-            return (Criteria) this;
-        }
-
         public Criteria andSenderIdIsNull() {
             addCriterion("sender_id is null");
             return (Criteria) this;
@@ -382,52 +262,52 @@ public class MsgRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andSenderTypeEqualTo(Byte value) {
+        public Criteria andSenderTypeEqualTo(Integer value) {
             addCriterion("sender_type =", value, "senderType");
             return (Criteria) this;
         }
 
-        public Criteria andSenderTypeNotEqualTo(Byte value) {
+        public Criteria andSenderTypeNotEqualTo(Integer value) {
             addCriterion("sender_type <>", value, "senderType");
             return (Criteria) this;
         }
 
-        public Criteria andSenderTypeGreaterThan(Byte value) {
+        public Criteria andSenderTypeGreaterThan(Integer value) {
             addCriterion("sender_type >", value, "senderType");
             return (Criteria) this;
         }
 
-        public Criteria andSenderTypeGreaterThanOrEqualTo(Byte value) {
+        public Criteria andSenderTypeGreaterThanOrEqualTo(Integer value) {
             addCriterion("sender_type >=", value, "senderType");
             return (Criteria) this;
         }
 
-        public Criteria andSenderTypeLessThan(Byte value) {
+        public Criteria andSenderTypeLessThan(Integer value) {
             addCriterion("sender_type <", value, "senderType");
             return (Criteria) this;
         }
 
-        public Criteria andSenderTypeLessThanOrEqualTo(Byte value) {
+        public Criteria andSenderTypeLessThanOrEqualTo(Integer value) {
             addCriterion("sender_type <=", value, "senderType");
             return (Criteria) this;
         }
 
-        public Criteria andSenderTypeIn(List<Byte> values) {
+        public Criteria andSenderTypeIn(List<Integer> values) {
             addCriterion("sender_type in", values, "senderType");
             return (Criteria) this;
         }
 
-        public Criteria andSenderTypeNotIn(List<Byte> values) {
+        public Criteria andSenderTypeNotIn(List<Integer> values) {
             addCriterion("sender_type not in", values, "senderType");
             return (Criteria) this;
         }
 
-        public Criteria andSenderTypeBetween(Byte value1, Byte value2) {
+        public Criteria andSenderTypeBetween(Integer value1, Integer value2) {
             addCriterion("sender_type between", value1, value2, "senderType");
             return (Criteria) this;
         }
 
-        public Criteria andSenderTypeNotBetween(Byte value1, Byte value2) {
+        public Criteria andSenderTypeNotBetween(Integer value1, Integer value2) {
             addCriterion("sender_type not between", value1, value2, "senderType");
             return (Criteria) this;
         }
@@ -502,52 +382,52 @@ public class MsgRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andReceiverTypeEqualTo(Byte value) {
+        public Criteria andReceiverTypeEqualTo(Integer value) {
             addCriterion("receiver_type =", value, "receiverType");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverTypeNotEqualTo(Byte value) {
+        public Criteria andReceiverTypeNotEqualTo(Integer value) {
             addCriterion("receiver_type <>", value, "receiverType");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverTypeGreaterThan(Byte value) {
+        public Criteria andReceiverTypeGreaterThan(Integer value) {
             addCriterion("receiver_type >", value, "receiverType");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverTypeGreaterThanOrEqualTo(Byte value) {
+        public Criteria andReceiverTypeGreaterThanOrEqualTo(Integer value) {
             addCriterion("receiver_type >=", value, "receiverType");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverTypeLessThan(Byte value) {
+        public Criteria andReceiverTypeLessThan(Integer value) {
             addCriterion("receiver_type <", value, "receiverType");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverTypeLessThanOrEqualTo(Byte value) {
+        public Criteria andReceiverTypeLessThanOrEqualTo(Integer value) {
             addCriterion("receiver_type <=", value, "receiverType");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverTypeIn(List<Byte> values) {
+        public Criteria andReceiverTypeIn(List<Integer> values) {
             addCriterion("receiver_type in", values, "receiverType");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverTypeNotIn(List<Byte> values) {
+        public Criteria andReceiverTypeNotIn(List<Integer> values) {
             addCriterion("receiver_type not in", values, "receiverType");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverTypeBetween(Byte value1, Byte value2) {
+        public Criteria andReceiverTypeBetween(Integer value1, Integer value2) {
             addCriterion("receiver_type between", value1, value2, "receiverType");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverTypeNotBetween(Byte value1, Byte value2) {
+        public Criteria andReceiverTypeNotBetween(Integer value1, Integer value2) {
             addCriterion("receiver_type not between", value1, value2, "receiverType");
             return (Criteria) this;
         }
@@ -632,52 +512,52 @@ public class MsgRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(Byte value) {
+        public Criteria andStatusEqualTo(Integer value) {
             addCriterion("status =", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotEqualTo(Byte value) {
+        public Criteria andStatusNotEqualTo(Integer value) {
             addCriterion("status <>", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThan(Byte value) {
+        public Criteria andStatusGreaterThan(Integer value) {
             addCriterion("status >", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThanOrEqualTo(Byte value) {
+        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
             addCriterion("status >=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThan(Byte value) {
+        public Criteria andStatusLessThan(Integer value) {
             addCriterion("status <", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThanOrEqualTo(Byte value) {
+        public Criteria andStatusLessThanOrEqualTo(Integer value) {
             addCriterion("status <=", value, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIn(List<Byte> values) {
+        public Criteria andStatusIn(List<Integer> values) {
             addCriterion("status in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotIn(List<Byte> values) {
+        public Criteria andStatusNotIn(List<Integer> values) {
             addCriterion("status not in", values, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusBetween(Byte value1, Byte value2) {
+        public Criteria andStatusBetween(Integer value1, Integer value2) {
             addCriterion("status between", value1, value2, "status");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotBetween(Byte value1, Byte value2) {
+        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
             addCriterion("status not between", value1, value2, "status");
             return (Criteria) this;
         }
