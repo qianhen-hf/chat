@@ -6,6 +6,8 @@ import com.fan.service.PhotoInfoService;
 import com.fan.service.UserService;
 import com.fan.vo.PhotoInfoVo;
 import com.fan.vo.ResponseResult;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,10 @@ public class UserController {
     UserService userService;
 
 
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户id(登录后传入token)", required = true, dataType = "Long"),
+            @ApiImplicitParam(name = "nickname", value = "用户昵称", required = true, dataType = "String")
+    })
     @PostMapping("updateUser")
     public void updateUser(String nickname, Long userId) {
         User user = userService.selectUserByUserId(userId);
@@ -41,6 +47,10 @@ public class UserController {
         userService.updateUser(user);
     }
 
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户id(登录后传入token)", required = true, dataType = "Long")
+    })
     @PostMapping("getUserPhotos")
     public ResponseResult getUserPhoto(Long userId) {
         List<PhotoInfoVo> list = userService.getUserPhoto(userId);
@@ -50,6 +60,11 @@ public class UserController {
 
     }
 
+
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户id(登录后传入token)", required = true, dataType = "Long"),
+            @ApiImplicitParam(name = "photoId", value = "照片id", required = true, dataType = "Long")
+    })
     @PostMapping("delUserPhotoById")
     public ResponseResult delUserPhotoById(Long userId, Long photoId) {
         userService.delUserPhotoById(userId, photoId);
