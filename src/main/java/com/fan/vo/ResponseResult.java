@@ -17,9 +17,19 @@ import lombok.Data;
 @Data
 public class ResponseResult {
     public static final Integer SUCCESS = 1;
-    public static final Integer ERROR = 1;
+    public static final Integer ERROR = -1;
+    public static final Integer FAIL = 0;
 
     private String msg;
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
+
     private Object data;
     private int code;
 
@@ -32,5 +42,13 @@ public class ResponseResult {
         this.code = flag ? 1 : 0;
         this.msg = flag ? "操作成功" : "操作失败";
     }
+
+    public ResponseResult(int code,String msg,Object data) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+    }
+
+
 
 }
