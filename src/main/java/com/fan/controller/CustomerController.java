@@ -1,21 +1,21 @@
 package com.fan.controller;
 
 import com.fan.Exception.ChatException;
-import com.fan.config.PrefixConfig;
 import com.fan.po.User;
 import com.fan.service.CustomerService;
-import com.fan.service.SendMsgService;
 import com.fan.vo.ResponseResult;
 import com.fan.vo.UserVo;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
-import java.util.Random;
 
 @Slf4j
 @RestController
@@ -27,7 +27,8 @@ public class CustomerController {
 
     Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
-    @RequestMapping("/updateUser")
+    @ApiOperation(value="更新用户/主播基本资料")
+    @PostMapping("/updateUser")
     public ResponseResult updateUser(UserVo userVo) {
         logger.info("开始处理更新用户信息,参数：",userVo);
         ResponseResult result;
@@ -43,7 +44,12 @@ public class CustomerController {
     }
 
 
-    @RequestMapping("/addFocus")
+    @ApiOperation(value = "用户关注主播")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId",value = "用户ID",required = true,dataType = "java.lang.Long"),
+            @ApiImplicitParam(name = "anchorId",value = "主播ID",required = true,dataType = "java.lang.Long")
+    })
+    @PostMapping("/addFocus")
     public ResponseResult addFocus(long userId,long anchorId) {
         logger.info("开始处理关注,userId={},anchorId={}",userId,anchorId);
         ResponseResult result;
@@ -58,7 +64,11 @@ public class CustomerController {
         return result;
     }
 
-    @RequestMapping("/findFocus")
+    @ApiOperation(value = "查询关注/粉丝列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId",value = "用户ID",required = true,dataType = "java.lang.Long")
+    })
+    @GetMapping("/findFocus")
     public ResponseResult findFocus(long userId) {
         logger.info("开始查询关注/粉丝列表,userId={}",userId);
         ResponseResult result;
@@ -74,7 +84,14 @@ public class CustomerController {
         return result;
     }
 
-    @RequestMapping("/applyDeposite")
+    @ApiOperation(value = "申请提现到支付宝")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId",value = "主播ID",required = true,dataType = "java.lang.Long"),
+            @ApiImplicitParam(name = "accountName",value = "账户名",required = true,dataType = "java.lang.String"),
+            @ApiImplicitParam(name = "account",value = "支付宝账号",required = true,dataType = "java.lang.String"),
+            @ApiImplicitParam(name = "money",value = "提现金额",required = true,dataType = "java.lang.Long"),
+    })
+    @PostMapping("/applyDeposite")
     public ResponseResult applyDeposite(Long userId,String accountName,String account,long money) {
         logger.info("开始处理提现申请，参数：userId={},money={}",new String[]{userId.toString(),String.valueOf(money)});
         ResponseResult result;
@@ -92,12 +109,13 @@ public class CustomerController {
         return result;
     }
 
-    /**
-     * @param accuserId 投诉人Id
-     * @param accuserdId 被投诉人Id
-     * @return
-     */
-    @RequestMapping("/advise")
+    @ApiOperation(value = "投诉用户/主播")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "accuserId",value = "投诉人ID",required = true,dataType = "java.lang.Long"),
+            @ApiImplicitParam(name = "accuserdId",value = "被投诉人Id",required = true,dataType = "java.lang.String"),
+            @ApiImplicitParam(name = "content",value = "投诉内容",required = true,dataType = "java.lang.String")
+    })
+    @PostMapping("/advise")
     public ResponseResult advise(long accuserId,long accuserdId,String content) {
         logger.info("开始处理投诉,accuserId={},accuserdId={}",accuserId,accuserdId);
         ResponseResult result;
@@ -112,7 +130,12 @@ public class CustomerController {
         return result;
     }
 
-    @RequestMapping("/updateStatus")
+    @ApiOperation(value = "更新主播在线状态")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId",value = "主播Id",required = true,dataType = "java.lang.Long"),
+            @ApiImplicitParam(name = "status",value = "在线状态 1：在线 2：下线 3：繁忙",required = true,dataType = "java.lang.Integer")
+    })
+    @PostMapping("/updateStatus")
     public ResponseResult updateStatus(long userId,int status) {
         logger.info("开始处理主播在线状态,userId={},status={}",userId,status);
         ResponseResult result;
