@@ -3,8 +3,10 @@ package com.fan.controller;
 import com.fan.service.external.OssService;
 import com.fan.vo.ResponseResult;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
@@ -37,12 +39,14 @@ public class OssController {
 //        return responseResult;
 //    }
 
-    @RequestMapping("getOssCertificate1")
+    @ApiIgnore
+    @PostMapping("getOssCertificate1")
     public Map<String, String> getOssCertificate1() {
         return ossService.getOssCertificate();
     }
 
-    @GetMapping("getOssCertificate")
+    @ApiOperation(value = "获取oss参数")
+    @PostMapping("getOssCertificate")
     public Map<String, String> getOssCertificate() {
         return ossService.getOssCertificate();
     }

@@ -19,6 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -56,7 +57,7 @@ public class LoginController {
     @Autowired
     SendMsgService sendMsgService;
 
-
+    @ApiOperation(value = "登录")
     @PostMapping("login")
     public ResponseResult Login(UserLoginVo userLoginVo) {
         ResponseResult responseResult = new ResponseResult(true);
@@ -128,6 +129,8 @@ public class LoginController {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userName", value = "用户登陆名", required = true, dataType = "String")
     })
+
+    @ApiOperation(value = "发送验证码")
     @PostMapping("sendMsgCode")
     public ResponseResult sendMsgCode(String userName) {
         String msgCode = String.valueOf(new Random().nextInt(899999) + 100000);
@@ -136,7 +139,7 @@ public class LoginController {
         return new ResponseResult(true);
     }
 
-
+    @ApiOperation(value = "注册")
     @PostMapping("register")
     public ResponseResult register(RegisterUser requestUser) {
         User user = new User();

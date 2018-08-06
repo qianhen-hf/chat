@@ -6,8 +6,10 @@ import com.fan.service.PhotoInfoService;
 import com.fan.service.UserService;
 import com.fan.vo.PhotoInfoVo;
 import com.fan.vo.ResponseResult;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,7 @@ import java.util.List;
  * @UpdateRemark: The modified content
  * @Version: 1.0
  */
+@Api(value = "user", tags = {"user接口"})
 @RestController
 @RequestMapping("vRabbit/user")
 public class UserController {
@@ -36,6 +39,7 @@ public class UserController {
     UserService userService;
 
 
+    @ApiOperation(value = "更新用户昵称")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户id(登录后传入token)", required = true, dataType = "Long"),
             @ApiImplicitParam(name = "nickname", value = "用户昵称", required = true, dataType = "String")
@@ -48,6 +52,7 @@ public class UserController {
     }
 
 
+    @ApiOperation(value = "获取用户所有照片")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户id(登录后传入token)", required = true, dataType = "Long")
     })
@@ -61,6 +66,7 @@ public class UserController {
     }
 
 
+    @ApiOperation(value = "删除用户照片")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userId", value = "用户id(登录后传入token)", required = true, dataType = "Long"),
             @ApiImplicitParam(name = "photoId", value = "照片id", required = true, dataType = "Long")
@@ -69,6 +75,19 @@ public class UserController {
     public ResponseResult delUserPhotoById(Long userId, Long photoId) {
         userService.delUserPhotoById(userId, photoId);
         return new ResponseResult();
+    }
+
+
+    @ApiOperation(value = "查看用户当前余额")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户id(登录后传入token)", required = true, dataType = "Long"),
+    })
+    @PostMapping("getUserBalance")
+    public ResponseResult getUserBalance(Long userId) {
+        ResponseResult responseResult = new ResponseResult();
+        User user = userService.selectUserByUserId(userId);
+        responseResult.setData(user.getAmount());
+        return responseResult;
     }
 
 }

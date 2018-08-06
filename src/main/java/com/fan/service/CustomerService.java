@@ -7,12 +7,10 @@ import com.fan.mapper.DepositInfoMapper;
 import com.fan.mapper.FocusInfoMapper;
 import com.fan.mapper.UserMapper;
 import com.fan.po.*;
-import com.fan.vo.AnchorVo;
 import com.fan.vo.UserVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -91,8 +89,8 @@ public class CustomerService {
 
     /**
      * 提现申请(支持支付宝账户)
-     * @param anchorId
-     * @param accout
+     * @param
+     * @param
      * @param money
      * @return
      */

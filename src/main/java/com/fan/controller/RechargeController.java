@@ -8,6 +8,7 @@ import com.fan.service.RechargeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
@@ -34,6 +35,7 @@ public class RechargeController {
     RechargeService rechargeService;
 
 
+    @ApiOperation(value = "充值")
     @PostMapping("recharge")
     public String recharge(RequestCharge requestCharge) {
         return rechargeService.recharge(requestCharge);
