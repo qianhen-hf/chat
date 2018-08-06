@@ -1,14 +1,15 @@
 package com.fan.controller.callback;
 
 import com.aliyun.oss.common.utils.BinaryUtil;
+import com.fan.po.PhotoInfo;
+import com.fan.service.PhotoInfoService;
+import com.fan.util.ClassUtils;
 import com.fan.vo.ResponseResult;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.connector.RequestFacade;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
@@ -18,9 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.security.KeyFactory;
 import java.security.PublicKey;
 import java.security.spec.X509EncodedKeySpec;
+import java.util.*;
 
 /**
  * java类简单作用描述
@@ -38,78 +41,35 @@ import java.security.spec.X509EncodedKeySpec;
 @ApiIgnore
 @RequestMapping("callback")
 public class OssCallBackController {
+    @Autowired
+    PhotoInfoService photoInfoService;
 
     @RequestMapping("ossCallBack")
     public ResponseResult ossCallBack(HttpServletRequest request, HttpServletResponse response) {
         System.out.println("--------ossCallBack------------");
         ResponseResult responseResult = new ResponseResult(true);
         try {
-//            String authorizationRequest = request.getHeader("Authorization");
-//            String pubKeyInputRequest = request.getHeader("x-oss-pub-key-url");
-//            byte[] authorization = BinaryUtil.fromBase64String(authorizationRequest);
-//            byte[] pubKey = BinaryUtil.fromBase64String(pubKeyInputRequest);
-//
-//            String authorizationString = new String(authorization, "utf-8");
-//            String pubKeyString = new String(pubKey, "utf-8");
-//            String queryString = request.getQueryString();
-//            BufferedReader reader = new BufferedReader(new InputStreamReader(request.getInputStream()));
-//            String body = read(reader);
-//            System.out.println(body);
-
-            String ossCallbackBody = GetPostBody(request.getInputStream(), Integer.parseInt(request.getHeader("content-length")));
-            boolean b = VerifyOSSCallbackRequest(request, ossCallbackBody);
+            Map<String, String> parameterMap = ClassUtils.getParameterMap(request);
+            StringJoiner stringJoiner = new StringJoiner("&");
+            for (Map.Entry<String, String> entry : parameterMap.entrySet()) {
+                stringJoiner.add(entry.getKey().concat("=") + URLEncoder.encode(entry.getValue(), "utf-8").replace("+", "%20"));
+            }
+            log.info("body----{}", stringJoiner.toString());
+            boolean b = VerifyOSSCallbackRequest(request, stringJoiner.toString());
             log.info("验证结果:{}", b);
+            if (!b) {
+                return new ResponseResult(false);
+            }
+            PhotoInfo photoInfo = new PhotoInfo();
+            photoInfo.setCreateTime(new Date());
+            photoInfo.setUserId(Long.parseLong(parameterMap.get("userId")));
+            photoInfo.setPhotoUrl(parameterMap.get("fileName"));
+            photoInfoService.insertPhoto(photoInfo);
         } catch (IOException e) {
             e.printStackTrace();
             return new ResponseResult(false);
         }
         return responseResult;
-    }
-
-
-    public static String read(Reader reader) throws IOException {
-        StringWriter writer = new StringWriter();
-        try {
-            write(reader, writer);
-            return writer.getBuffer().toString();
-        } finally {
-            writer.close();
-        }
-    }
-
-    public static long write(Reader reader, Writer writer) throws IOException {
-        return write(reader, writer, BUFFER_SIZE);
-    }
-
-    public static long write(Reader reader, Writer writer, int bufferSize) throws IOException {
-        int read;
-        long total = 0;
-        char[] buf = new char[BUFFER_SIZE];
-        while ((read = reader.read(buf)) != -1) {
-            writer.write(buf, 0, read);
-            total += read;
-        }
-        return total;
-    }
-
-    private static final int BUFFER_SIZE = 1024 * 8;
-
-
-    void charReader(HttpServletRequest request) throws IOException {
-        BufferedReader br = request.getReader();
-        String str, wholeStr = "";
-        while ((str = br.readLine()) != null) {
-            wholeStr += str;
-        }
-        System.out.println(wholeStr);
-    }
-//二进制读取
-
-    void binaryReader(HttpServletRequest request) throws IOException {
-        int len = request.getContentLength();
-        ServletInputStream iii = request.getInputStream();
-        byte[] buffer = new byte[len];
-        iii.read(buffer, 0, len);
     }
 
 
@@ -119,7 +79,7 @@ public class OssCallBackController {
         String pubKeyInput = request.getHeader("x-oss-pub-key-url");
         byte[] authorization = BinaryUtil.fromBase64String(autorizationInput);
         byte[] pubKey = BinaryUtil.fromBase64String(pubKeyInput);
-        String pubKeyAddr = new String(pubKey,"utf-8");
+        String pubKeyAddr = new String(pubKey, "utf-8");
         if (!pubKeyAddr.startsWith("http://gosspublic.alicdn.com/") && !pubKeyAddr.startsWith("https://gosspublic.alicdn.com/")) {
             System.out.println("pub key addr must be oss addrss");
             return false;
@@ -191,24 +151,5 @@ public class OssCallBackController {
 
     }
 
-    public String GetPostBody(InputStream is, int contentLen) {
-        if (contentLen > 0) {
-            int readLen = 0;
-            int readLengthThisTime = 0;
-            byte[] message = new byte[contentLen];
-            try {
-                while (readLen != contentLen) {
-                    readLengthThisTime = is.read(message, readLen, contentLen - readLen);
-                    if (readLengthThisTime == -1) {// Should not happen.
-                        break;
-                    }
-                    readLen += readLengthThisTime;
-                }
-                return new String(message);
-            } catch (IOException e) {
-            }
-        }
-        return "";
-    }
 
 }

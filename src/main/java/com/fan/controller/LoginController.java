@@ -5,7 +5,7 @@ import com.fan.Exception.VRabbitUserErrors;
 import com.fan.config.PrefixConfig;
 import com.fan.jwt.JwtHelper;
 import com.fan.po.User;
-import com.fan.requestVo.RequestUser;
+import com.fan.requestVo.RegisterUser;
 import com.fan.requestVo.UserLoginVo;
 import com.fan.service.LoginService;
 import com.fan.service.SendMsgService;
@@ -138,9 +138,10 @@ public class LoginController {
 
 
     @PostMapping("register")
-    public ResponseResult register(RequestUser requestUser) {
+    public ResponseResult register(RegisterUser requestUser) {
         User user = new User();
         user.setUsername(requestUser.getUsername());
+        user.setNickname(requestUser.getNickname());
         userService.insertUser(user);
         return new ResponseResult(true);
     }

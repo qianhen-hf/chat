@@ -42,6 +42,7 @@ public class LoginFilter implements Filter {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
+        ParameterRequestWrapper requestParameterWrapper = new ParameterRequestWrapper(req);
         ObjectMapper objectMapper = new ObjectMapper();
         String token = req.getHeader("token");
 //        String token = req.getParameter("token");
@@ -60,7 +61,6 @@ public class LoginFilter implements Filter {
             }
             User user = objectMapper.readValue(keyValue, User.class);
             UserHolder.add(user);
-            ParameterRequestWrapper requestParameterWrapper = new ParameterRequestWrapper(req);
             requestParameterWrapper.addParameter("userId", uid);
             filterChain.doFilter(requestParameterWrapper, servletResponse);
         } else {
