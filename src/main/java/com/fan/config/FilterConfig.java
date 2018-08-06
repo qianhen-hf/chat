@@ -16,7 +16,6 @@ import org.springframework.context.annotation.Configuration;
  * @UpdateRemark: The modified content
  * @Version: 1.0
  */
-
 @Configuration
 public class FilterConfig {
 
@@ -27,7 +26,7 @@ public class FilterConfig {
         registration.setFilter(new LoginFilter());
         registration.addUrlPatterns("/*");
         registration.setName("loginFilter");
-        registration.setOrder(1);
+        registration.setOrder(FilterRegistrationBean.REQUEST_WRAPPER_FILTER_MAX_ORDER);
         return registration;
     }
 }

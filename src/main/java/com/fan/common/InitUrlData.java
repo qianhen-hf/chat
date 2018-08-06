@@ -27,6 +27,7 @@ public class InitUrlData {
         urls.put("/vRabbit/overTime", 1);
         urls.put("/vRabbit/sendMsgCode", 1);
         urls.put("/vRabbit/test", 1);
+        urls.put("/vRabbit/test1", 1);
         urls.put("/swagger-ui.html", 1);
         urls.put("/webjars/", 2);
         urls.put("/images/", 2);
