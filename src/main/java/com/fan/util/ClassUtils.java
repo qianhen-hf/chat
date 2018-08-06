@@ -139,18 +139,13 @@ public class ClassUtils {
     }
 
     public static Map<String, String> getParameterMap(HttpServletRequest request) {
-        Map<String, String> result = new HashMap<>();
+        Map<String, String> result = new LinkedHashMap<>();
         Map<String, String[]> map = request.getParameterMap();
-        String k = null;
-        String[] v = null;
-        Iterator var5 = map.entrySet().iterator();
-
-        while (var5.hasNext()) {
-            Map.Entry<String, String[]> et = (Map.Entry) var5.next();
-            k = (String) et.getKey();
-            v = (String[]) et.getValue();
-            if (v != null && v.length > 0) {
-                result.put(k, v[0]);
+        for (Map.Entry<String, String[]> stringEntry : map.entrySet()) {
+            if (stringEntry.getValue() != null) {
+                result.put(stringEntry.getKey(), stringEntry.getValue()[0]);
+            } else {
+                result.put(stringEntry.getKey(), "");
             }
         }
         return result;
