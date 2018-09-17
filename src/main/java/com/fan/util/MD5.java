@@ -3,6 +3,11 @@ package com.fan.util;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * java类简单作用描述
@@ -38,5 +43,16 @@ public class MD5 {
             e.printStackTrace();
             return "";
         }
+    }
+
+    public static void main(String[] args) {
+        List<Map<String, Object>> list = new ArrayList<>();
+        for (Integer i = 0; i < 6; i++) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("a", i);
+            list.add(map);
+        }
+        Integer a = list.stream().map(e -> (Integer) e.get("a")).collect(Collectors.summingInt(e -> e));
+        System.out.println(a);
     }
 }

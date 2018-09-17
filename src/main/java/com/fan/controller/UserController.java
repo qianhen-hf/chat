@@ -6,6 +6,7 @@ import com.fan.service.PhotoInfoService;
 import com.fan.service.UserService;
 import com.fan.vo.PhotoInfoVo;
 import com.fan.vo.ResponseResult;
+import com.fan.vo.UserVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -13,6 +14,7 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,10 +49,9 @@ public class UserController {
     @PostMapping("updateUser")
     public void updateUser(String nickname, Long userId) {
         User user = userService.selectUserByUserId(userId);
-        user.setNickname(nickname);
+        user.setNickName(nickname);
         userService.updateUser(user);
     }
-
 
     @ApiOperation(value = "获取用户所有照片")
     @ApiImplicitParams({
@@ -89,5 +90,20 @@ public class UserController {
         responseResult.setData(user.getAmount());
         return responseResult;
     }
+
+
+//    @ApiOperation(value = "获取主播基本资料")
+//    @ApiImplicitParams({
+//            @ApiImplicitParam(name = "anchorId", value = "主播ID", required = true, dataType = "java.lang.Long")
+//    })
+//    @PostMapping("/getUserById")
+//    public ResponseResult getUserById(Long anchorId) {
+//        ResponseResult responseResult = new ResponseResult();
+//        User user = userService.selectUserByUserId(anchorId);
+//        UserVo userVo = new UserVo();
+//        BeanUtils.copyProperties(user, userVo);
+//        responseResult.setData(userVo);
+//        return responseResult;
+//    }
 
 }

@@ -49,6 +49,10 @@ public class CustomerService {
         userMapper.updateByPrimaryKey(user);
     }
 
+    public User selectUserByUserId(Long userId) {
+        return userMapper.selectByPrimaryKey(userId);
+    }
+
     public void addFocus(Long userId,Long anchorId) {
         FocusInfo focusInfo = new FocusInfo();
         focusInfo.setUserId(userId);

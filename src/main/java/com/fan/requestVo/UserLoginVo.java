@@ -9,7 +9,7 @@ import lombok.Data;
 @ApiModel
 public class UserLoginVo {
 
-    @ApiModelProperty(value="登陆用户名",name="username")
+    @ApiModelProperty(value="登陆用户名",name="userName")
     private String userName;
 
     @ApiModelProperty(value="登陆验证码",name="msgCode")
@@ -27,7 +27,7 @@ public class UserLoginVo {
     @ApiModelProperty(value="app版本",name="appVersion")
     private String appVersion;
 
-    @ApiModelProperty(value="app名",name="appname")
-    private String appname;
+    @ApiModelProperty(value="app名",name="appName")
+    private String appName;
 
 }

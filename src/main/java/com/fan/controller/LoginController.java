@@ -68,7 +68,10 @@ public class LoginController {
             throw new VRabbitException(VRabbitUserErrors.USER_MSG_CODE_NOT_EXIST);
         }
         if (user == null) {
-            throw new VRabbitException(VRabbitUserErrors.USER_ERROR);
+            user = new User();
+            user.setUserName(userLoginVo.getUserName());
+            user.setNickName("");
+            userService.insertUser(user);
         }
         if (userLoginVo.getMsgCode().intValue() != Integer.valueOf(redisMsgCode)) {
             throw new VRabbitException(VRabbitUserErrors.USER_MSG_CODE_ERROR);
@@ -143,8 +146,8 @@ public class LoginController {
     @PostMapping("register")
     public ResponseResult register(RegisterUser requestUser) {
         User user = new User();
-        user.setUsername(requestUser.getUsername());
-        user.setNickname(requestUser.getNickname());
+        user.setUserName(requestUser.getUsername());
+        user.setNickName(requestUser.getNickname());
         userService.insertUser(user);
         return new ResponseResult(true);
     }

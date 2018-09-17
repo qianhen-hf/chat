@@ -23,11 +23,11 @@ public class UserVo {
 
     private Long userId;
 
-    @ApiModelProperty(value="用户名",name="username")
-    private String username;
+    @ApiModelProperty(value="用户名",name="userName")
+    private String userName;
 
-    @ApiModelProperty(value="显示昵称",name="nickname")
-    private String nickname;
+    @ApiModelProperty(value="显示昵称",name="nickName")
+    private String nickName;
 
     @ApiModelProperty(value="头像",name="photo")
     private String photo;
@@ -35,15 +35,20 @@ public class UserVo {
     @ApiModelProperty(value="注册时间",name="registerTime")
     private Date registerTime;
 
+    @ApiModelProperty(value="余额",name="amount")
     private Long amount;
 
-    private Byte isStop;
+    private Integer isStop;
 
     private Date createTime;
 
     private Date updateTime;
 
-    private Integer type;
+    @ApiModelProperty(value="是否是主播",name="type")
+    private Integer userType;
+
+    @ApiModelProperty(value="主播状态",name="status")
+    private Integer status;
 
     private String token;
 

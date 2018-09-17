@@ -101,19 +101,20 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.fan.po.PhotoInfo" >
-    insert into v_photo_info (id, user_id, photo_url, 
-      seq, create_time, update_time
-      )
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{photoUrl,jdbcType=VARCHAR}, 
-      #{seq,jdbcType=INTEGER}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}
-      )
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into v_photo_info (user_id, photo_url, seq, 
+      create_time, update_time)
+    values (#{userId,jdbcType=BIGINT}, #{photoUrl,jdbcType=VARCHAR}, #{seq,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.fan.po.PhotoInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into v_photo_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
       <if test="userId != null" >
         user_id,
       </if>
@@ -131,9 +132,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
-      </if>
       <if test="userId != null" >
         #{userId,jdbcType=BIGINT},
       </if>

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.Map;
+import java.util.concurrent.CountDownLatch;
 
 /**
  * java类简单作用描述
@@ -47,7 +48,18 @@ public class OssController {
 
     @ApiOperation(value = "获取oss参数")
     @PostMapping("getOssCertificate")
-    public Map<String, String> getOssCertificate() {
-        return ossService.getOssCertificate();
+    public ResponseResult getOssCertificate() {
+        ResponseResult responseResult = new ResponseResult();
+        responseResult.setData(ossService.getOssCertificate());
+        return responseResult;
     }
+
+    @ApiOperation(value = "获取oss web参数")
+    @RequestMapping("getOssWebCertificate")
+    public ResponseResult getOssWebCertificate() {
+        ResponseResult responseResult = new ResponseResult();
+        responseResult.setData(ossService.getOssWebCertificate());
+        return responseResult;
+    }
+
 }

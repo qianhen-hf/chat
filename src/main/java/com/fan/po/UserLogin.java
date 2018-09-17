@@ -25,7 +25,7 @@ public class UserLogin {
 
     private String appVersion;
 
-    private String appname;
+    private String appName;
 
     private Date createTime;
 
@@ -119,12 +119,12 @@ public class UserLogin {
         this.appVersion = appVersion == null ? null : appVersion.trim();
     }
 
-    public String getAppname() {
-        return appname;
+    public String getAppName() {
+        return appName;
     }
 
-    public void setAppname(String appname) {
-        this.appname = appname == null ? null : appname.trim();
+    public void setAppName(String appName) {
+        this.appName = appName == null ? null : appName.trim();
     }
 
     public Date getCreateTime() {

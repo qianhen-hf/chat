@@ -13,7 +13,7 @@
     <result column="os_version" property="osVersion" jdbcType="VARCHAR" />
     <result column="mobile_model" property="mobileModel" jdbcType="VARCHAR" />
     <result column="app_version" property="appVersion" jdbcType="VARCHAR" />
-    <result column="appname" property="appname" jdbcType="VARCHAR" />
+    <result column="app_name" property="appName" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="DATE" />
     <result column="update_time" property="updateTime" jdbcType="DATE" />
   </resultMap>
@@ -77,7 +77,7 @@
   </sql>
   <sql id="Base_Column_List" >
     ID, user_id, user_name, status, sid, code, login_out_time, os_type, os_version, mobile_model, 
-    app_version, appname, create_time, update_time
+    app_version, app_name, create_time, update_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fan.po.UserLoginExample" >
     select
@@ -113,12 +113,12 @@
     insert into v_user_login (ID, user_id, user_name, 
       status, sid, code, 
       login_out_time, os_type, os_version, 
-      mobile_model, app_version, appname, 
+      mobile_model, app_version, app_name, 
       create_time, update_time)
     values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{userName,jdbcType=CHAR}, 
       #{status,jdbcType=INTEGER}, #{sid,jdbcType=VARCHAR}, #{code,jdbcType=INTEGER}, 
       #{loginOutTime,jdbcType=DATE}, #{osType,jdbcType=INTEGER}, #{osVersion,jdbcType=VARCHAR}, 
-      #{mobileModel,jdbcType=VARCHAR}, #{appVersion,jdbcType=VARCHAR}, #{appname,jdbcType=VARCHAR}, 
+      #{mobileModel,jdbcType=VARCHAR}, #{appVersion,jdbcType=VARCHAR}, #{appName,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.fan.po.UserLogin" >
@@ -157,8 +157,8 @@
       <if test="appVersion != null" >
         app_version,
       </if>
-      <if test="appname != null" >
-        appname,
+      <if test="appName != null" >
+        app_name,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -201,8 +201,8 @@
       <if test="appVersion != null" >
         #{appVersion,jdbcType=VARCHAR},
       </if>
-      <if test="appname != null" >
-        #{appname,jdbcType=VARCHAR},
+      <if test="appName != null" >
+        #{appName,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=DATE},
@@ -254,8 +254,8 @@
       <if test="record.appVersion != null" >
         app_version = #{record.appVersion,jdbcType=VARCHAR},
       </if>
-      <if test="record.appname != null" >
-        appname = #{record.appname,jdbcType=VARCHAR},
+      <if test="record.appName != null" >
+        app_name = #{record.appName,jdbcType=VARCHAR},
       </if>
       <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=DATE},
@@ -281,7 +281,7 @@
       os_version = #{record.osVersion,jdbcType=VARCHAR},
       mobile_model = #{record.mobileModel,jdbcType=VARCHAR},
       app_version = #{record.appVersion,jdbcType=VARCHAR},
-      appname = #{record.appname,jdbcType=VARCHAR},
+      app_name = #{record.appName,jdbcType=VARCHAR},
       create_time = #{record.createTime,jdbcType=DATE},
       update_time = #{record.updateTime,jdbcType=DATE}
     <if test="_parameter != null" >
@@ -321,8 +321,8 @@
       <if test="appVersion != null" >
         app_version = #{appVersion,jdbcType=VARCHAR},
       </if>
-      <if test="appname != null" >
-        appname = #{appname,jdbcType=VARCHAR},
+      <if test="appName != null" >
+        app_name = #{appName,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=DATE},
@@ -345,7 +345,7 @@
       os_version = #{osVersion,jdbcType=VARCHAR},
       mobile_model = #{mobileModel,jdbcType=VARCHAR},
       app_version = #{appVersion,jdbcType=VARCHAR},
-      appname = #{appname,jdbcType=VARCHAR},
+      app_name = #{appName,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=DATE},
       update_time = #{updateTime,jdbcType=DATE}
     where ID = #{id,jdbcType=BIGINT}

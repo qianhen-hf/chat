@@ -1,6 +1,9 @@
 package com.fan.service.external;
 
 import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.common.utils.BinaryUtil;
+import com.aliyun.oss.model.MatchMode;
+import com.aliyun.oss.model.PolicyConditions;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.http.MethodType;
@@ -10,8 +13,10 @@ import com.aliyuncs.profile.IClientProfile;
 import com.aliyuncs.sts.model.v20150401.AssumeRoleRequest;
 import com.aliyuncs.sts.model.v20150401.AssumeRoleResponse;
 import com.fan.config.OssConfig;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sun.misc.BASE64Encoder;
 
 import java.net.URL;
 import java.util.*;
@@ -84,5 +89,58 @@ public class OssService {
         // 关闭OSSClient。
         ossClient.shutdown();
         return map;
+    }
+
+    public Map<String, String> getOssWebCertificate() {
+        Map<String, String> respMap = new LinkedHashMap<String, String>();
+        String endpoint = "oss-cn-shenzhen.aliyuncs.com";
+        String accessId = "*";
+        String accessKey = "*";
+        String bucket = "qianhen-fan";
+        String dir = "user-dir";
+        String host = "http://" + bucket + "." + endpoint;
+        OSSClient ossClient = new OSSClient(endpoint, ossConfig.getAccessKeyID(), ossConfig.getAccessKeySecret());
+        try {
+            long expireTime = 30;
+            long expireEndTime = System.currentTimeMillis() + expireTime * 1000;
+            Date expiration = new Date(expireEndTime);
+            PolicyConditions policyConds = new PolicyConditions();
+            policyConds.addConditionItem(PolicyConditions.COND_CONTENT_LENGTH_RANGE, 0, 1048576000);
+            policyConds.addConditionItem(MatchMode.StartWith, PolicyConditions.COND_KEY, dir);
+
+            String postPolicy = ossClient.generatePostPolicy(expiration, policyConds);
+            byte[] binaryData = postPolicy.getBytes("utf-8");
+            String encodedPolicy = BinaryUtil.toBase64String(binaryData);
+            String postSignature = ossClient.calculatePostSignature(postPolicy);
+
+            Map<String, String> map = new HashMap<>();
+            map.put("callbackUrl", "http://2049g328c3.iask.in:55469/callback/ossCallBack");
+//            map.put("callbackUrl", "2049g328c3.iask.in:55469");
+//            map.put("callbackHost","oss-demo.aliyuncs.com");
+            map.put("callbackBody", "filename=${object}&size=${size}&mimeType=${mimeType}&height=${imageInfo.height}&width=${imageInfo.width}&userId=1234");
+            map.put("callbackBodyType", "application/x-www-form-urlencoded");
+            ObjectMapper objectMapper = new ObjectMapper();
+            String callback = objectMapper.writeValueAsString(map);
+//            callback = callback.replaceAll("\n", "").replaceAll("\r", "");
+//            Base64.encodeBase64(callback.getBytes());
+//            String encode = new BASE64Encoder().encode(callback.getBytes());
+            String encode = BinaryUtil.toBase64String(callback.getBytes());
+            System.out.println(encode);
+            respMap.put("accessid", ossConfig.getAccessKeyID());
+            respMap.put("policy", encodedPolicy);
+            respMap.put("signature", postSignature);
+            //respMap.put("expire", formatISO8601Date(expiration));
+            respMap.put("dir", dir);
+            respMap.put("host", host);
+            respMap.put("callback", encode);
+//            respMap.put("",)
+            respMap.put("expire", String.valueOf(expireEndTime / 1000));
+
+
+        } catch (Exception e) {
+//            Assert.fail(e.getMessage());
+        }
+
+        return respMap;
     }
 }

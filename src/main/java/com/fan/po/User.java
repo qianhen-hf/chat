@@ -7,9 +7,9 @@ public class User {
 
     private Integer userType;
 
-    private String username;
+    private String userName;
 
-    private String nickname;
+    private String nickName;
 
     private String photo;
 
@@ -19,7 +19,7 @@ public class User {
 
     private Long amount;
 
-    private Byte isStop;
+    private Integer isStop;
 
     private Integer status;
 
@@ -43,20 +43,20 @@ public class User {
         this.userType = userType;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public void setUserName(String userName) {
+        this.userName = userName == null ? null : userName.trim();
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname == null ? null : nickname.trim();
+    public void setNickName(String nickName) {
+        this.nickName = nickName == null ? null : nickName.trim();
     }
 
     public String getPhoto() {
@@ -91,11 +91,11 @@ public class User {
         this.amount = amount;
     }
 
-    public Byte getIsStop() {
+    public Integer getIsStop() {
         return isStop;
     }
 
-    public void setIsStop(Byte isStop) {
+    public void setIsStop(Integer isStop) {
         this.isStop = isStop;
     }
 

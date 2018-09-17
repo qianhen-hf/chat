@@ -4,13 +4,13 @@
   <resultMap id="BaseResultMap" type="com.fan.po.User" >
     <id column="user_id" property="userId" jdbcType="BIGINT" />
     <result column="user_type" property="userType" jdbcType="INTEGER" />
-    <result column="username" property="username" jdbcType="CHAR" />
-    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="CHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
     <result column="photo" property="photo" jdbcType="VARCHAR" />
     <result column="sign" property="sign" jdbcType="VARCHAR" />
     <result column="register_time" property="registerTime" jdbcType="DATE" />
     <result column="amount" property="amount" jdbcType="BIGINT" />
-    <result column="is_stop" property="isStop" jdbcType="TINYINT" />
+    <result column="is_stop" property="isStop" jdbcType="INTEGER" />
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="DATE" />
     <result column="update_time" property="updateTime" jdbcType="DATE" />
@@ -74,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    user_id, user_type, username, nickname, photo, sign, register_time, amount, is_stop, 
+    user_id, user_type, user_name, nick_name, photo, sign, register_time, amount, is_stop, 
     status, create_time, update_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fan.po.UserExample" >
@@ -108,31 +108,32 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.fan.po.User" >
-    insert into v_user (user_id, user_type, username, 
-      nickname, photo, sign, 
-      register_time, amount, is_stop, 
-      status, create_time, update_time
-      )
-    values (#{userId,jdbcType=BIGINT}, #{userType,jdbcType=INTEGER}, #{username,jdbcType=CHAR}, 
-      #{nickname,jdbcType=VARCHAR}, #{photo,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, 
-      #{registerTime,jdbcType=DATE}, #{amount,jdbcType=BIGINT}, #{isStop,jdbcType=TINYINT}, 
-      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}
-      )
+    <selectKey resultType="java.lang.Long" keyProperty="userId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into v_user (user_type, user_name, nick_name, 
+      photo, sign, register_time, 
+      amount, is_stop, status, 
+      create_time, update_time)
+    values (#{userType,jdbcType=INTEGER}, #{userName,jdbcType=CHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{photo,jdbcType=VARCHAR}, #{sign,jdbcType=VARCHAR}, #{registerTime,jdbcType=DATE}, 
+      #{amount,jdbcType=BIGINT}, #{isStop,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="com.fan.po.User" >
+    <selectKey resultType="java.lang.Long" keyProperty="userId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
     insert into v_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        user_id,
-      </if>
       <if test="userType != null" >
         user_type,
       </if>
-      <if test="username != null" >
-        username,
+      <if test="userName != null" >
+        user_name,
       </if>
-      <if test="nickname != null" >
-        nickname,
+      <if test="nickName != null" >
+        nick_name,
       </if>
       <if test="photo != null" >
         photo,
@@ -160,17 +161,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="userId != null" >
-        #{userId,jdbcType=BIGINT},
-      </if>
       <if test="userType != null" >
         #{userType,jdbcType=INTEGER},
       </if>
-      <if test="username != null" >
-        #{username,jdbcType=CHAR},
+      <if test="userName != null" >
+        #{userName,jdbcType=CHAR},
       </if>
-      <if test="nickname != null" >
-        #{nickname,jdbcType=VARCHAR},
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
       </if>
       <if test="photo != null" >
         #{photo,jdbcType=VARCHAR},
@@ -185,7 +183,7 @@
         #{amount,jdbcType=BIGINT},
       </if>
       <if test="isStop != null" >
-        #{isStop,jdbcType=TINYINT},
+        #{isStop,jdbcType=INTEGER},
       </if>
       <if test="status != null" >
         #{status,jdbcType=INTEGER},
@@ -213,11 +211,11 @@
       <if test="record.userType != null" >
         user_type = #{record.userType,jdbcType=INTEGER},
       </if>
-      <if test="record.username != null" >
-        username = #{record.username,jdbcType=CHAR},
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=CHAR},
       </if>
-      <if test="record.nickname != null" >
-        nickname = #{record.nickname,jdbcType=VARCHAR},
+      <if test="record.nickName != null" >
+        nick_name = #{record.nickName,jdbcType=VARCHAR},
       </if>
       <if test="record.photo != null" >
         photo = #{record.photo,jdbcType=VARCHAR},
@@ -232,7 +230,7 @@
         amount = #{record.amount,jdbcType=BIGINT},
       </if>
       <if test="record.isStop != null" >
-        is_stop = #{record.isStop,jdbcType=TINYINT},
+        is_stop = #{record.isStop,jdbcType=INTEGER},
       </if>
       <if test="record.status != null" >
         status = #{record.status,jdbcType=INTEGER},
@@ -252,13 +250,13 @@
     update v_user
     set user_id = #{record.userId,jdbcType=BIGINT},
       user_type = #{record.userType,jdbcType=INTEGER},
-      username = #{record.username,jdbcType=CHAR},
-      nickname = #{record.nickname,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=CHAR},
+      nick_name = #{record.nickName,jdbcType=VARCHAR},
       photo = #{record.photo,jdbcType=VARCHAR},
       sign = #{record.sign,jdbcType=VARCHAR},
       register_time = #{record.registerTime,jdbcType=DATE},
       amount = #{record.amount,jdbcType=BIGINT},
-      is_stop = #{record.isStop,jdbcType=TINYINT},
+      is_stop = #{record.isStop,jdbcType=INTEGER},
       status = #{record.status,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=DATE},
       update_time = #{record.updateTime,jdbcType=DATE}
@@ -272,11 +270,11 @@
       <if test="userType != null" >
         user_type = #{userType,jdbcType=INTEGER},
       </if>
-      <if test="username != null" >
-        username = #{username,jdbcType=CHAR},
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=CHAR},
       </if>
-      <if test="nickname != null" >
-        nickname = #{nickname,jdbcType=VARCHAR},
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
       </if>
       <if test="photo != null" >
         photo = #{photo,jdbcType=VARCHAR},
@@ -291,7 +289,7 @@
         amount = #{amount,jdbcType=BIGINT},
       </if>
       <if test="isStop != null" >
-        is_stop = #{isStop,jdbcType=TINYINT},
+        is_stop = #{isStop,jdbcType=INTEGER},
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=INTEGER},
@@ -308,13 +306,13 @@
   <update id="updateByPrimaryKey" parameterType="com.fan.po.User" >
     update v_user
     set user_type = #{userType,jdbcType=INTEGER},
-      username = #{username,jdbcType=CHAR},
-      nickname = #{nickname,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=CHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
       photo = #{photo,jdbcType=VARCHAR},
       sign = #{sign,jdbcType=VARCHAR},
       register_time = #{registerTime,jdbcType=DATE},
       amount = #{amount,jdbcType=BIGINT},
-      is_stop = #{isStop,jdbcType=TINYINT},
+      is_stop = #{isStop,jdbcType=INTEGER},
       status = #{status,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=DATE},
       update_time = #{updateTime,jdbcType=DATE}

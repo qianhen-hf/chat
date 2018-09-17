@@ -842,73 +842,73 @@ public class UserLoginExample {
             return (Criteria) this;
         }
 
-        public Criteria andAppnameIsNull() {
-            addCriterion("appname is null");
+        public Criteria andAppNameIsNull() {
+            addCriterion("app_name is null");
             return (Criteria) this;
         }
 
-        public Criteria andAppnameIsNotNull() {
-            addCriterion("appname is not null");
+        public Criteria andAppNameIsNotNull() {
+            addCriterion("app_name is not null");
             return (Criteria) this;
         }
 
-        public Criteria andAppnameEqualTo(String value) {
-            addCriterion("appname =", value, "appname");
+        public Criteria andAppNameEqualTo(String value) {
+            addCriterion("app_name =", value, "appName");
             return (Criteria) this;
         }
 
-        public Criteria andAppnameNotEqualTo(String value) {
-            addCriterion("appname <>", value, "appname");
+        public Criteria andAppNameNotEqualTo(String value) {
+            addCriterion("app_name <>", value, "appName");
             return (Criteria) this;
         }
 
-        public Criteria andAppnameGreaterThan(String value) {
-            addCriterion("appname >", value, "appname");
+        public Criteria andAppNameGreaterThan(String value) {
+            addCriterion("app_name >", value, "appName");
             return (Criteria) this;
         }
 
-        public Criteria andAppnameGreaterThanOrEqualTo(String value) {
-            addCriterion("appname >=", value, "appname");
+        public Criteria andAppNameGreaterThanOrEqualTo(String value) {
+            addCriterion("app_name >=", value, "appName");
             return (Criteria) this;
         }
 
-        public Criteria andAppnameLessThan(String value) {
-            addCriterion("appname <", value, "appname");
+        public Criteria andAppNameLessThan(String value) {
+            addCriterion("app_name <", value, "appName");
             return (Criteria) this;
         }
 
-        public Criteria andAppnameLessThanOrEqualTo(String value) {
-            addCriterion("appname <=", value, "appname");
+        public Criteria andAppNameLessThanOrEqualTo(String value) {
+            addCriterion("app_name <=", value, "appName");
             return (Criteria) this;
         }
 
-        public Criteria andAppnameLike(String value) {
-            addCriterion("appname like", value, "appname");
+        public Criteria andAppNameLike(String value) {
+            addCriterion("app_name like", value, "appName");
             return (Criteria) this;
         }
 
-        public Criteria andAppnameNotLike(String value) {
-            addCriterion("appname not like", value, "appname");
+        public Criteria andAppNameNotLike(String value) {
+            addCriterion("app_name not like", value, "appName");
             return (Criteria) this;
         }
 
-        public Criteria andAppnameIn(List<String> values) {
-            addCriterion("appname in", values, "appname");
+        public Criteria andAppNameIn(List<String> values) {
+            addCriterion("app_name in", values, "appName");
             return (Criteria) this;
         }
 
-        public Criteria andAppnameNotIn(List<String> values) {
-            addCriterion("appname not in", values, "appname");
+        public Criteria andAppNameNotIn(List<String> values) {
+            addCriterion("app_name not in", values, "appName");
             return (Criteria) this;
         }
 
-        public Criteria andAppnameBetween(String value1, String value2) {
-            addCriterion("appname between", value1, value2, "appname");
+        public Criteria andAppNameBetween(String value1, String value2) {
+            addCriterion("app_name between", value1, value2, "appName");
             return (Criteria) this;
         }
 
-        public Criteria andAppnameNotBetween(String value1, String value2) {
-            addCriterion("appname not between", value1, value2, "appname");
+        public Criteria andAppNameNotBetween(String value1, String value2) {
+            addCriterion("app_name not between", value1, value2, "appName");
             return (Criteria) this;
         }
 
