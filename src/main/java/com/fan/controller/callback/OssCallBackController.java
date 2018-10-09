@@ -63,7 +63,7 @@ public class OssCallBackController {
             PhotoInfo photoInfo = new PhotoInfo();
             photoInfo.setCreateTime(new Date());
             photoInfo.setUserId(Long.parseLong(parameterMap.get("userId")));
-            photoInfo.setPhotoUrl(parameterMap.get("fileName"));
+            photoInfo.setPhotoUrl(parameterMap.get("filename"));
             photoInfoService.insertPhoto(photoInfo);
             responseResult.setData(photoInfo.getId());
         } catch (IOException e) {

@@ -69,7 +69,7 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="v_consume_info" domainObjectName="ConsumeInfo">
+        <table tableName="v_live_record" domainObjectName="LiveRecord">
         </table>
         <!--  <table tableName="v_advise" domainObjectName="Advise">
           </table>
@@ -95,9 +95,9 @@
 
           <table tableName="v_version_info" domainObjectName="VersionInfo">
           </table>-->
-       <!-- <table tableName="v_gift_info" domainObjectName="GiftInfo">
+        <table tableName="v_gift_info" domainObjectName="GiftInfo">
             <generatedKey column="gift_id" sqlStatement="MySql" identity="true"/>
-        </table>-->
+        </table>
         <!-- <table tableName="v_user" domainObjectName="User">
             <generatedKey column="user_id" sqlStatement="MySql" identity="true"/>
         </table>-->

@@ -65,7 +65,7 @@ public class OssService {
             respMap.put("bucketName", "qianhen-fan");
             respMap.put("endPoint", "http://oss-cn-shenzhen.aliyuncs.com");
             respMap.put("imageEndPoint", "http://img-cn-shenzhen.aliyuncs.com");
-            respMap.put("callbackAddress", "http://2049g328c3.iask.in:55469/callback/ossCallBack");
+            respMap.put("callbackAddress", "http://2049g328c3.iask.in:37084/callback/ossCallBack");
             respMap.put("StatusCode", "200");
             respMap.put("callbackBody", "filename=${object}&size=${size}&mimeType=${mimeType}&height=${imageInfo.height}&width=${imageInfo.width}&userId=1234");
             respMap.put("AccessKeyId", stsResponse.getCredentials().getAccessKeyId());
