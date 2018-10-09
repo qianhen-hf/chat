@@ -32,6 +32,7 @@ public class AliPayCallBackService {
     AliPayConfig aliPayConfig;
     @Autowired
     AliPayMapper aliPayMapper;
+    @Autowired
     ChargeInfoService chargeInfoService;
 
 
@@ -41,7 +42,7 @@ public class AliPayCallBackService {
             if (b) {
                 aliPayMapper.insert(aliPay);
                 Double totalAmount = aliPay.getTotalAmount() * 100;
-                chargeInfoService.charge(1, aliPay.getTradeNo(), Long.parseLong(aliPay.getOutTradeNo()), Long.parseLong(totalAmount.toString()));
+                chargeInfoService.charge(1, aliPay.getTradeNo(), Long.parseLong(aliPay.getOutTradeNo()), totalAmount.longValue());
                 return true;
             }
         } catch (AlipayApiException e) {
@@ -69,6 +70,14 @@ public class AliPayCallBackService {
         //切记alipaypublickey是支付宝的公钥，请去open.alipay.com对应应用下查看。
         //boolean AlipaySignature.rsaCheckV1(Map<String, String> params, String publicKey, String charset, String sign_type)
         return AlipaySignature.rsaCheckV1(params, aliPayConfig.getAliPayPublicKey(), aliPayConfig.getCharset(), aliPayConfig.getSignType());
+    }
+
+
+    public static void main(String[] args) {
+        Double a = 0.01;
+        Double totalAmount = a * 100;
+        Long l = totalAmount.longValue();
+        System.out.println(l);
     }
 }
 

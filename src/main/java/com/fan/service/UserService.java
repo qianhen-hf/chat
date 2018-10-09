@@ -78,4 +78,5 @@ public class UserService {
     public void delUserPhotoById(Long userId, Long photoId) {
         photoInfoService.delPhoto(photoId);
     }
+
 }

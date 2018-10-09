@@ -59,7 +59,7 @@ public class AliPayCallBackController {
             ClassUtils.lineBeanToHumpBean(requestAliPay, aliPay);
             Boolean flag = aliPayCallBackService.aliPayNotify(aliPay, request.getParameterMap());
             if (flag) {
-                return "fail";
+                return "success";
             }
         } catch (Exception e) {
             throw new VRabbitException(VRabbitUserErrors.PAY_CALL_BACK_ERROR);

@@ -9,7 +9,7 @@ public class ConsumeInfo {
 
     private Long anchor;
 
-    private Long vcorn;
+    private Long giftId;
 
     private Date createTime;
 
@@ -39,12 +39,12 @@ public class ConsumeInfo {
         this.anchor = anchor;
     }
 
-    public Long getVcorn() {
-        return vcorn;
+    public Long getGiftId() {
+        return giftId;
     }
 
-    public void setVcorn(Long vcorn) {
-        this.vcorn = vcorn;
+    public void setGiftId(Long giftId) {
+        this.giftId = giftId;
     }
 
     public Date getCreateTime() {

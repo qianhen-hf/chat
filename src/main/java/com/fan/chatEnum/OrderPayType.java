@@ -14,7 +14,7 @@ package com.fan.chatEnum;
 public enum OrderPayType {
 
     ALI_PAY(1, "支付宝app"),
-    WEI_XIN_PAY(1, "支付宝app");
+    WEI_XIN_PAY(2, "微信app");
 
 
     private String orderDesc;

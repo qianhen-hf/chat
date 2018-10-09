@@ -9,6 +9,7 @@ import com.alipay.api.response.AlipayTradeAppPayResponse;
 import com.fan.config.AliPayConfig;
 import com.fan.mapper.ChargeInfoMapper;
 import com.fan.po.ChargeInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Service;
  * @Version: 1.0
  */
 @Service
+@Slf4j
 public class AliPayService {
     @Autowired
     AliPayConfig aliPayConfig;

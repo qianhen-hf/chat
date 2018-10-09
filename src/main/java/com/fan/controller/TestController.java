@@ -1,6 +1,7 @@
 package com.fan.controller;
 
 import com.fan.config.SmsConfig;
+import com.fan.po.User;
 import com.fan.service.redis.RedisOperator;
 import com.fan.util.HttpRequestHelper;
 import com.netflix.discovery.converters.Auto;
@@ -41,8 +42,8 @@ public class TestController {
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 
-    @GetMapping("getSing")
-    public String  getSing(Date date){
+    @PostMapping("getSing")
+    public String  getSing(User user){
         System.out.println(smsConfig.getSignature());
         return  smsConfig.getSignature();
     }

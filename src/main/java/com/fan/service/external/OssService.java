@@ -14,6 +14,7 @@ import com.aliyuncs.sts.model.v20150401.AssumeRoleRequest;
 import com.aliyuncs.sts.model.v20150401.AssumeRoleResponse;
 import com.fan.config.OssConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sun.misc.BASE64Encoder;
@@ -34,10 +35,11 @@ import java.util.*;
  */
 
 @Service
+@Slf4j
 public class OssService {
     @Autowired
     OssConfig ossConfig;
-    public static final String REGION_CN_SHENZHEN = "cn-shangzhou";   //"cn-hangzhou  cn-shanghai 都不行"
+    public static final String REGION_CN_SHENZHEN = "cn-hangzhou";   //"cn-hangzhou  cn-shanghai 都不行"
     public static final String STS_API_VERSION = "2015-04-01";
 
     public Map<String, String> getOssCertificate() {
@@ -60,12 +62,19 @@ public class OssService {
             // 发起请求，并得到response
             final AssumeRoleResponse stsResponse = client.getAcsResponse(request);
 
+            respMap.put("bucketName", "qianhen-fan");
+            respMap.put("endPoint", "http://oss-cn-shenzhen.aliyuncs.com");
+            respMap.put("imageEndPoint", "http://img-cn-shenzhen.aliyuncs.com");
+            respMap.put("callbackAddress", "http://2049g328c3.iask.in:55469/callback/ossCallBack");
             respMap.put("StatusCode", "200");
+            respMap.put("callbackBody", "filename=${object}&size=${size}&mimeType=${mimeType}&height=${imageInfo.height}&width=${imageInfo.width}&userId=1234");
             respMap.put("AccessKeyId", stsResponse.getCredentials().getAccessKeyId());
             respMap.put("AccessKeySecret", stsResponse.getCredentials().getAccessKeySecret());
             respMap.put("SecurityToken", stsResponse.getCredentials().getSecurityToken());
             respMap.put("Expiration", stsResponse.getCredentials().getExpiration());
         } catch (ClientException e) {
+            log.info("oss 错误");
+            System.out.println(e);
             e.printStackTrace();
         }
         return respMap;
@@ -101,7 +110,7 @@ public class OssService {
         String host = "http://" + bucket + "." + endpoint;
         OSSClient ossClient = new OSSClient(endpoint, ossConfig.getAccessKeyID(), ossConfig.getAccessKeySecret());
         try {
-            long expireTime = 30;
+            long expireTime = 1800;
             long expireEndTime = System.currentTimeMillis() + expireTime * 1000;
             Date expiration = new Date(expireEndTime);
             PolicyConditions policyConds = new PolicyConditions();

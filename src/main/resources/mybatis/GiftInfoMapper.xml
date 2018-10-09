@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fan.mapper.ConsumeInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.fan.po.ConsumeInfo" >
-    <id column="ID" property="id" jdbcType="BIGINT" />
-    <result column="user_id" property="userId" jdbcType="BIGINT" />
-    <result column="anchor" property="anchor" jdbcType="BIGINT" />
-    <result column="gift_id" property="giftId" jdbcType="BIGINT" />
+<mapper namespace="com.fan.mapper.GiftInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.fan.po.GiftInfo" >
+    <id column="gift_id" property="giftId" jdbcType="BIGINT" />
+    <result column="gift_name" property="giftName" jdbcType="VARCHAR" />
+    <result column="vcorn" property="vcorn" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="DATE" />
     <result column="update_time" property="updateTime" jdbcType="DATE" />
   </resultMap>
@@ -68,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ID, user_id, anchor, gift_id, create_time, update_time
+    gift_id, gift_name, vcorn, status, create_time, update_time
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fan.po.ConsumeInfoExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fan.po.GiftInfoExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from v_consume_info
+    from v_gift_info
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,41 +87,42 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select 
     <include refid="Base_Column_List" />
-    from v_consume_info
-    where ID = #{id,jdbcType=BIGINT}
+    from v_gift_info
+    where gift_id = #{giftId,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
-    delete from v_consume_info
-    where ID = #{id,jdbcType=BIGINT}
+    delete from v_gift_info
+    where gift_id = #{giftId,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.fan.po.ConsumeInfoExample" >
-    delete from v_consume_info
+  <delete id="deleteByExample" parameterType="com.fan.po.GiftInfoExample" >
+    delete from v_gift_info
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.fan.po.ConsumeInfo" >
-    insert into v_consume_info (ID, user_id, anchor, 
-      gift_id, create_time, update_time
-      )
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{anchor,jdbcType=BIGINT}, 
-      #{giftId,jdbcType=BIGINT}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}
-      )
+  <insert id="insert" parameterType="com.fan.po.GiftInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="giftId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into v_gift_info (gift_name, vcorn, status, 
+      create_time, update_time)
+    values (#{giftName,jdbcType=VARCHAR}, #{vcorn,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE})
   </insert>
-  <insert id="insertSelective" parameterType="com.fan.po.ConsumeInfo" >
-    insert into v_consume_info
+  <insert id="insertSelective" parameterType="com.fan.po.GiftInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="giftId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into v_gift_info
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        ID,
+      <if test="giftName != null" >
+        gift_name,
       </if>
-      <if test="userId != null" >
-        user_id,
+      <if test="vcorn != null" >
+        vcorn,
       </if>
-      <if test="anchor != null" >
-        anchor,
-      </if>
-      <if test="giftId != null" >
-        gift_id,
+      <if test="status != null" >
+        status,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -131,17 +132,14 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=BIGINT},
+      <if test="giftName != null" >
+        #{giftName,jdbcType=VARCHAR},
       </if>
-      <if test="userId != null" >
-        #{userId,jdbcType=BIGINT},
+      <if test="vcorn != null" >
+        #{vcorn,jdbcType=BIGINT},
       </if>
-      <if test="anchor != null" >
-        #{anchor,jdbcType=BIGINT},
-      </if>
-      <if test="giftId != null" >
-        #{giftId,jdbcType=BIGINT},
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
       </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=DATE},
@@ -151,26 +149,26 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.fan.po.ConsumeInfoExample" resultType="java.lang.Integer" >
-    select count(*) from v_consume_info
+  <select id="countByExample" parameterType="com.fan.po.GiftInfoExample" resultType="java.lang.Integer" >
+    select count(*) from v_gift_info
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update v_consume_info
+    update v_gift_info
     <set >
-      <if test="record.id != null" >
-        ID = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.userId != null" >
-        user_id = #{record.userId,jdbcType=BIGINT},
-      </if>
-      <if test="record.anchor != null" >
-        anchor = #{record.anchor,jdbcType=BIGINT},
-      </if>
       <if test="record.giftId != null" >
         gift_id = #{record.giftId,jdbcType=BIGINT},
+      </if>
+      <if test="record.giftName != null" >
+        gift_name = #{record.giftName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vcorn != null" >
+        vcorn = #{record.vcorn,jdbcType=BIGINT},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=INTEGER},
       </if>
       <if test="record.createTime != null" >
         create_time = #{record.createTime,jdbcType=DATE},
@@ -184,28 +182,28 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update v_consume_info
-    set ID = #{record.id,jdbcType=BIGINT},
-      user_id = #{record.userId,jdbcType=BIGINT},
-      anchor = #{record.anchor,jdbcType=BIGINT},
-      gift_id = #{record.giftId,jdbcType=BIGINT},
+    update v_gift_info
+    set gift_id = #{record.giftId,jdbcType=BIGINT},
+      gift_name = #{record.giftName,jdbcType=VARCHAR},
+      vcorn = #{record.vcorn,jdbcType=BIGINT},
+      status = #{record.status,jdbcType=INTEGER},
       create_time = #{record.createTime,jdbcType=DATE},
       update_time = #{record.updateTime,jdbcType=DATE}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.fan.po.ConsumeInfo" >
-    update v_consume_info
+  <update id="updateByPrimaryKeySelective" parameterType="com.fan.po.GiftInfo" >
+    update v_gift_info
     <set >
-      <if test="userId != null" >
-        user_id = #{userId,jdbcType=BIGINT},
+      <if test="giftName != null" >
+        gift_name = #{giftName,jdbcType=VARCHAR},
       </if>
-      <if test="anchor != null" >
-        anchor = #{anchor,jdbcType=BIGINT},
+      <if test="vcorn != null" >
+        vcorn = #{vcorn,jdbcType=BIGINT},
       </if>
-      <if test="giftId != null" >
-        gift_id = #{giftId,jdbcType=BIGINT},
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
       </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=DATE},
@@ -214,15 +212,15 @@
         update_time = #{updateTime,jdbcType=DATE},
       </if>
     </set>
-    where ID = #{id,jdbcType=BIGINT}
+    where gift_id = #{giftId,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.fan.po.ConsumeInfo" >
-    update v_consume_info
-    set user_id = #{userId,jdbcType=BIGINT},
-      anchor = #{anchor,jdbcType=BIGINT},
-      gift_id = #{giftId,jdbcType=BIGINT},
+  <update id="updateByPrimaryKey" parameterType="com.fan.po.GiftInfo" >
+    update v_gift_info
+    set gift_name = #{giftName,jdbcType=VARCHAR},
+      vcorn = #{vcorn,jdbcType=BIGINT},
+      status = #{status,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=DATE},
       update_time = #{updateTime,jdbcType=DATE}
-    where ID = #{id,jdbcType=BIGINT}
+    where gift_id = #{giftId,jdbcType=BIGINT}
   </update>
 </mapper>

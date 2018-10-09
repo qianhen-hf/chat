@@ -36,7 +36,6 @@ public class InitUrlData {
         urls.put("/configuration/security", 1);
         urls.put("/configuration/ui", 1);
         urls.put("/vRabbit/getSing", 1);
-        urls.put("/oss/getOssCertificate", 1);
         urls.put("/oss/getOssCertificate1", 1);
         urls.put("/oss/getOssWebCertificate", 1);
         return urls;

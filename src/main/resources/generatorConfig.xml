@@ -69,36 +69,38 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-
-      <!--  <table tableName="v_advise" domainObjectName="Advise">
-        </table>
-        <table tableName="v_alipay" domainObjectName="AliPay">
-        </table>
-        <table tableName="v_charge_info" domainObjectName="ChargeInfo">
-        </table>
         <table tableName="v_consume_info" domainObjectName="ConsumeInfo">
         </table>
-        <table tableName="v_deposit_info" domainObjectName="DepositInfo">
-        </table>
-        <table tableName="v_focus_info" domainObjectName="FocusInfo">
-        </table>
-        <table tableName="v_msg_record" domainObjectName="MsgRecord">
-        </table>
-        <table tableName="v_photo_info" domainObjectName="PhotoInfo">
+        <!--  <table tableName="v_advise" domainObjectName="Advise">
+          </table>
+          <table tableName="v_alipay" domainObjectName="AliPay">
+          </table>
+          <table tableName="v_charge_info" domainObjectName="ChargeInfo">
+          </table>
+
+          <table tableName="v_deposit_info" domainObjectName="DepositInfo">
+          </table>
+          <table tableName="v_focus_info" domainObjectName="FocusInfo">
+          </table>
+          <table tableName="v_msg_record" domainObjectName="MsgRecord">
+          </table>
+          <table tableName="v_photo_info" domainObjectName="PhotoInfo">
+          </table>-->
+
+
+        <!--  <table tableName="v_sms_record" domainObjectName="SmsRecord">
+          </table>
+          <table tableName="v_user" domainObjectName="User">
+          </table>
+
+          <table tableName="v_version_info" domainObjectName="VersionInfo">
+          </table>-->
+       <!-- <table tableName="v_gift_info" domainObjectName="GiftInfo">
+            <generatedKey column="gift_id" sqlStatement="MySql" identity="true"/>
         </table>-->
-
-
-
-      <!--  <table tableName="v_sms_record" domainObjectName="SmsRecord">
-        </table>
-        <table tableName="v_user" domainObjectName="User">
-        </table>
-
-        <table tableName="v_version_info" domainObjectName="VersionInfo">
-        </table>-->
-        <table tableName="v_user" domainObjectName="User">
+        <!-- <table tableName="v_user" domainObjectName="User">
             <generatedKey column="user_id" sqlStatement="MySql" identity="true"/>
-        </table>
+        </table>-->
         <!--<table tableName="v_photo_info" domainObjectName="PhotoInfo">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>-->
