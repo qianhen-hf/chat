@@ -54,6 +54,7 @@ public class AliPayService {
         model.setTimeoutExpress("30m");
         model.setTotalAmount(String.valueOf(chargeInfo.getChargeAmount() / 100.0));
         model.setProductCode("QUICK_MSECURITY_PAY");
+        model.setPassbackParams(chargeInfo.getUserId().toString());
         request.setBizModel(model);
         request.setNotifyUrl(aliPayConfig.getNotifyUrl());
         try {

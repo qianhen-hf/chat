@@ -532,6 +532,146 @@ public class UserExample {
             return (Criteria) this;
         }
 
+        public Criteria andConstellationIsNull() {
+            addCriterion("constellation is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstellationIsNotNull() {
+            addCriterion("constellation is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstellationEqualTo(String value) {
+            addCriterion("constellation =", value, "constellation");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstellationNotEqualTo(String value) {
+            addCriterion("constellation <>", value, "constellation");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstellationGreaterThan(String value) {
+            addCriterion("constellation >", value, "constellation");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstellationGreaterThanOrEqualTo(String value) {
+            addCriterion("constellation >=", value, "constellation");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstellationLessThan(String value) {
+            addCriterion("constellation <", value, "constellation");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstellationLessThanOrEqualTo(String value) {
+            addCriterion("constellation <=", value, "constellation");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstellationLike(String value) {
+            addCriterion("constellation like", value, "constellation");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstellationNotLike(String value) {
+            addCriterion("constellation not like", value, "constellation");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstellationIn(List<String> values) {
+            addCriterion("constellation in", values, "constellation");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstellationNotIn(List<String> values) {
+            addCriterion("constellation not in", values, "constellation");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstellationBetween(String value1, String value2) {
+            addCriterion("constellation between", value1, value2, "constellation");
+            return (Criteria) this;
+        }
+
+        public Criteria andConstellationNotBetween(String value1, String value2) {
+            addCriterion("constellation not between", value1, value2, "constellation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationIsNull() {
+            addCriterion("occupation is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationIsNotNull() {
+            addCriterion("occupation is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationEqualTo(String value) {
+            addCriterion("occupation =", value, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationNotEqualTo(String value) {
+            addCriterion("occupation <>", value, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationGreaterThan(String value) {
+            addCriterion("occupation >", value, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationGreaterThanOrEqualTo(String value) {
+            addCriterion("occupation >=", value, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationLessThan(String value) {
+            addCriterion("occupation <", value, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationLessThanOrEqualTo(String value) {
+            addCriterion("occupation <=", value, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationLike(String value) {
+            addCriterion("occupation like", value, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationNotLike(String value) {
+            addCriterion("occupation not like", value, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationIn(List<String> values) {
+            addCriterion("occupation in", values, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationNotIn(List<String> values) {
+            addCriterion("occupation not in", values, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationBetween(String value1, String value2) {
+            addCriterion("occupation between", value1, value2, "occupation");
+            return (Criteria) this;
+        }
+
+        public Criteria andOccupationNotBetween(String value1, String value2) {
+            addCriterion("occupation not between", value1, value2, "occupation");
+            return (Criteria) this;
+        }
+
         public Criteria andRegisterTimeIsNull() {
             addCriterion("register_time is null");
             return (Criteria) this;

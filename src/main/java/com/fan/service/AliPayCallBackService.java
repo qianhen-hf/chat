@@ -35,6 +35,8 @@ public class AliPayCallBackService {
     AliPayMapper aliPayMapper;
     @Autowired
     ChargeInfoService chargeInfoService;
+    @Autowired
+    UserService userService;
 
 
     public Boolean aliPayNotify(AliPay aliPay, Map<String, String[]> parameterMap) {
@@ -44,6 +46,7 @@ public class AliPayCallBackService {
                 aliPayMapper.insert(aliPay);
                 Double totalAmount = aliPay.getTotalAmount() * 100;
                 chargeInfoService.charge(1, aliPay.getTradeNo(), Long.parseLong(aliPay.getOutTradeNo()), totalAmount.longValue());
+                userService.changeUserAmount(Long.parseLong(aliPay.getPassbackParams()), totalAmount.longValue());
                 return true;
             }
         } catch (AlipayApiException e) {

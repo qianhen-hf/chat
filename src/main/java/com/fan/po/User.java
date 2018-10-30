@@ -15,6 +15,10 @@ public class User {
 
     private String sign;
 
+    private String constellation;
+
+    private String occupation;
+
     private Date registerTime;
 
     private Long amount;
@@ -73,6 +77,22 @@ public class User {
 
     public void setSign(String sign) {
         this.sign = sign == null ? null : sign.trim();
+    }
+
+    public String getConstellation() {
+        return constellation;
+    }
+
+    public void setConstellation(String constellation) {
+        this.constellation = constellation == null ? null : constellation.trim();
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation == null ? null : occupation.trim();
     }
 
     public Date getRegisterTime() {

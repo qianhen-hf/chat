@@ -48,6 +48,7 @@ public class RechargeService {
         chargeInfo.setChargeAmount(requestCharge.getChargeAmount());
         chargeInfo.setBusiId(createOrderNum("0101"));
         chargeInfo.setStatus(0);
+        chargeInfo.setUserId(requestCharge.getUserId());
         if (requestCharge.getType() == OrderPayType.ALI_PAY.getValue()) {
             return aliPayService.aliPay(chargeInfo);
         }

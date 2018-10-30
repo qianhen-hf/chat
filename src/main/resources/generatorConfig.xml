@@ -87,17 +87,17 @@
           <table tableName="v_photo_info" domainObjectName="PhotoInfo">
           </table>-->
 
+          <table tableName="v_user" domainObjectName="User">
+          </table>
 
         <!--  <table tableName="v_sms_record" domainObjectName="SmsRecord">
-          </table>
-          <table tableName="v_user" domainObjectName="User">
           </table>
 
           <table tableName="v_version_info" domainObjectName="VersionInfo">
           </table>-->
-        <table tableName="v_gift_info" domainObjectName="GiftInfo">
-            <generatedKey column="gift_id" sqlStatement="MySql" identity="true"/>
-        </table>
+       <!-- <table tableName="v_index_pic" domainObjectName="IndexPic">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>-->
         <!-- <table tableName="v_user" domainObjectName="User">
             <generatedKey column="user_id" sqlStatement="MySql" identity="true"/>
         </table>-->

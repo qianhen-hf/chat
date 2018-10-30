@@ -78,4 +78,12 @@ public class UserService {
         photoInfoService.delPhoto(photoId);
     }
 
+    public void changeUserAmount(Long userId, Long amount) {
+        User user = selectUserByUserId(userId);
+        User upUser = new User();
+        upUser.setUserId(userId);
+        upUser.setAmount(user.getAmount() + amount);
+        userMapper.updateByPrimaryKeySelective(user);
+    }
+
 }
