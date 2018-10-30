@@ -171,4 +171,26 @@ public class CustomerController {
         return result;
     }
 
+    @ApiOperation(value = "直播记录")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId",value = "用户Id",required = true,dataType = "java.lang.Long"),
+            @ApiImplicitParam(name = "anchorId",value = "主播Id",required = true,dataType = "java.lang.Long"),
+            @ApiImplicitParam(name = "status",value = "状态 1：开始，2：结束",required = true,dataType = "java.lang.Integer")
+    })
+    @PostMapping("/startLive")
+    public ResponseResult startLive(long userId,long anchorId,int status) {
+        logger.info("开始处理直播,userId={},anchorId={}",userId,anchorId);
+        ResponseResult result;
+        try {
+            customerService.recordLiveLog(userId,anchorId,status);
+            result = new ResponseResult();
+        }  catch(Exception e) {
+            logger.error("处理直播发生异常",e);
+            result = new ResponseResult(false);
+        }
+        logger.info("结束处理直播");
+        return result;
+    }
+
+
 }

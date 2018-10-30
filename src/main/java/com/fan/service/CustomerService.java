@@ -2,10 +2,7 @@ package com.fan.service;
 
 import com.fan.Exception.ChatException;
 import com.fan.chatEnum.UserStatusEnum;
-import com.fan.mapper.AdviseMapper;
-import com.fan.mapper.DepositInfoMapper;
-import com.fan.mapper.FocusInfoMapper;
-import com.fan.mapper.UserMapper;
+import com.fan.mapper.*;
 import com.fan.po.*;
 import com.fan.vo.UserVo;
 import org.springframework.beans.BeanUtils;
@@ -40,6 +37,9 @@ public class CustomerService {
 
     @Autowired
     AdviseMapper adviseMapper;
+
+    @Autowired
+    LiveRecordMapper liveRecordMapper;
 
     public void updateUser(UserVo userVo) {
         User user = new User();
@@ -152,6 +152,25 @@ public class CustomerService {
         user.setStatus(status);
         user.setUpdateTime(new Date());
         userMapper.updateByPrimaryKeySelective(user);
+    }
+
+    /**
+     * 直播记录
+     * @param userId
+     * @param anchorId
+     * @param status
+     */
+    public void recordLiveLog(long userId,long anchorId,int status) {
+        LiveRecord liveRecord = new LiveRecord();
+        liveRecord.setAnchor(anchorId);
+        liveRecord.setUserId(userId);
+        liveRecord.setStatus(status);
+        Date now = new Date();
+        liveRecord.setOccurTime(now);
+        liveRecord.setCreateTime(now);
+        liveRecord.setUpdateTime(now);
+
+        liveRecordMapper.insert(liveRecord);
     }
 
     /**
