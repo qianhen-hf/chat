@@ -39,10 +39,10 @@ public class UserVo {
     private Long amount;
 
     @ApiModelProperty(value="星座",name="constellation")
-    private Long constellation;
+    private String constellation;
 
     @ApiModelProperty(value="职业",name="occupation")
-    private Long occupation;
+    private String occupation;
 
     private Integer isStop;
 
