@@ -3,6 +3,7 @@ package com.fan.service;
 import com.fan.mapper.PhotoInfoMapper;
 import com.fan.po.PhotoInfo;
 import com.fan.po.PhotoInfoExample;
+import com.fan.service.external.OssService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,12 +26,18 @@ public class PhotoInfoService {
 
     @Autowired
     PhotoInfoMapper photoInfoMapper;
+    @Autowired
+    OssService ossService;
 
     public List<PhotoInfo> getUserPhoto(Long userId) {
         PhotoInfoExample photoInfoExample = new PhotoInfoExample();
         PhotoInfoExample.Criteria criteria = photoInfoExample.createCriteria();
         criteria.andUserIdEqualTo(userId);
-        return photoInfoMapper.selectByExample(photoInfoExample);
+        List<PhotoInfo> photoInfos = photoInfoMapper.selectByExample(photoInfoExample);
+        for (PhotoInfo photoInfo : photoInfos) {
+//            ossService.getObjectUrl();
+        }
+        return  photoInfos;
     }
 
     public void insertPhoto(PhotoInfo photoInfo) {

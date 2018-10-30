@@ -1,3 +1,5 @@
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.*;
 
 /**
@@ -44,7 +46,9 @@ public class ReadJson {
     }
 
     public static void main(String[] args) {
-        String policy = ReadJson("E:/policy/bucket_read_write_policy.txt");
-        System.out.println(policy);
+//        String policy = ReadJson("E:/policy/bucket_read_write_policy.txt");
+//        System.out.println(policy);
+        String a="";
+        System.out.println(StringUtils.isBlank(a));
     }
 }

@@ -38,6 +38,8 @@ public class InitUrlData {
         urls.put("/vRabbit/getSing", 1);
         urls.put("/oss/getOssCertificate1", 1);
         urls.put("/oss/getOssWebCertificate", 1);
+        urls.put("/pay/recharge2", 1);
+        urls.put("/pay/recharge3", 1);
         return urls;
     }
 }

@@ -28,7 +28,7 @@ import javax.ws.rs.POST;
  */
 
 @Api(value = "支付", tags = {"支付接口"})
-@RequestMapping("vRabbit/pay")
+@RequestMapping("pay")
 @RestController
 public class RechargeController {
     @Autowired
@@ -49,5 +49,18 @@ public class RechargeController {
         requestCharge.setType(1);
         requestCharge.setUserId(1l);
         return rechargeService.recharge(requestCharge);
+    }
+
+
+    @ApiIgnore
+    @RequestMapping("recharge2")
+    public String recharge2() {
+        return rechargeService.recharge();
+    }
+
+    @ApiIgnore
+    @GetMapping("recharge3")
+    public String recharge3() {
+        return rechargeService.rechargeWeb();
     }
 }

@@ -501,6 +501,66 @@ public class GiftInfoExample {
             addCriterionForJDBCDate("update_time not between", value1, value2, "updateTime");
             return (Criteria) this;
         }
+
+        public Criteria andPhotoInfoIdIsNull() {
+            addCriterion("photo_info_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfoIdIsNotNull() {
+            addCriterion("photo_info_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfoIdEqualTo(Long value) {
+            addCriterion("photo_info_id =", value, "photoInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfoIdNotEqualTo(Long value) {
+            addCriterion("photo_info_id <>", value, "photoInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfoIdGreaterThan(Long value) {
+            addCriterion("photo_info_id >", value, "photoInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfoIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("photo_info_id >=", value, "photoInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfoIdLessThan(Long value) {
+            addCriterion("photo_info_id <", value, "photoInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfoIdLessThanOrEqualTo(Long value) {
+            addCriterion("photo_info_id <=", value, "photoInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfoIdIn(List<Long> values) {
+            addCriterion("photo_info_id in", values, "photoInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfoIdNotIn(List<Long> values) {
+            addCriterion("photo_info_id not in", values, "photoInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfoIdBetween(Long value1, Long value2) {
+            addCriterion("photo_info_id between", value1, value2, "photoInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfoIdNotBetween(Long value1, Long value2) {
+            addCriterion("photo_info_id not between", value1, value2, "photoInfoId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

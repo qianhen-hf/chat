@@ -69,8 +69,8 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="v_live_record" domainObjectName="LiveRecord">
-        </table>
+       <!-- <table tableName="v_live_record" domainObjectName="LiveRecord">
+        </table>-->
         <!--  <table tableName="v_advise" domainObjectName="Advise">
           </table>
           <table tableName="v_alipay" domainObjectName="AliPay">

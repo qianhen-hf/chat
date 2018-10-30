@@ -65,4 +65,14 @@ public class RechargeService {
         StringBuilder append = new StringBuilder(formatDate).append(businessCode).append(increment);
         return Long.parseLong(append.toString());
     }
+
+    @Transactional
+    public String recharge() {
+        return aliPayService.aliPay();
+    }
+
+    @Transactional
+    public String rechargeWeb() {
+        return aliPayService.aliWebPay();
+    }
 }

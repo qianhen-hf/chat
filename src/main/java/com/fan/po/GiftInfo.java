@@ -15,6 +15,8 @@ public class GiftInfo {
 
     private Date updateTime;
 
+    private Long photoInfoId;
+
     public Long getGiftId() {
         return giftId;
     }
@@ -61,5 +63,13 @@ public class GiftInfo {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Long getPhotoInfoId() {
+        return photoInfoId;
+    }
+
+    public void setPhotoInfoId(Long photoInfoId) {
+        this.photoInfoId = photoInfoId;
     }
 }

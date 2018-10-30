@@ -7,6 +7,7 @@ import com.fan.config.AliPayConfig;
 import com.fan.mapper.AliPayMapper;
 import com.fan.po.AliPay;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -72,13 +73,6 @@ public class AliPayCallBackService {
         return AlipaySignature.rsaCheckV1(params, aliPayConfig.getAliPayPublicKey(), aliPayConfig.getCharset(), aliPayConfig.getSignType());
     }
 
-
-    public static void main(String[] args) {
-        Double a = 0.01;
-        Double totalAmount = a * 100;
-        Long l = totalAmount.longValue();
-        System.out.println(l);
-    }
 }
 
 

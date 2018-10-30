@@ -174,6 +174,23 @@ public class ClassUtils {
         }
     }
 
+
+    public static <E> List<E> copyTo(List<?> source, Class<E> destinationClass) {
+        if (source.size() == 0)
+            return Collections.emptyList();
+        List<E> res = new ArrayList<E>(source.size());
+        try {
+            for (Object o : source) {
+                E e = destinationClass.newInstance();
+                org.springframework.beans.BeanUtils.copyProperties(o, e);
+                res.add(e);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
 //    public static void main(String[] args) {
 //        RequestAliPay requestAliPay = new RequestAliPay();
 //        requestAliPay.setApp_id("aaaa");
