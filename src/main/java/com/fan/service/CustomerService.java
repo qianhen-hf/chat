@@ -3,7 +3,7 @@ package com.fan.service;
 import com.fan.Exception.ChatException;
 import com.fan.chatEnum.UserStatusEnum;
 import com.fan.mapper.*;
-import com.fan.mapper.dao.ConsumeInfoDao;
+import com.fan.mapper.ConsumeInfoDao;
 import com.fan.po.*;
 import com.fan.vo.UserVo;
 import org.springframework.beans.BeanUtils;

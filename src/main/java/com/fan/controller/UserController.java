@@ -1,6 +1,6 @@
 package com.fan.controller;
 
-import com.fan.mapper.dao.ConsumeInfoDao;
+import com.fan.mapper.ConsumeInfoDao;
 import com.fan.po.User;
 import com.fan.service.CustomerService;
 import com.fan.service.UserService;
