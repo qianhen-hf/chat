@@ -3,6 +3,7 @@ package com.fan.service;
 import com.fan.Exception.ChatException;
 import com.fan.chatEnum.UserStatusEnum;
 import com.fan.mapper.*;
+import com.fan.mapper.dao.ConsumeInfoDao;
 import com.fan.po.*;
 import com.fan.vo.UserVo;
 import org.springframework.beans.BeanUtils;
@@ -41,6 +42,9 @@ public class CustomerService {
     @Autowired
     LiveRecordMapper liveRecordMapper;
 
+    @Autowired
+    ConsumeInfoDao consumeInfoDao;
+
     public void updateUser(UserVo userVo) {
         User user = new User();
         BeanUtils.copyProperties(userVo,user);
@@ -51,6 +55,12 @@ public class CustomerService {
 
     public User selectUserByUserId(Long userId) {
         return userMapper.selectByPrimaryKey(userId);
+    }
+
+    public List<User> selectUsersByUserIds(List<Long> userIds) {
+        UserExample example = new UserExample();
+        example.createCriteria().andUserIdIn(userIds).andUserTypeEqualTo(2);
+        return userMapper.selectByExample(example);
     }
 
     public void addFocus(Long userId,Long anchorId) {
@@ -190,4 +200,6 @@ public class CustomerService {
     public void findAccountDetail(long anchorId) {
 
     }
+
+
 }

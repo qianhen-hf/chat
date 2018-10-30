@@ -1,8 +1,8 @@
 package com.fan.controller;
 
-import com.fan.po.PhotoInfo;
+import com.fan.mapper.dao.ConsumeInfoDao;
 import com.fan.po.User;
-import com.fan.service.PhotoInfoService;
+import com.fan.service.CustomerService;
 import com.fan.service.UserService;
 import com.fan.vo.PhotoInfoVo;
 import com.fan.vo.ResponseResult;
@@ -11,15 +11,14 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -39,7 +38,10 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
-
+    @Autowired
+    CustomerService customerService;
+    @Autowired
+    ConsumeInfoDao consumeInfoDao;
 
     @ApiOperation(value = "更新用户昵称")
     @ApiImplicitParams({
@@ -92,18 +94,32 @@ public class UserController {
     }
 
 
-//    @ApiOperation(value = "获取主播基本资料")
-//    @ApiImplicitParams({
-//            @ApiImplicitParam(name = "anchorId", value = "主播ID", required = true, dataType = "java.lang.Long")
-//    })
-//    @PostMapping("/getUserById")
-//    public ResponseResult getUserById(Long anchorId) {
-//        ResponseResult responseResult = new ResponseResult();
-//        User user = userService.selectUserByUserId(anchorId);
-//        UserVo userVo = new UserVo();
-//        BeanUtils.copyProperties(user, userVo);
-//        responseResult.setData(userVo);
-//        return responseResult;
-//    }
+    @ApiOperation(value = "用户获取主播信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "java.lang.Long"),
+            @ApiImplicitParam(name = "anchorId", value = "主播ID", required = true, dataType = "java.lang.Long")
+    })
+    @PostMapping("/getAnchorByUid")
+    public ResponseResult getAnchorById(Long userId,Long anchorId) {
+        ResponseResult responseResult = new ResponseResult();
+        User user = userService.selectUserByUserId(anchorId);
+        List<Long> anchorIds = consumeInfoDao.findAnchorOrder(userId);
+        List<HashMap<Long,String>> rankList = null;
+        if(null != anchorIds && anchorIds.size() > 0) {
+            rankList = new ArrayList<HashMap<Long,String>>();
+            List<User> users = customerService.selectUsersByUserIds(anchorIds);
+            for(User tempUser : users) {
+                HashMap<Long,String> tempMap = new HashMap<Long,String>();
+                tempMap.put(tempUser.getUserId(),tempUser.getPhoto());
+                rankList.add(tempMap);
+            }
+        }
+
+        UserVo userVo = new UserVo();
+        BeanUtils.copyProperties(user, userVo);
+        userVo.setRankList(rankList);
+        responseResult.setData(userVo);
+        return responseResult;
+    }
 
 }

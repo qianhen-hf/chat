@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.util.Date;
+import java.util.*;
 
 /**
  * java类简单作用描述
@@ -57,5 +57,11 @@ public class UserVo {
     private Integer status;
 
     private String token;
+
+    private List<HashMap<Long,String>> rankList = new ArrayList<HashMap<Long,String>>();
+
+    public void setRankList(List<HashMap<Long, String>> rankList) {
+        this.rankList = rankList;
+    }
 
 }
