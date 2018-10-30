@@ -38,6 +38,12 @@ public class UserVo {
     @ApiModelProperty(value="余额",name="amount")
     private Long amount;
 
+    @ApiModelProperty(value="星座",name="constellation")
+    private Long constellation;
+
+    @ApiModelProperty(value="职业",name="occupation")
+    private Long occupation;
+
     private Integer isStop;
 
     private Date createTime;
