@@ -37,7 +37,7 @@ public class PhotoInfoService {
         for (PhotoInfo photoInfo : photoInfos) {
 //            ossService.getObjectUrl();
         }
-        return  photoInfos;
+        return photoInfos;
     }
 
     public void insertPhoto(PhotoInfo photoInfo) {
@@ -47,6 +47,13 @@ public class PhotoInfoService {
 
     public void delPhoto(Long id) {
         photoInfoMapper.deleteByPrimaryKey(id);
+    }
+
+    public PhotoInfo selectPhotoInfoById(Long photoId) {
+        PhotoInfo photoInfo = photoInfoMapper.selectByPrimaryKey(photoId);
+        String url = ossService.getObjectUrl(photoInfo.getPhotoUrl());
+        photoInfo.setPhotoUrl(url);
+        return photoInfo;
     }
 
 }

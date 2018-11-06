@@ -5,7 +5,7 @@ public class IndexPic {
 
     private Long photoId;
 
-    private String desc;
+    private String describeDesc;
 
     public Long getId() {
         return id;
@@ -23,11 +23,11 @@ public class IndexPic {
         this.photoId = photoId;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescribeDesc() {
+        return describeDesc;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDescribeDesc(String describeDesc) {
+        this.describeDesc = describeDesc == null ? null : describeDesc.trim();
     }
 }

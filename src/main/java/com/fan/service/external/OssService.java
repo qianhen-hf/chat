@@ -62,10 +62,10 @@ public class OssService {
             // 发起请求，并得到response
             final AssumeRoleResponse stsResponse = client.getAcsResponse(request);
 
-            respMap.put("bucketName", "qianhen-fan");
+            respMap.put("bucketName", "v-chat");
             respMap.put("endPoint", "http://oss-cn-shenzhen.aliyuncs.com");
             respMap.put("imageEndPoint", "http://img-cn-shenzhen.aliyuncs.com");
-            respMap.put("callbackAddress", "http://2049g328c3.iask.in:37084/callback/ossCallBack");
+            respMap.put("callbackAddress", "http://2049g328c3.iask.in:55469/callback/ossCallBack");
             respMap.put("StatusCode", "200");
             respMap.put("callbackBody", "filename=${object}&size=${size}&mimeType=${mimeType}&height=${imageInfo.height}&width=${imageInfo.width}&userId=1234");
             respMap.put("AccessKeyId", stsResponse.getCredentials().getAccessKeyId());
@@ -84,7 +84,7 @@ public class OssService {
         // Endpoint以杭州为例，其它Region请按实际情况填写。
         String endpoint = "http://oss-cn-shenzhen.aliyuncs.com";
         // 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建RAM账号。
-        String bucketName = "qianhen-fan";
+        String bucketName = "v-chat";
         // 创建OSSClient实例。
         OSSClient ossClient = new OSSClient(endpoint, ossConfig.getAccessKeyID(), ossConfig.getAccessKeySecret());
         // 设置URL过期时间为1小时。
@@ -100,12 +100,30 @@ public class OssService {
         return map;
     }
 
+
+    public String getObjectUrl(String fileName) {
+        // Endpoint以杭州为例，其它Region请按实际情况填写。
+        String endpoint = "http://oss-cn-shenzhen.aliyuncs.com";
+        // 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建RAM账号。
+        String bucketName = "v-chat";
+        // 创建OSSClient实例。
+        OSSClient ossClient = new OSSClient(endpoint, ossConfig.getAccessKeyID(), ossConfig.getAccessKeySecret());
+        // 设置URL过期时间为1小时。
+        // 生成以GET方法访问的签名URL，访客可以直接通过浏览器访问相关内容。
+        Date expiration = new Date(new Date().getTime() + 3600 * 1000);
+        URL url = ossClient.generatePresignedUrl(bucketName, fileName, expiration);
+        // 关闭OSSClient。
+        ossClient.shutdown();
+        return url.toString();
+    }
+
+
     public Map<String, String> getOssWebCertificate() {
         Map<String, String> respMap = new LinkedHashMap<String, String>();
         String endpoint = "oss-cn-shenzhen.aliyuncs.com";
         String accessId = "*";
         String accessKey = "*";
-        String bucket = "qianhen-fan";
+        String bucket = "v-chat";
         String dir = "user-dir";
         String host = "http://" + bucket + "." + endpoint;
         OSSClient ossClient = new OSSClient(endpoint, ossConfig.getAccessKeyID(), ossConfig.getAccessKeySecret());

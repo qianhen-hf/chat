@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.fan.po.IndexPic" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="photo_id" property="photoId" jdbcType="BIGINT" />
-    <result column="desc" property="desc" jdbcType="VARCHAR" />
+    <result column="describe_desc" property="describeDesc" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,7 +65,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, photo_id, desc
+    id, photo_id, describe_desc
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.fan.po.IndexPicExample" >
     select
@@ -101,8 +101,8 @@
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
-    insert into v_index_pic (photo_id, desc)
-    values (#{photoId,jdbcType=BIGINT}, #{desc,jdbcType=VARCHAR})
+    insert into v_index_pic (photo_id, describe_desc)
+    values (#{photoId,jdbcType=BIGINT}, #{describeDesc,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.fan.po.IndexPic" >
     <selectKey resultType="java.lang.Long" keyProperty="id" order="AFTER" >
@@ -113,16 +113,16 @@
       <if test="photoId != null" >
         photo_id,
       </if>
-      <if test="desc != null" >
-        desc,
+      <if test="describeDesc != null" >
+        describe_desc,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="photoId != null" >
         #{photoId,jdbcType=BIGINT},
       </if>
-      <if test="desc != null" >
-        #{desc,jdbcType=VARCHAR},
+      <if test="describeDesc != null" >
+        #{describeDesc,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -141,8 +141,8 @@
       <if test="record.photoId != null" >
         photo_id = #{record.photoId,jdbcType=BIGINT},
       </if>
-      <if test="record.desc != null" >
-        desc = #{record.desc,jdbcType=VARCHAR},
+      <if test="record.describeDesc != null" >
+        describe_desc = #{record.describeDesc,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -153,7 +153,7 @@
     update v_index_pic
     set id = #{record.id,jdbcType=BIGINT},
       photo_id = #{record.photoId,jdbcType=BIGINT},
-      desc = #{record.desc,jdbcType=VARCHAR}
+      describe_desc = #{record.describeDesc,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -164,8 +164,8 @@
       <if test="photoId != null" >
         photo_id = #{photoId,jdbcType=BIGINT},
       </if>
-      <if test="desc != null" >
-        desc = #{desc,jdbcType=VARCHAR},
+      <if test="describeDesc != null" >
+        describe_desc = #{describeDesc,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
@@ -173,7 +173,7 @@
   <update id="updateByPrimaryKey" parameterType="com.fan.po.IndexPic" >
     update v_index_pic
     set photo_id = #{photoId,jdbcType=BIGINT},
-      desc = #{desc,jdbcType=VARCHAR}
+      describe_desc = #{describeDesc,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

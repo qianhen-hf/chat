@@ -561,6 +561,66 @@ public class GiftInfoExample {
             addCriterion("photo_info_id not between", value1, value2, "photoInfoId");
             return (Criteria) this;
         }
+
+        public Criteria andPhotoInfo3xIdIsNull() {
+            addCriterion("photo_info_3x_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfo3xIdIsNotNull() {
+            addCriterion("photo_info_3x_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfo3xIdEqualTo(Long value) {
+            addCriterion("photo_info_3x_id =", value, "photoInfo3xId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfo3xIdNotEqualTo(Long value) {
+            addCriterion("photo_info_3x_id <>", value, "photoInfo3xId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfo3xIdGreaterThan(Long value) {
+            addCriterion("photo_info_3x_id >", value, "photoInfo3xId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfo3xIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("photo_info_3x_id >=", value, "photoInfo3xId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfo3xIdLessThan(Long value) {
+            addCriterion("photo_info_3x_id <", value, "photoInfo3xId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfo3xIdLessThanOrEqualTo(Long value) {
+            addCriterion("photo_info_3x_id <=", value, "photoInfo3xId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfo3xIdIn(List<Long> values) {
+            addCriterion("photo_info_3x_id in", values, "photoInfo3xId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfo3xIdNotIn(List<Long> values) {
+            addCriterion("photo_info_3x_id not in", values, "photoInfo3xId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfo3xIdBetween(Long value1, Long value2) {
+            addCriterion("photo_info_3x_id between", value1, value2, "photoInfo3xId");
+            return (Criteria) this;
+        }
+
+        public Criteria andPhotoInfo3xIdNotBetween(Long value1, Long value2) {
+            addCriterion("photo_info_3x_id not between", value1, value2, "photoInfo3xId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

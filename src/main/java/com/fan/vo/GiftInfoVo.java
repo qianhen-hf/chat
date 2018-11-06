@@ -31,4 +31,6 @@ public class GiftInfoVo {
 
     private String giftUrl;
 
+    private String gift3xUrl;
+
 }

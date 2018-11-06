@@ -1,7 +1,9 @@
 package com.fan.service;
 
 import com.fan.chatEnum.OrderPayType;
+import com.fan.mapper.RechargePackageMapper;
 import com.fan.po.ChargeInfo;
+import com.fan.po.RechargePackage;
 import com.fan.requestVo.RequestCharge;
 import com.fan.service.redis.RedisOperator;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.math.BigInteger;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -40,6 +43,8 @@ public class RechargeService {
     RedisOperator redisOperator;
     @Value("${orderInitNum}")
     String orderInitNum;
+    @Autowired
+    RechargePackageMapper rechargePackageMapper;
 
 
     @Transactional
@@ -75,5 +80,9 @@ public class RechargeService {
     @Transactional
     public String rechargeWeb() {
         return aliPayService.aliWebPay();
+    }
+
+    public List<RechargePackage> rechargePackages() {
+        return rechargePackageMapper.selectByExample(null);
     }
 }

@@ -17,6 +17,8 @@ public class GiftInfo {
 
     private Long photoInfoId;
 
+    private Long photoInfo3xId;
+
     public Long getGiftId() {
         return giftId;
     }
@@ -71,5 +73,13 @@ public class GiftInfo {
 
     public void setPhotoInfoId(Long photoInfoId) {
         this.photoInfoId = photoInfoId;
+    }
+
+    public Long getPhotoInfo3xId() {
+        return photoInfo3xId;
+    }
+
+    public void setPhotoInfo3xId(Long photoInfo3xId) {
+        this.photoInfo3xId = photoInfo3xId;
     }
 }

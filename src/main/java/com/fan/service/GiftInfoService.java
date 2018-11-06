@@ -44,7 +44,10 @@ public class GiftInfoService {
 
             GiftInfoVo giftInfoVo = new GiftInfoVo();
             BeanUtils.copyProperties(giftInfo, giftInfoVo);
-//            giftInfoVo.setGiftUrl();
+            PhotoInfo photoInfo = photoInfoService.selectPhotoInfoById(giftInfo.getPhotoInfoId());
+            PhotoInfo photoInfo3x = photoInfoService.selectPhotoInfoById(giftInfo.getPhotoInfo3xId());
+            giftInfoVo.setGiftUrl(photoInfo.getPhotoUrl());
+            giftInfoVo.setGift3xUrl(photoInfo3x.getPhotoUrl());
             list.add(giftInfoVo);
         }
         return list;
