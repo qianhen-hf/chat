@@ -5,6 +5,7 @@ import com.fan.po.ChargeInfo;
 import com.fan.requestVo.RequestCharge;
 import com.fan.service.AliPayService;
 import com.fan.service.RechargeService;
+import com.fan.vo.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -40,6 +41,16 @@ public class RechargeController {
     public String recharge(RequestCharge requestCharge) {
         return rechargeService.recharge(requestCharge);
     }
+
+
+    @ApiOperation(value = "充值套餐")
+    @PostMapping("rechargePackage")
+    public ResponseResult rechargePackages() {
+        ResponseResult responseResult = new ResponseResult();
+        responseResult.setData(rechargeService.rechargePackages());
+        return responseResult;
+    }
+
 
     @ApiIgnore
     @GetMapping("recharge1")
