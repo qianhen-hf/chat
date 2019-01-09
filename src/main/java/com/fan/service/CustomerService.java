@@ -3,8 +3,9 @@ package com.fan.service;
 import com.fan.Exception.ChatException;
 import com.fan.chatEnum.UserStatusEnum;
 import com.fan.mapper.*;
-import com.fan.mapper.ConsumeInfoDao;
 import com.fan.po.*;
+import com.fan.vo.AccountDetailVo;
+import com.fan.vo.GiftDetailVo;
 import com.fan.vo.UserVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,10 @@ public class CustomerService {
 
     @Autowired
     ConsumeInfoDao consumeInfoDao;
+
+    @Autowired
+    GiftInfoMapper giftInfoMapper;
+
 
     public void updateUser(UserVo userVo) {
         User user = new User();
@@ -92,7 +97,7 @@ public class CustomerService {
         }
         List<Long> userIds = new ArrayList<>();
         for(FocusInfo focusInfo : focusInfos) {
-            long tempId =  userType == 1 ? focusInfo.getUserId() : focusInfo.getAnchorId();
+            long tempId =  userType == 1 ? focusInfo.getAnchorId() : focusInfo.getUserId();
             userIds.add(tempId);
         }
         UserExample userExample = new UserExample();
@@ -187,19 +192,38 @@ public class CustomerService {
      * 查询收到的礼物
      * @param anchorId
      */
-    public void findReceiveGift(long anchorId) {
-
-        
-
+    public List<GiftDetailVo> findReceiveGift(long userId,int start,int end) {
+        List<GiftDetailVo> list = consumeInfoDao.findGiftInfoByPage(userId,start,end);
+        return list;
     }
+
+//    public List<>
 
     /**
      * 查询收支明细
-     * @param anchorId
+     * @param userId
      */
-    public void findAccountDetail(long anchorId) {
-
+    public List<AccountDetailVo> findAccountDetail(long userId,int start,int end) {
+        List<AccountDetailVo> list = consumeInfoDao.findAccountDetail(userId,start,end);
+        return list;
     }
 
+
+    /**
+     * 查询收益
+     * @param userId
+     * @return
+     */
+    public AccountDetailVo findAccountTotal(long userId) {
+
+        long accountTotal = consumeInfoDao.findAccountTotal(userId);
+        long accountDay = consumeInfoDao.findAccountDay(userId);
+
+        AccountDetailVo accountVo = new AccountDetailVo();
+        accountVo.setAccountTotal(accountTotal);
+        accountVo.setAccountDay(accountDay);
+
+        return accountVo;
+    }
 
 }

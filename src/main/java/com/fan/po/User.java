@@ -21,7 +21,7 @@ public class User {
 
     private Date registerTime;
 
-    private Long amount;
+    private Long amount = 100L;
 
     private Integer isStop;
 

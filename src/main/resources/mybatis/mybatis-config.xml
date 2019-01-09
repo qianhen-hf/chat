@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"  
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<!-- 通过配置这个属性为true可以自动将下画线方式命名的数据库列映射到java对象驼峰式命名属性中 -->
 	<settings>
 		<setting name="logImpl" value="STDOUT_LOGGING" />
 		<setting name="cacheEnabled" value="false" />
@@ -14,7 +15,7 @@
 		<setting name="defaultExecutorType" value="SIMPLE" />
 		<setting name="defaultStatementTimeout" value="25" />
 		<setting name="safeRowBoundsEnabled" value="false" />
-		<setting name="mapUnderscoreToCamelCase" value="false" />
+		<setting name="mapUnderscoreToCamelCase" value="true" />
 		<setting name="localCacheScope" value="SESSION" />
 		<setting name="jdbcTypeForNull" value="OTHER" />
 		<setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString" />

@@ -16,10 +16,10 @@ import org.springframework.context.annotation.Configuration;
  * @UpdateRemark: The modified content
  * @Version: 1.0
  */
-@Configuration
+//@Configuration
 public class FilterConfig {
 
-    @Bean
+//    @Bean
     public FilterRegistrationBean loginFilterRegistration() {
 
         FilterRegistrationBean registration = new FilterRegistrationBean();

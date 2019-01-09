@@ -104,13 +104,14 @@ public class UserController {
         ResponseResult responseResult = new ResponseResult();
         User user = userService.selectUserByUserId(anchorId);
         List<Long> anchorIds = consumeInfoDao.findAnchorOrder(userId);
-        List<HashMap<Long,String>> rankList = null;
+        List<HashMap<String,String>> rankList = null;
         if(null != anchorIds && anchorIds.size() > 0) {
-            rankList = new ArrayList<HashMap<Long,String>>();
+            rankList = new ArrayList<HashMap<String,String>>();
             List<User> users = customerService.selectUsersByUserIds(anchorIds);
             for(User tempUser : users) {
-                HashMap<Long,String> tempMap = new HashMap<Long,String>();
-                tempMap.put(tempUser.getUserId(),tempUser.getPhoto());
+                HashMap<String,String> tempMap = new HashMap<String,String>();
+                tempMap.put("anchorId",tempUser.getUserId().toString());
+                tempMap.put("photo",tempUser.getPhoto());
                 rankList.add(tempMap);
             }
         }
