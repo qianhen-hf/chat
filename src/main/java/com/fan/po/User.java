@@ -31,6 +31,8 @@ public class User {
 
     private Date updateTime;
 
+    private String wyToken;
+
     public Long getUserId() {
         return userId;
     }
@@ -141,5 +143,13 @@ public class User {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getWyToken() {
+        return wyToken;
+    }
+
+    public void setWyToken(String wyToken) {
+        this.wyToken = wyToken == null ? null : wyToken.trim();
     }
 }

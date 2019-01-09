@@ -58,6 +58,8 @@ public class UserVo {
 
     private String token;
 
+    private String wyToken;
+
     private List<HashMap<Long,String>> rankList = new ArrayList<HashMap<Long,String>>();
 
     public void setRankList(List<HashMap<Long, String>> rankList) {

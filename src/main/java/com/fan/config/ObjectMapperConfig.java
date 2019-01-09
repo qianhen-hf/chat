@@ -28,21 +28,21 @@ public class ObjectMapperConfig {
 	}
 
 
-	@Configuration
-	public class CorsConfig {
-		private CorsConfiguration buildConfig() {
-			CorsConfiguration corsConfiguration = new CorsConfiguration();
-			corsConfiguration.addAllowedOrigin("*"); // 1
-			corsConfiguration.addAllowedHeader("*"); // 2
-			corsConfiguration.addAllowedMethod("*"); // 3
-			return corsConfiguration;
-		}
-
-		@Bean
-		public CorsFilter corsFilter() {
-			UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-			source.registerCorsConfiguration("/**", buildConfig()); // 4
-			return new CorsFilter(source);
-		}
-	}
+//	@Configuration
+//	public class CorsConfig {
+//		private CorsConfiguration buildConfig() {
+//			CorsConfiguration corsConfiguration = new CorsConfiguration();
+//			corsConfiguration.addAllowedOrigin("*"); // 1
+//			corsConfiguration.addAllowedHeader("*"); // 2
+//			corsConfiguration.addAllowedMethod("*"); // 3
+//			return corsConfiguration;
+//		}
+//
+//		@Bean
+//		public CorsFilter corsFilter() {
+//			UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//			source.registerCorsConfiguration("/**", buildConfig()); // 4
+//			return new CorsFilter(source);
+//		}
+//	}
 }

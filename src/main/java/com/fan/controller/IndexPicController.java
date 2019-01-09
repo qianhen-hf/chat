@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +31,7 @@ public class IndexPicController {
 
 
     @ApiOperation(value = "查询所有首页图片")
-    @RequestMapping("getIndexPics")
+    @PostMapping("getIndexPics")
     public ResponseResult getIndexPics() {
         ResponseResult responseResult = new ResponseResult();
         responseResult.setData(indexPicService.getIndexPics());
@@ -38,7 +39,7 @@ public class IndexPicController {
     }
 
     @ApiOperation(value = "查询所有在线繁忙的主播")
-    @RequestMapping("getIndexCustomers")
+    @PostMapping("getIndexCustomers")
     public ResponseResult getIndexCustomers() {
         ResponseResult responseResult = new ResponseResult();
         responseResult.setData(indexPicService.getIndexCustomers());

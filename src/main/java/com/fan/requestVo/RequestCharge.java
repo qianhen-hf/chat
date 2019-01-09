@@ -27,4 +27,6 @@ public class RequestCharge implements Serializable {
     private Integer type;
     @ApiModelProperty(value = "用户id", name = "userId")
     private Long userId;
+    @ApiModelProperty(value = "充值套餐id", name = "rechargePackagreId")
+    private Long rechargePackagreId;
 }

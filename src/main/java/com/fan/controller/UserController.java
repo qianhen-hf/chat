@@ -68,7 +68,6 @@ public class UserController {
         ResponseResult responseResult = new ResponseResult();
         responseResult.setData(list);
         return responseResult;
-
     }
 
 

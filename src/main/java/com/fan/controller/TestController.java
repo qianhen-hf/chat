@@ -1,7 +1,9 @@
 package com.fan.controller;
 
+import com.aliyun.oss.OSS;
 import com.fan.config.SmsConfig;
 import com.fan.po.User;
+import com.fan.service.external.OssService;
 import com.fan.service.redis.RedisOperator;
 import com.fan.util.HttpRequestHelper;
 import com.netflix.discovery.converters.Auto;
@@ -34,6 +36,8 @@ public class TestController {
     SmsConfig smsConfig;
     @Autowired
     RedisOperator redisOperator;
+    @Autowired
+    OssService ossService;
 
 
     @InitBinder
@@ -63,17 +67,9 @@ public class TestController {
         return list;
     }
 
-    @PutMapping("test1")
+    @RequestMapping("test1")
     public String  getTest1(HttpServletRequest httpServletRequest){
-//        redisOperator.leftPush("list","bbbbbb");
-//        redisOperator.setList("list",0,"aaaaa");
-//        String list = redisOperator.leftPop("list");
-//        System.out.println(list);
-        String a = httpServletRequest.getParameter("ab");
-        System.out.println(a);
-        System.out.println("____________________");
-        String bodyString = HttpRequestHelper.getBodyString(httpServletRequest);
-        System.out.println(bodyString);
-        return "aaaa";
+        String url = ossService.getObjectUrl("2_2x.png");
+        return url;
     }
 }

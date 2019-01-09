@@ -1,5 +1,7 @@
 package com.fan.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.fan.Exception.VRabbitException;
 import com.fan.Exception.VRabbitUserErrors;
 import com.fan.config.PrefixConfig;
@@ -12,6 +14,8 @@ import com.fan.service.SendMsgService;
 import com.fan.service.UserService;
 import com.fan.service.redis.RedisOperator;
 import com.fan.util.MD5;
+import com.fan.video.CheckSumBuilder;
+import com.fan.video.HttpClientUtil;
 import com.fan.vo.ResponseResult;
 import com.fan.vo.UserVo;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -22,11 +26,15 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
+import springfox.documentation.spring.web.json.Json;
 
+import java.util.Date;
 import java.util.Random;
 
 /**
@@ -79,6 +87,19 @@ public class LoginController {
         ObjectMapper objectMapper = new ObjectMapper();
         responseResult.setCode(ResponseResult.SUCCESS);
         String uid = user.getUserId().toString();
+        if (StringUtils.isBlank(user.getWyToken())) {
+            String s = HttpClientUtil.httpClient(uid);
+            JSONObject jsonObject = JSON.parseObject(s);
+            if (jsonObject.get("code").toString().equals("200")) {
+                User userUp = new User();
+                userUp.setUserId(user.getUserId());
+                JSONObject info = (JSONObject) jsonObject.get("info");
+                Object token = info.get("token");
+                userUp.setWyToken(token.toString());
+                userService.updateUser(userUp);
+                user = userService.selectUserName(userLoginVo.getUserName());
+            }
+        }
         String userSerializable = null;
         try {
             userSerializable = objectMapper.writeValueAsString(user);
@@ -151,5 +172,37 @@ public class LoginController {
         userService.insertUser(user);
         return new ResponseResult(true);
     }
+
+    @ApiOperation(value = "云信注册")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户/主播ID", required = true, dataType = "java.lang.Long")
+    })
+    @PostMapping("yunXinRegister")
+    public ResponseResult yunXinRegister(Long userId) {
+        ResponseResult responseResult = new ResponseResult();
+        String s = HttpClientUtil.httpClient(userId.toString());
+        JSONObject jsonObject = JSON.parseObject(s);
+        if (jsonObject.get("code").toString().equals("200")) {
+            User user = new User();
+            user.setUserId(userId);
+            JSONObject info = (JSONObject) jsonObject.get("info");
+            Object token = info.get("token");
+            user.setWyToken(token.toString());
+            userService.updateUser(user);
+        }
+        responseResult.setData(s);
+        return responseResult;
+    }
+
+
+//    public static void main(String[] args) {
+//        String s = "{\"code\":200,\"info\":{\"token\":\"83ad8090541a3048e3b10f89f0018434\",\"accid\":\"888888\",\"name\":\"\"}}";
+//        JSONObject jsonObject = JSONObject.parseObject(s);
+//        if (jsonObject.get("code").toString().equals("200")) {
+//            JSONObject info = (JSONObject) jsonObject.get("info");
+//            Object token = info.get("token");
+//            System.out.println(token);
+//        }
+//    }
 }
 
