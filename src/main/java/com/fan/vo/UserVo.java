@@ -60,9 +60,9 @@ public class UserVo {
 
     private String wyToken;
 
-    private List<HashMap<Long,String>> rankList = new ArrayList<HashMap<Long,String>>();
+    private List<HashMap<String,String>> rankList = new ArrayList<HashMap<String,String>>();
 
-    public void setRankList(List<HashMap<Long, String>> rankList) {
+    public void setRankList(List<HashMap<String, String>> rankList) {
         this.rankList = rankList;
     }
 
