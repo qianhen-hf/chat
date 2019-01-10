@@ -49,10 +49,13 @@ public class UserController {
             @ApiImplicitParam(name = "nickname", value = "用户昵称", required = true, dataType = "String")
     })
     @PostMapping("updateUser")
-    public void updateUser(String nickname, Long userId) {
+    public ResponseResult updateUser(String nickname, Long userId) {
         User user = userService.selectUserByUserId(userId);
-        user.setNickName(nickname);
-        userService.updateUser(user);
+        User userUpdate = new User();
+        userUpdate.setUserId(user.getUserId());
+        userUpdate.setNickName(nickname);
+        userService.updateUser(userUpdate);
+        return new ResponseResult(true);
     }
 
     @ApiOperation(value = "获取用户所有照片")
@@ -65,7 +68,6 @@ public class UserController {
         ResponseResult responseResult = new ResponseResult();
         responseResult.setData(list);
         return responseResult;
-
     }
 
 

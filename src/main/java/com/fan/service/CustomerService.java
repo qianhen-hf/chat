@@ -52,10 +52,10 @@ public class CustomerService {
 
     public void updateUser(UserVo userVo) {
         User user = new User();
-        BeanUtils.copyProperties(userVo,user);
+        BeanUtils.copyProperties(userVo, user);
         user.setUpdateTime(new Date());
 
-        userMapper.updateByPrimaryKey(user);
+        userMapper.updateByPrimaryKeySelective(user);
     }
 
     public User selectUserByUserId(Long userId) {
@@ -68,7 +68,7 @@ public class CustomerService {
         return userMapper.selectByExample(example);
     }
 
-    public void addFocus(Long userId,Long anchorId) {
+    public void addFocus(Long userId, Long anchorId) {
         FocusInfo focusInfo = new FocusInfo();
         focusInfo.setUserId(userId);
         focusInfo.setAnchorId(anchorId);
@@ -84,7 +84,7 @@ public class CustomerService {
         FocusInfoExample focusInfoExample = new FocusInfoExample();
         int userType = user.getUserType();
         //查询关注
-        if(userType == 1) {
+        if (userType == 1) {
             focusInfoExample.createCriteria().andUserIdEqualTo(userId);
         }
         //查询粉丝
@@ -92,10 +92,12 @@ public class CustomerService {
             focusInfoExample.createCriteria().andAnchorIdEqualTo(userId);
         }
         List<FocusInfo> focusInfos = focusInfoMapper.selectByExample(focusInfoExample);
-        if(focusInfos == null || focusInfos.size() < 1) {
+        if (focusInfos == null || focusInfos.size() < 1) {
             return null;
         }
         List<Long> userIds = new ArrayList<>();
+        for (FocusInfo focusInfo : focusInfos) {
+            long tempId = userType == 1 ? focusInfo.getUserId() : focusInfo.getAnchorId();
         for(FocusInfo focusInfo : focusInfos) {
             long tempId =  userType == 1 ? focusInfo.getAnchorId() : focusInfo.getUserId();
             userIds.add(tempId);
@@ -108,15 +110,16 @@ public class CustomerService {
 
     /**
      * 提现申请(支持支付宝账户)
+     *
      * @param
      * @param
      * @param money
      * @return
      */
-    public void applyWithdraw(Long userId,String accountName,String account,long money) throws ChatException {
+    public void applyWithdraw(Long userId, String accountName, String account, long money) throws ChatException {
 
         User user = userMapper.selectByPrimaryKey(userId);
-        if(user.getAmount().longValue() - money < 0) {
+        if (user.getAmount().longValue() - money < 0) {
             throw new ChatException("可提现金额不足");
         }
 
@@ -134,7 +137,7 @@ public class CustomerService {
         depositInfoMapper.insert(depositInfo);
     }
 
-    public void addAdviseInfo(long accuserId,long accuserdId,String content) {
+    public void addAdviseInfo(long accuserId, long accuserdId, String content) {
         User user = userMapper.selectByPrimaryKey(accuserId);
         int userType = user.getUserType();
         Advise advise = new Advise();
@@ -154,12 +157,13 @@ public class CustomerService {
 
     /**
      * 更新在线状态
+     *
      * @param userId
      * @param status
      */
-    public void updateStatus(long userId,int status) throws ChatException {
+    public void updateStatus(long userId, int status) throws ChatException {
         UserStatusEnum userStatusEnum = UserStatusEnum.getByCode(status);
-        if(null == userStatusEnum) {
+        if (null == userStatusEnum) {
             throw new ChatException("状态不支持");
         }
         User user = new User();
@@ -171,11 +175,12 @@ public class CustomerService {
 
     /**
      * 直播记录
+     *
      * @param userId
      * @param anchorId
      * @param status
      */
-    public void recordLiveLog(long userId,long anchorId,int status) {
+    public void recordLiveLog(long userId, long anchorId, int status) {
         LiveRecord liveRecord = new LiveRecord();
         liveRecord.setAnchor(anchorId);
         liveRecord.setUserId(userId);
@@ -190,6 +195,7 @@ public class CustomerService {
 
     /**
      * 查询收到的礼物
+     *
      * @param anchorId
      */
     public List<GiftDetailVo> findReceiveGift(long userId,int start,int end) {

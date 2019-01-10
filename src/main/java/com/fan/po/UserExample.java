@@ -1031,6 +1031,76 @@ public class UserExample {
             addCriterionForJDBCDate("update_time not between", value1, value2, "updateTime");
             return (Criteria) this;
         }
+
+        public Criteria andWyTokenIsNull() {
+            addCriterion("wy_token is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWyTokenIsNotNull() {
+            addCriterion("wy_token is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWyTokenEqualTo(String value) {
+            addCriterion("wy_token =", value, "wyToken");
+            return (Criteria) this;
+        }
+
+        public Criteria andWyTokenNotEqualTo(String value) {
+            addCriterion("wy_token <>", value, "wyToken");
+            return (Criteria) this;
+        }
+
+        public Criteria andWyTokenGreaterThan(String value) {
+            addCriterion("wy_token >", value, "wyToken");
+            return (Criteria) this;
+        }
+
+        public Criteria andWyTokenGreaterThanOrEqualTo(String value) {
+            addCriterion("wy_token >=", value, "wyToken");
+            return (Criteria) this;
+        }
+
+        public Criteria andWyTokenLessThan(String value) {
+            addCriterion("wy_token <", value, "wyToken");
+            return (Criteria) this;
+        }
+
+        public Criteria andWyTokenLessThanOrEqualTo(String value) {
+            addCriterion("wy_token <=", value, "wyToken");
+            return (Criteria) this;
+        }
+
+        public Criteria andWyTokenLike(String value) {
+            addCriterion("wy_token like", value, "wyToken");
+            return (Criteria) this;
+        }
+
+        public Criteria andWyTokenNotLike(String value) {
+            addCriterion("wy_token not like", value, "wyToken");
+            return (Criteria) this;
+        }
+
+        public Criteria andWyTokenIn(List<String> values) {
+            addCriterion("wy_token in", values, "wyToken");
+            return (Criteria) this;
+        }
+
+        public Criteria andWyTokenNotIn(List<String> values) {
+            addCriterion("wy_token not in", values, "wyToken");
+            return (Criteria) this;
+        }
+
+        public Criteria andWyTokenBetween(String value1, String value2) {
+            addCriterion("wy_token between", value1, value2, "wyToken");
+            return (Criteria) this;
+        }
+
+        public Criteria andWyTokenNotBetween(String value1, String value2) {
+            addCriterion("wy_token not between", value1, value2, "wyToken");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

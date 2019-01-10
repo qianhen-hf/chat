@@ -13,6 +13,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 /**
  * java类简单作用描述
@@ -33,9 +34,10 @@ public class HttpClientUtil {
         String url = "https://api.netease.im/nimserver/user/create.action";
         HttpPost httpPost = new HttpPost(url);
 
-        String appKey = "94kid09c9ig9k1loimjg012345123456";
-        String appSecret = "123456789012";
-        String nonce = "12345";
+        String appKey = "3ecd8078b7313dc3b14db9815893d473";
+        String appSecret = "ba1f21373df7";
+        Random random = new Random();
+        String nonce = String.valueOf(random.nextInt(100000));
         String curTime = String.valueOf((new Date()).getTime() / 1000L);
         String checkSum = CheckSumBuilder.getCheckSum(appSecret, nonce, curTime);//参考 计算CheckSum的java代码
         httpPost.addHeader("AppKey", appKey);
@@ -50,8 +52,9 @@ public class HttpClientUtil {
         try {
             httpPost.setEntity(new UrlEncodedFormEntity(nvps, "utf-8"));
             HttpResponse response = httpClient.execute(httpPost);
-            log.info("response:{}", EntityUtils.toString(response.getEntity(), "utf-8"));
-            return EntityUtils.toString(response.getEntity(), "utf-8");
+            String result = EntityUtils.toString(response.getEntity(), "utf-8");
+            log.info("response:{}", result);
+            return result;
         } catch (Exception e) {
             e.printStackTrace();
         }
