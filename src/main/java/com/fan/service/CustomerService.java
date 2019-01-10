@@ -98,8 +98,6 @@ public class CustomerService {
         List<Long> userIds = new ArrayList<>();
         for (FocusInfo focusInfo : focusInfos) {
             long tempId = userType == 1 ? focusInfo.getUserId() : focusInfo.getAnchorId();
-        for(FocusInfo focusInfo : focusInfos) {
-            long tempId =  userType == 1 ? focusInfo.getAnchorId() : focusInfo.getUserId();
             userIds.add(tempId);
         }
         UserExample userExample = new UserExample();
@@ -196,7 +194,7 @@ public class CustomerService {
     /**
      * 查询收到的礼物
      *
-     * @param anchorId
+     * @param userId
      */
     public List<GiftDetailVo> findReceiveGift(long userId,int start,int end) {
         List<GiftDetailVo> list = consumeInfoDao.findGiftInfoByPage(userId,start,end);

@@ -3,6 +3,8 @@ package com.fan.controller;
 import com.fan.Exception.ChatException;
 import com.fan.po.User;
 import com.fan.service.CustomerService;
+import com.fan.vo.AccountDetailVo;
+import com.fan.vo.GiftDetailVo;
 import com.fan.vo.ResponseResult;
 import com.fan.vo.UserVo;
 import io.swagger.annotations.ApiImplicitParam;
@@ -189,6 +191,93 @@ public class CustomerController {
             result = new ResponseResult(false);
         }
         logger.info("结束处理直播");
+        return result;
+    }
+
+    @ApiOperation(value = "查询收到的礼物")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "主播Id", required = true, dataType = "java.lang.Long"),
+            @ApiImplicitParam(name = "pageSize", value = "每页记录数", required = true, dataType = "java.lang.Integer"),
+            @ApiImplicitParam(name = "page", value = "页码", required = true, dataType = "java.lang.Integer"),
+    })
+    @PostMapping("/findGift")
+    public ResponseResult findGift(long userId, int pageSize,int page) {
+        logger.info("开始查询主播收到的礼物,anchorId={}",userId);
+        ResponseResult result;
+        try {
+            List<GiftDetailVo> receiveGift = customerService.findReceiveGift(userId, (page - 1) * pageSize, page * pageSize-1);
+            result = new ResponseResult();
+            result.setData(receiveGift);
+        }  catch(Exception e) {
+            logger.error("查询主播礼物发生异常",e);
+            result = new ResponseResult(false);
+        }
+        logger.info("结束查询主播礼物");
+        return result;
+    }
+
+    @ApiOperation(value = "查询直播记录")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "主播Id", required = true, dataType = "java.lang.Long"),
+            @ApiImplicitParam(name = "pageSize", value = "每页记录数", required = true, dataType = "java.lang.Integer"),
+            @ApiImplicitParam(name = "page", value = "页码", required = true, dataType = "java.lang.Integer"),
+    })
+    @PostMapping("/findLive")
+    public ResponseResult findLive(long userId, int pageSize,int page) {
+        logger.info("开始查询直播记录,anchorId={}",userId);
+        ResponseResult result;
+        try {
+//            List<GiftDetailVo> receiveGift = customerService.findReceiveGift(userId, (page - 1) * pageSize, page * pageSize-1);
+            result = new ResponseResult();
+//            result.setData(receiveGift);
+        }  catch(Exception e) {
+            logger.error("查询直播记录发生异常",e);
+            result = new ResponseResult(false);
+        }
+        logger.info("结束查询直播记录");
+        return result;
+    }
+
+    @ApiOperation(value = "分页查询收支明细记录")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "主播Id", required = true, dataType = "java.lang.Long"),
+            @ApiImplicitParam(name = "pageSize", value = "每页记录数", required = true, dataType = "java.lang.Integer"),
+            @ApiImplicitParam(name = "page", value = "页码", required = true, dataType = "java.lang.Integer"),
+    })
+    @PostMapping("/findAccountDetail")
+    public ResponseResult find(long userId, int pageSize,int page) {
+        logger.info("开始查询收支明细,anchorId={}",userId);
+        ResponseResult result;
+        try {
+            List<AccountDetailVo> accDetailList = customerService.findAccountDetail(userId, (page - 1) * pageSize, page * pageSize-1);
+            result = new ResponseResult();
+            result.setData(accDetailList);
+        }  catch(Exception e) {
+            logger.error("查询收支明细发生异常",e);
+            result = new ResponseResult(false);
+        }
+        logger.info("结束查询收支明细");
+        return result;
+    }
+
+
+    @ApiOperation(value = "统计收益")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "userId", value = "用户ID", required = true, dataType = "java.lang.Long")
+    })
+    @PostMapping("/findAccountTotal")
+    public ResponseResult findAccountTotal(long userId) {
+        logger.info("开始收益总和,userId={}", userId);
+        ResponseResult result;
+        try {
+            AccountDetailVo accVo = customerService.findAccountTotal(userId);
+            result = new ResponseResult();
+            result.setData(accVo);
+        } catch (Exception e) {
+            logger.error("查询收益总和异常", e);
+            result = new ResponseResult(false);
+        }
+        logger.info("结束查询收益总和");
         return result;
     }
 
